@@ -1,7 +1,7 @@
 ﻿using System;
 using TowerProtect.Domain.Model.Vectors;
 
-namespace TowerProtect.Domain.Game.Entities;
+namespace TowerProtect.Domain.Backend.Entities;
 
 public abstract class Entity(Vec2 position, double rotation, int health)
 {

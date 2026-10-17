@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using System;
 using TowerProtect.App.Backend;
 using TowerProtect.App.Client;
-using TowerProtect.App.Engine;
+using TowerProtect.App.Interfaces;
 using TowerProtect.App.Root.App;
 using TowerProtect.App.Root.Display;
 using TowerProtect.Domain.Backend.Maps;

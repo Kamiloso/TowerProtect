@@ -1,7 +1,7 @@
 ﻿using TowerProtect.Domain.Interfaces;
 using TowerProtect.Domain.Model.Vectors;
 
-namespace TowerProtect.Domain.Game.Entities.Specific;
+namespace TowerProtect.Domain.Backend.Entities.Specific;
 
 internal sealed class PlayerEntity(Vec2 position)
     : Entity(position, 0.0, Initial.Health), IUpdateAware

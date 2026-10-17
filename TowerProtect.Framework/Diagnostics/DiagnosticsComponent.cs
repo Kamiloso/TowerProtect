@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Diagnostics;
-using TowerProtect.App.Engine;
+using TowerProtect.App.Interfaces;
 using TowerProtect.Domain.Model.Vectors;
 using TowerProtect.Domain.Rendering;
 

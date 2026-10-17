@@ -1,8 +1,8 @@
 ﻿using AutoInterfaceAttributes;
-using TowerProtect.Domain.Game.Entities;
 using TowerProtect.Domain.Backend.Tiles;
 using TowerProtect.Domain.Interfaces;
 using TowerProtect.Domain.Backend.Maps;
+using TowerProtect.Domain.Backend.Entities;
 
 namespace TowerProtect.App.Backend;
 

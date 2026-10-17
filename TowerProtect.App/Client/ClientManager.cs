@@ -3,11 +3,11 @@ using System;
 using TowerProtect.Domain.Interfaces;
 using TowerProtect.Domain.Model.Dto;
 using TowerProtect.Domain.Model.Tiles;
-using TowerProtect.App.Engine;
 using TowerProtect.Domain.Display.Camera;
 using TowerProtect.Domain.Model.Vectors;
 using System.Collections.Generic;
 using TowerProtect.Domain.Backend.Maps;
+using TowerProtect.App.Interfaces;
 
 namespace TowerProtect.App.Client;
 

@@ -4,7 +4,7 @@ using System.Linq;
 using TowerProtect.Domain.Interfaces;
 using TowerProtect.Domain.Model.Vectors;
 
-namespace TowerProtect.Domain.Game.Entities;
+namespace TowerProtect.Domain.Backend.Entities;
 
 public class EntityBag : IUpdateAware
 {

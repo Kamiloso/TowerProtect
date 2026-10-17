@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using TowerProtect.App.Engine;
+using TowerProtect.App.Interfaces;
 
 namespace TowerProtect.Framework.Rendering;
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using TowerProtect.App.Engine;
+using TowerProtect.App.Interfaces;
 using TowerProtect.Domain.Model.Vectors;
 
 namespace TowerProtect.Framework.Input;
