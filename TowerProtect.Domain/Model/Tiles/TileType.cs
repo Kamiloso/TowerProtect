@@ -10,8 +10,7 @@ public enum TileType
     Water = 2,
     Rock = 3,
     Spawner = 4,
-    Crush = 5,
-    Bedrock = 6,
+    Bedrock = 5,
 }
 
 public static class TileTypeExtensions
@@ -20,7 +19,7 @@ public static class TileTypeExtensions
         => Enum.GetName(self) ?? Assets.Unknown;
 
     public static bool IsSolid(this TileType self)
-        => self is TileType.Stone or TileType.Crush or TileType.Bedrock;
+        => self is TileType.Stone or TileType.Bedrock;
 
     public static bool IsUnsolid(this TileType self)
         => self is TileType.Rock or TileType.Spawner;

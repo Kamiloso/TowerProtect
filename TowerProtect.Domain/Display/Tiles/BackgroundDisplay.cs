@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using TowerProtect.Domain.Interfaces;
-using TowerProtect.Domain.Model.Tiles;
 using TowerProtect.Domain.Rendering;
 using TowerProtect.Domain.Rendering.Model;
 using TowerProtect.Domain.Tools;
@@ -13,11 +12,13 @@ internal class BackgroundDisplay(int range) : ISpriteRenderingAware
     {
         cameraView.ExtendedVisionArea.GridIterate(pos =>
         {
-            Sprite sprite = Area.ContainsKey(range, pos)
+            bool isBelowTilemap = Area.ContainsKey(range, pos);
+
+            Sprite bgSprite = isBelowTilemap
                 ? new(pos, Assets.Floor, Layer.Floor)
                 : new(pos, Assets.Border, Layer.Border);
 
-            targetSprites.Add(sprite);
+            targetSprites.Add(bgSprite);
         });
     }
 }

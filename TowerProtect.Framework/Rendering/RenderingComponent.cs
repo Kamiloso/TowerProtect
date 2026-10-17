@@ -45,7 +45,7 @@ internal class RenderingComponent(
         }
 
         GraphicsDevice.Clear(Color.CornflowerBlue);
-        _spriteBatch.Begin(blendState: BlendState.AlphaBlend);
+        _spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
 
 		foreach (var monoSprite in _monoSprites)
         {
@@ -54,7 +54,7 @@ internal class RenderingComponent(
                 position: monoSprite.CenterPosition,
                 sourceRectangle: null,
                 color: Color.White,
-                rotation: (float)monoSprite.Rotation,
+                rotation: monoSprite.Rotation,
                 origin: monoSprite.Origin,
                 scale: monoSprite.Scale,
                 effects: SpriteEffects.None,
@@ -76,7 +76,7 @@ internal class RenderingComponent(
             textureComponent.Get(sprite.TextureName),
             screenTextureArea.ToRectangleF(),
             sprite.DisplayLayer.ToDepthLayer(),
-            sprite.Rotation
+            (float)sprite.Rotation
         );
     }
 }

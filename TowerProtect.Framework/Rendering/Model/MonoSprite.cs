@@ -6,7 +6,7 @@ internal readonly record struct MonoSprite(
     Texture2D Texture,
     RectangleF TextureArea,
     float DepthLayer,
-    double Rotation)
+    float Rotation)
 {
     public Vector2 Origin { get; } = new(Texture.Width / 2f, Texture.Height / 2f);
 

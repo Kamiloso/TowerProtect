@@ -10,7 +10,7 @@ internal class ContourTextureComponent(Game game) : GameComponent(game), IContou
 {
     private const int TextureSize = 16;
     private const int TextureArraySize = TextureSize * TextureSize;
-    private static readonly Color ContourColor = Color.Lerp(Color.Transparent, Color.Black, 0.6f);
+    private static readonly Color ContourColor = Color.Lerp(Color.Transparent, Color.Black, 1f);
 
     public Texture2D CreateByKey(string key)
     {

@@ -1,4 +1,4 @@
-#----------------------------- Global Properties ----------------------------#
+﻿#----------------------------- Global Properties ----------------------------#
 
 /outputDir:bin
 /intermediateDir:obj
@@ -110,19 +110,6 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.6.0
 /build:Rock.png
-
-#begin Crush.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=True
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/processorParam:Version=3.8.6.0
-/build:Crush.png
 
 #begin Unknown.png
 /importer:TextureImporter

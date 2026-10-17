@@ -1,5 +1,5 @@
 @echo off
-set "FILENAME=TowerProtect/Content/Content.mgcb"
+set "FILENAME=../TowerProtect/Content/Content.mgcb"
 
 if not exist "%FILENAME%" (
     echo File %FILENAME% not found.

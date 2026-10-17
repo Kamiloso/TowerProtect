@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Linq;
 using TowerProtect.Domain.Tools;
 using TowerProtect.Domain.Backend.Tiles;
 using TowerProtect.Domain.Model.Vectors;
 using TowerProtect.Domain.Backend.Tiles.Specific;
+using TowerProtect.Domain.Model.Tiles;
 
 namespace TowerProtect.Domain.Backend.Maps;
 
@@ -13,43 +13,46 @@ public abstract class Map
     public int Size => 2 * Range + 1;
     public int Capacity => Size * Size;
 
-    protected abstract string Template { get; }
-
-    private readonly Area<string> _table;
+    private readonly Area<TileType> _table;
 
     public Map()
     {
-        _table = new Area<string>(Range, out int size);
+        _table = new Area<TileType>(Range, out int size);
 
-        string[] tokens = [.. Template.Split('\n')
-            .Select(l => l.Trim())
-            .SelectMany(l => l.Split())];
+        TileType[,] tiles = GenerateTiles();
+        {
+            int dim1 = tiles.GetLength(0);
+            int dim2 = tiles.GetLength(1);
 
-        if (tokens.Length != size * size)
-            throw new InvalidOperationException();
+            if (dim1 != size || dim2 != size)
+            {
+                throw new InvalidOperationException($"Invalid dimensions: {dim1}x{dim2}");
+            }
+        }
 
         _table.Populate(pos =>
         {
             int i = Range - pos.y;
             int j = pos.x + Range;
-            
-            return tokens[i * size + j];
+
+            return tiles[i, j];
         });
     }
 
     public Tile CreateTileAt(Vec2Int pos)
     {
-        string tile = _table[pos];
+        TileType tile = _table[pos];
         return tile switch
         {
-            "." => new AirTile(),
-            "#" => new StoneTile(),
-            "O" => new CrushTile(),
-            "!" => new SpawnerTile(),
-            "+" => new WaterTile(),
-            "B" => new BedrockTile(),
-            "*" => new RockTile(),
-            _ => throw new InvalidOperationException($"Invalid tile: {tile}")
+            TileType.Air => new AirTile(),
+            TileType.Stone => new StoneTile(),
+            TileType.Spawner => new SpawnerTile(),
+            TileType.Water => new WaterTile(),
+            TileType.Bedrock => new BedrockTile(),
+            TileType.Rock => new RockTile(),
+            _ => throw new InvalidOperationException($"Invalid tile type: {tile}")
         };
     }
+
+    protected abstract TileType[,] GenerateTiles();
 }
