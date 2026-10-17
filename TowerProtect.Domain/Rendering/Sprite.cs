@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using TowerProtect.Domain.Model.Vectors;
+using TowerProtect.Domain.Rendering.Model;
 
 namespace TowerProtect.Domain.Rendering;
 
-public readonly record struct Sprite(string TextureName, Rect TextureArea) : IRenderable<Sprite>
+public readonly record struct Sprite(
+    Rect TextureArea, string TextureName, Layer DisplayLayer) : IRenderable<Sprite>
 {
     public Vec2 Position => TextureArea.Center;
     public double Rotation { get; private init; } = 0.0;
     public IEnumerable<Sprite> Sprites => [this];
+
+    public Sprite(Vec2 position, string textureName, Layer displayLayer)
+        : this(new Rect(position), textureName, displayLayer) { }
 
     public Sprite Move(Vec2 deltaPosition)
     {

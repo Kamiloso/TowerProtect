@@ -21,6 +21,14 @@ internal static class MonoGameRegistryExtensions
         srv.ReassignSingleton<IGameComponent, T>();
     }
 
+    public static void AddMonoGameSingleton<I, T>(this IServiceCollection srv)
+        where I : class
+        where T : class, I, IGameComponent
+    {
+        srv.AddMonoGameSingleton<T>();
+        srv.ReassignSingleton<I, T>();
+    }
+
     public static void AttachComponents(this Game game, IServiceProvider provider)
     {
         var components = provider.GetServices<IGameComponent>();

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static TowerProtect.Domain.Config.ScreenConfig;
 
 namespace TowerProtect.Framework.Rendering;
 
@@ -7,9 +8,6 @@ internal class LetterboxComponent(Game game) : DrawableGameComponent(game)
 {
     private SpriteBatch _spriteBatch = null!;
     private Texture2D _pixel = null!;
-
-    private const float MinRatio = 0.5f;
-    private const float MaxRatio = 2.0f;
 
     protected override void LoadContent()
     {
@@ -26,21 +24,21 @@ internal class LetterboxComponent(Game game) : DrawableGameComponent(game)
         int height = GraphicsDevice.Viewport.Height;
         float currentRatio = (float)width / height;
 
-        if (currentRatio < MinRatio || currentRatio > MaxRatio)
+        if (currentRatio < MinAspectRatio || currentRatio > MaxAspectRatio)
         {
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Opaque);
 
-            if (currentRatio > MaxRatio)
+            if (currentRatio > MaxAspectRatio)
             {
-                int targetWidth = (int)(height * MaxRatio);
+                int targetWidth = (int)(height * MaxAspectRatio);
                 int boxWidth = (width - targetWidth) / 2;
 
                 _spriteBatch.Draw(_pixel, new Rectangle(boxWidth - width, 0, width, height), Color.Black);
                 _spriteBatch.Draw(_pixel, new Rectangle(width - boxWidth, 0, width, height), Color.Black);
             }
-            else if (currentRatio < MinRatio)
+            else if (currentRatio < MinAspectRatio)
             {
-                int targetHeight = (int)(width / MinRatio);
+                int targetHeight = (int)(width / MinAspectRatio);
                 int boxHeight = (height - targetHeight) / 2;
 
                 _spriteBatch.Draw(_pixel, new Rectangle(0, boxHeight - height, width, height), Color.Black);

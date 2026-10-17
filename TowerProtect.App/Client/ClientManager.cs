@@ -1,44 +1,65 @@
 ﻿using AutoInterfaceAttributes;
 using System;
-using TowerProtect.App.Engine;
-using TowerProtect.Domain.Game.Tiles.Model;
 using TowerProtect.Domain.Interfaces;
+using TowerProtect.Domain.Model.Dto;
+using TowerProtect.Domain.Model.Tiles;
+using TowerProtect.App.Engine;
+using TowerProtect.Domain.Display.Camera;
 using TowerProtect.Domain.Model.Vectors;
-using TowerProtect.Domain.Rendering;
+using System.Collections.Generic;
+using TowerProtect.Domain.Backend.Maps;
+using TowerProtect.Domain.Backend.Maps.Specific;
 
 namespace TowerProtect.App.Client;
 
-partial interface IClientManager : IUpdateAware;
+partial interface IClientManager : IStartAware, IUpdateAware;
 
 [AutoInterface]
-internal class ClientManager : IClientManager
+internal class ClientManager(
+    IClientState clientState,
+    IInputSystem inputSystem,
+    ICameraZoomControl cameraZoomControl,
+    ICameraFollow cameraFollow) : IClientManager
 {
-    private readonly IClientState _clientState;
-    private readonly IInputSystem _inputSystem;
-    private readonly ICameraView _cameraView;
-
-    public ClientManager(IClientState clientState, IInputSystem inputSystem, ICameraView cameraView)
+    public void Start()
     {
-        _clientState = clientState;
-        _inputSystem = inputSystem;
-        _cameraView = cameraView;
+        Map map = new PlaceholderMap();
 
-        _clientState.Start(range: 100);
+        int range = map.Range;
 
-        for (int i = -100; i <= 100; i++)
-            for (int j = -100; j <= 100; j++)
+        List<PosTileData> posTileList = [];
+        for (int x = -range; x <= range; x++)
+            for (int y = -range; y <= range; y++)
             {
-                if (Random.Shared.Next(5) == 0)
-                {
-                    Vec2Int pos = new(i, j);
-                    _clientState.Tilemap.Set(pos, new TileData(TileType.Stone, 1));
-                }
+                var pos = new Vec2Int(x, y);
+                var posTileData = map.CreateTileAt(pos).GetPosTileData(pos);
+
+                posTileList.Add(posTileData);
             }
+
+        InitializeDto initializeDto = new(
+            Guid.NewGuid(),
+            new TilemapData(range, [.. posTileList])
+        );
+
+        clientState.Initialize(initializeDto);
     }
 
     public void Update(double deltaTime)
     {
-        _cameraView.Center += _inputSystem.ArrowsVector;
-        _cameraView.Zoom += 0.15 * _inputSystem.ScrollSign;
+        cameraZoomControl.Update(deltaTime);
+        cameraFollow.Update(deltaTime);
+
+        // TODO: move this somewhere else (follow player)
+
+        if (inputSystem.IsKeyDown("R"))
+        {
+            cameraFollow.Enabled = !cameraFollow.Enabled;
+        }
+
+        if (inputSystem.ArrowsVector != Vec2.Zero)
+        {
+            cameraFollow.Target += inputSystem.ArrowsVector;
+        }
     }
 }

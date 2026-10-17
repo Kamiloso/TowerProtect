@@ -1,6 +1,7 @@
 ﻿#pragma warning disable IDE1006 // Naming Styles
 
 using System;
+using System.Collections.Generic;
 
 namespace TowerProtect.Domain.Model.Vectors;
 
@@ -16,6 +17,8 @@ public readonly record struct Vec2Int(int x, int y)
     public static readonly Vec2Int Up = new(0, -1);
     public static readonly Vec2Int Right = new(1, 0);
     public static readonly Vec2Int Left = new(-1, 0);
+
+    public static IEnumerable<Vec2> MainDirections => [Up, Right, Down, Left];
 
     public static Vec2Int MinCorner(Vec2Int a, Vec2Int b) => new(Math.Min(a.x, b.x), Math.Min(a.y, b.y));
     public static Vec2Int MaxCorner(Vec2Int a, Vec2Int b) => new(Math.Max(a.x, b.x), Math.Max(a.y, b.y));

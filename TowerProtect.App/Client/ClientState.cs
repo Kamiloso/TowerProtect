@@ -1,23 +1,31 @@
 ﻿using AutoInterfaceAttributes;
-using TowerProtect.Domain.Game.Environment;
-using TowerProtect.Domain.Game.Tiles;
+using System.Collections.Generic;
+using TowerProtect.Domain.Display.Tiles;
+using TowerProtect.Domain.Interfaces;
+using TowerProtect.Domain.Model.Dto;
+using TowerProtect.Domain.Rendering;
 
 namespace TowerProtect.App.Client;
+
+partial interface IClientState : ISpriteRenderingAware;
 
 [AutoInterface]
 internal class ClientState : IClientState
 {
-    public ClientTilemap Tilemap { get; } = new(0);
-    public ClientBorders Borders { get; } = new(0);
+    public WorldDisplay WorldDisplay { get; } = new();
 
-    private bool _started;
+    private bool _initialized;
 
-    public void Start(int range)
+    public void Initialize(InitializeDto initializeDto)
     {
-        if (_started) return;
-        _started = true;
+        if (_initialized) return;
+        _initialized = true;
 
-        Tilemap.Recreate(range);
-        Borders.Recreate(range);
+        WorldDisplay.Initialize(initializeDto.Tilemap);
+    }
+
+    public void RenderSprites(List<Sprite> targetSprites, ICameraView cameraView)
+    {
+        WorldDisplay.RenderSprites(targetSprites, cameraView);
     }
 }

@@ -6,6 +6,13 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
+  
+  <ItemGroup Condition="'$(MSBuildProjectName)' == 'TowerProtect'">
+    <None Include="$(MSBuildThisFileDirectory)Licenses\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Licenses\%(RecursiveDir)%(Filename)%(Extension)</Link>
+    </None>
+  </ItemGroup>
 </Project>

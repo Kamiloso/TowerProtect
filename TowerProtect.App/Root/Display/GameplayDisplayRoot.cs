@@ -8,15 +8,13 @@ internal class GameplayDisplayRoot(
     IClientState clientState,
     ICameraView cameraView) : IDisplayRoot
 {
-    private readonly List<Sprite> _sprites = [];
+    private readonly List<Sprite> _targetSprites = [];
 
     public IEnumerable<Sprite> DrawNextFrame()
     {
-        _sprites.Clear();
+        _targetSprites.Clear();
+        clientState.RenderSprites(_targetSprites, cameraView);
 
-        clientState.Tilemap.RenderSprites(_sprites, cameraView);
-        clientState.Borders.RenderSprites(_sprites, cameraView);
-
-        return _sprites;
+        return _targetSprites;
     }
 }

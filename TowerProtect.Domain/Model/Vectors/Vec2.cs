@@ -1,6 +1,7 @@
 ﻿#pragma warning disable IDE1006 // Naming Styles
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace TowerProtect.Domain.Model.Vectors;
@@ -10,6 +11,7 @@ public readonly record struct Vec2(double x, double y)
     public double Magnitude => Math.Sqrt(x * x + y * y);
     public double SqrMagnitude => x * x + y * y;
     public Vec2 Normalized => Magnitude > 1E-15 ? this / Magnitude : Right;
+    public Vec2 Abs => new(Math.Abs(x), Math.Abs(y));
 
     public Vec2 Rotate(double angle)
     {
@@ -19,11 +21,15 @@ public readonly record struct Vec2(double x, double y)
         );
     }
 
-    public Vec2Int Round()
+    public Vec2Int Round() => RoundInternal(Math.Round);
+    public Vec2Int Floor() => RoundInternal(Math.Floor);
+    public Vec2Int Ceiling() => RoundInternal(Math.Ceiling);
+
+    private Vec2Int RoundInternal(Func<double, double> round)
     {
         return new Vec2Int(
-            x: double.IsNaN(x) ? 0 : (int)Math.Clamp(Math.Round(x), int.MinValue, int.MaxValue),
-            y: double.IsNaN(y) ? 0 : (int)Math.Clamp(Math.Round(y), int.MinValue, int.MaxValue)
+            x: double.IsNaN(x) ? 0 : (int)Math.Clamp(round(x), int.MinValue, int.MaxValue),
+            y: double.IsNaN(y) ? 0 : (int)Math.Clamp(round(y), int.MinValue, int.MaxValue)
         );
     }
 
@@ -52,6 +58,8 @@ public readonly record struct Vec2(double x, double y)
     public static readonly Vec2 Up = new(0, -1);
     public static readonly Vec2 Right = new(1, 0);
     public static readonly Vec2 Left = new(-1, 0);
+
+    public static IEnumerable<Vec2> MainDirections => [ Up, Right, Down, Left ];
 
     public static Vec2 MinCorner(Vec2 a, Vec2 b) => new(Math.Min(a.x, b.x), Math.Min(a.y, b.y));
     public static Vec2 MaxCorner(Vec2 a, Vec2 b) => new(Math.Max(a.x, b.x), Math.Max(a.y, b.y));

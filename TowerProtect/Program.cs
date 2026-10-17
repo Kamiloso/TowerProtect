@@ -6,11 +6,14 @@ using TowerProtect.App.Client;
 using TowerProtect.App.Engine;
 using TowerProtect.App.Root.App;
 using TowerProtect.App.Root.Display;
-using TowerProtect.Domain.Game.Maps;
+using TowerProtect.Domain.Backend.Maps;
+using TowerProtect.Domain.Display.Camera;
 using TowerProtect.Domain.Rendering;
 using TowerProtect.Framework.App;
+using TowerProtect.Framework.Diagnostics;
 using TowerProtect.Framework.Input;
 using TowerProtect.Framework.Rendering;
+using TowerProtect.Framework.Rendering.Textures;
 using TowerProtect.MonoGame;
 using TowerProtect.Registry;
 using TowerProtect.Scopes;
@@ -53,6 +56,11 @@ public static class Program
         srv.AddMonoGameSingleton<ScreenResizeComponent>();
         srv.AddMonoGameSingleton<RenderingComponent>();
         srv.AddMonoGameSingleton<LetterboxComponent>();
+        srv.AddMonoGameSingleton<DiagnosticsComponent>();
+
+        // 4. No update methods (no ordering required)
+        srv.AddMonoGameSingleton<ITextureComponent, TextureComponent>();
+        srv.AddMonoGameSingleton<IContourTextureComponent, ContourTextureComponent>();
     }
 
     private static void AddSingletonServices(this IServiceCollection srv)
@@ -77,5 +85,7 @@ public static class Program
         // Client-Side
         srv.UseGameplayScoped<IClientManager, ClientManager>();
         srv.UseGameplayScoped<IClientState, ClientState>();
+        srv.UseGameplayScoped<ICameraZoomControl, CameraZoomControl>();
+        srv.UseGameplayScoped<ICameraFollow, CameraFollow>();
     }
 }

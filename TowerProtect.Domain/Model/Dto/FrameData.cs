@@ -1,5 +1,5 @@
 ﻿using System.Collections.Immutable;
-using TowerProtect.Domain.Game.Entities.Model;
+using TowerProtect.Domain.Model.Entities;
 
 namespace TowerProtect.Domain.Model.Dto;
 

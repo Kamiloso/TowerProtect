@@ -1,26 +1,32 @@
 ﻿using AutoInterfaceAttributes;
 using TowerProtect.Domain.Game.Entities;
-using TowerProtect.Domain.Game.Maps;
-using TowerProtect.Domain.Game.Tiles;
+using TowerProtect.Domain.Backend.Tiles;
 using TowerProtect.Domain.Interfaces;
+using TowerProtect.Domain.Backend.Maps;
 
 namespace TowerProtect.App.Backend;
 
+partial interface IBackendManager : IStartAware, IUpdateAware;
+
 [AutoInterface]
-internal class BackendManager : IBackendManager, IUpdateAware
+internal class BackendManager : IBackendManager
 {
-    private readonly EntityBag _entityBag = new();
     private readonly Tilemap _tilemap;
+    private readonly EntityBag _entityBag;
 
     public BackendManager(IMapProvider mapProvider)
     {
-        var map = mapProvider.GetMap(null);
+        Map map = mapProvider.GetMap(null);
+
         _tilemap = new Tilemap(map.Range, map.CreateTileAt);
+        _entityBag = new();
     }
+
+    public void Start() { }
 
     public void Update(double deltaTime)
     {
-        _entityBag.Update(deltaTime);
         _tilemap.Update(deltaTime);
+        _entityBag.Update(deltaTime);
     }
 }
