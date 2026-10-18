@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using TowerProtect.Domain.Tools;
+using TowerProtect.Domain.Inventions.Tools;
 
 namespace TowerProtect.Framework.Rendering.Textures;
 

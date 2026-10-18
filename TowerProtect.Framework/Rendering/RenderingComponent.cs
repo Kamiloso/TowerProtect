@@ -3,12 +3,12 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using TowerProtect.App.Scopes;
 using TowerProtect.Domain.Model.Vectors;
-using TowerProtect.Domain.Rendering;
 using TowerProtect.Framework.Extensions;
 using TowerProtect.Framework.Rendering.Model;
 using TowerProtect.App.Root.Display;
 using TowerProtect.Framework.Rendering.Textures;
-using TowerProtect.Domain.Rendering.Model;
+using TowerProtect.Domain.Inventions.Rendering;
+using TowerProtect.Domain.Inventions.Rendering.Model;
 
 namespace TowerProtect.Framework.Rendering;
 

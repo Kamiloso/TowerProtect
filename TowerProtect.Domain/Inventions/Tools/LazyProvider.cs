@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TowerProtect.Domain.Tools;
+namespace TowerProtect.Domain.Inventions.Tools;
 
 public class LazyProvider<TKey, TValue>(Func<TKey, TValue> factory)
     where TKey : notnull

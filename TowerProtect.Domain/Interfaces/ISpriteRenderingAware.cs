@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using TowerProtect.Domain.Rendering;
+using TowerProtect.Domain.Inventions.Rendering;
 
 namespace TowerProtect.Domain.Interfaces;
 

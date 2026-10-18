@@ -1,7 +1,7 @@
 ﻿using AutoInterfaceAttributes;
 using TowerProtect.App.Interfaces;
 using TowerProtect.Domain.Interfaces;
-using TowerProtect.Domain.Rendering;
+using TowerProtect.Domain.Inventions.Rendering;
 using static TowerProtect.Domain.Config.CameraConfig;
 
 namespace TowerProtect.Domain.Display.Camera;

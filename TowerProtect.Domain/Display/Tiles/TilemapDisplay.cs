@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using TowerProtect.Domain.Interfaces;
+using TowerProtect.Domain.Inventions.Rendering;
+using TowerProtect.Domain.Inventions.Tools;
 using TowerProtect.Domain.Model.Tiles;
 using TowerProtect.Domain.Model.Vectors;
-using TowerProtect.Domain.Rendering;
-using TowerProtect.Domain.Tools;
 
 namespace TowerProtect.Domain.Display.Tiles;
 

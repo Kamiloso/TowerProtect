@@ -1,7 +1,7 @@
 ﻿using System;
 using TowerProtect.Domain.Model.Vectors;
 
-namespace TowerProtect.Domain.Tools;
+namespace TowerProtect.Domain.Inventions.Tools;
 
 public class Area<T>
 {

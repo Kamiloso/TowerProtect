@@ -1,12 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using AutoInterfaceAttributes;
+using System.Collections.Generic;
 using TowerProtect.Domain.Interfaces;
+using TowerProtect.Domain.Inventions.Rendering;
 using TowerProtect.Domain.Model.Tiles;
 using TowerProtect.Domain.Model.Vectors;
-using TowerProtect.Domain.Rendering;
 
 namespace TowerProtect.Domain.Display.Tiles;
 
-public class WorldDisplay : ISpriteRenderingAware
+partial interface IWorldDisplay : ISpriteRenderingAware;
+
+[AutoInterface]
+public class WorldDisplay : IWorldDisplay
 {
     private const int TypicalMapRange = 24;
 
@@ -31,7 +35,7 @@ public class WorldDisplay : ISpriteRenderingAware
 
     public void RenderSprites(List<Sprite> targetSprites, ICameraView cameraView)
     {
-        _background?.RenderSprites(targetSprites, cameraView);
+        _background.RenderSprites(targetSprites, cameraView);
         _tilemap?.RenderSprites(targetSprites, cameraView);
     }
 }

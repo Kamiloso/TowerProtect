@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoInterfaceAttributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TowerProtect.Domain.Interfaces;
@@ -6,18 +7,15 @@ using TowerProtect.Domain.Model.Vectors;
 
 namespace TowerProtect.Domain.Backend.Entities;
 
-public class EntityBag : IUpdateAware
+public partial interface IEntityBag : IUpdateAware;
+
+[AutoInterface]
+public class EntityBag : IEntityBag
 {
     private readonly Dictionary<Guid, Entity> _entities = [];
 
     private IEnumerable<Entity> EntitiesSnapshot => _entities.Values.ToList()
         .Where(e => e.IsAlive);
-
-    public void Spawn(Entity entity)
-    {
-        entity.OnDeath += () => _entities.Remove(entity.Guid);
-        _entities.Add(entity.Guid, entity);
-    }
 
     public void Update(double deltaTime)
     {
@@ -26,6 +24,13 @@ public class EntityBag : IUpdateAware
             var updateAware = entity as IUpdateAware;
             updateAware?.Update(deltaTime);
         }
+    }
+
+    public void SpawnEntity(Entity entity, out Guid guid)
+    {
+        entity.OnDeath += () => _entities.Remove(entity.Guid);
+        _entities.Add(entity.Guid, entity);
+        guid = entity.Guid;
     }
 
     public void ApplyAreaDamage(Vec2 center, int damage, double radius)

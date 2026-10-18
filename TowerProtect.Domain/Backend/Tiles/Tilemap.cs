@@ -1,24 +1,28 @@
 ﻿using System;
-using TowerProtect.Domain.Tools;
-using TowerProtect.Domain.Interfaces;
 using TowerProtect.Domain.Model.Vectors;
 using TowerProtect.Domain.Backend.Tiles.Specific;
 using TowerProtect.Domain.Model.Tiles;
+using TowerProtect.Domain.Backend.Maps;
+using AutoInterfaceAttributes;
+using TowerProtect.Domain.Inventions.Tools;
 
 namespace TowerProtect.Domain.Backend.Tiles;
 
-public class Tilemap : IUpdateAware
+partial interface ITilemap;
+
+[AutoInterface]
+public class Tilemap : ITilemap
 {
     private readonly Area<Tile> _area;
 
     public event Action<PosTileData>? TileUpdateEvent;
 
-    public Tilemap(int range, Func<Vec2Int, Tile> populator)
+    public Tilemap(IMap map)
     {
-        _area = new Area<Tile>(range);
+        _area = new Area<Tile>(map.Range);
         _area.Populate(pos =>
         {
-            Tile tile = populator(pos);
+            Tile tile = map.CreateTileAt(pos);
             tile.OnBreakEvent += () =>
             {
                 _area[pos] = new AirTile();
@@ -28,14 +32,8 @@ public class Tilemap : IUpdateAware
         });
     }
 
-    public void Update(double deltaTime)
-    {
-        _area.Iterate(pos =>
-        {
-            var updateAware = _area[pos] as IUpdateAware;
-            updateAware?.Update(deltaTime);
-        });
-    }
+    public TilemapData CollectTilemapData()
+        => TilemapData.FromArea(_area, (pos, t) => t.GetPosTileData(pos));
 
     public bool TryBreak(Vec2Int pos) => _area[pos].TryBreak();
 }

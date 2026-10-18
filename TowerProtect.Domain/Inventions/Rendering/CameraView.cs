@@ -3,7 +3,7 @@ using System;
 using TowerProtect.Domain.Model.Vectors;
 using static TowerProtect.Domain.Config.CameraConfig;
 
-namespace TowerProtect.Domain.Rendering;
+namespace TowerProtect.Domain.Inventions.Rendering;
 
 [AutoInterface]
 public class CameraView : ICameraView

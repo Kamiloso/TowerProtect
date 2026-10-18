@@ -4,7 +4,7 @@ using System;
 using System.Diagnostics;
 using TowerProtect.App.Interfaces;
 using TowerProtect.Domain.Model.Vectors;
-using TowerProtect.Domain.Rendering;
+using TowerProtect.Domain.Inventions.Rendering;
 
 namespace TowerProtect.Framework.Diagnostics;
 

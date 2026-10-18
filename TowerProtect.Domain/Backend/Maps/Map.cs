@@ -1,13 +1,15 @@
 ﻿using System;
-using TowerProtect.Domain.Tools;
 using TowerProtect.Domain.Backend.Tiles;
 using TowerProtect.Domain.Model.Vectors;
 using TowerProtect.Domain.Backend.Tiles.Specific;
 using TowerProtect.Domain.Model.Tiles;
+using AutoInterfaceAttributes;
+using TowerProtect.Domain.Inventions.Tools;
 
 namespace TowerProtect.Domain.Backend.Maps;
 
-public abstract class Map
+[AutoInterface]
+public abstract class Map : IMap
 {
     public abstract int Range { get; }
     public int Size => 2 * Range + 1;

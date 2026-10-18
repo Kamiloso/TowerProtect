@@ -1,12 +1,12 @@
 ﻿using System;
 using TowerProtect.Domain.Display.Tiles.Model;
+using TowerProtect.Domain.Inventions.Rendering;
 using TowerProtect.Domain.Model.Tiles;
 using TowerProtect.Domain.Model.Vectors;
-using TowerProtect.Domain.Rendering;
 
 namespace TowerProtect.Domain.Display.Tiles;
 
-public static class TileRenderExtensions
+internal static class TileRenderExtensions
 {
     public static IRenderable Render(this TileType self, Vec2Int pos, Func<Vec2Int, TileType?> tileAt)
     {

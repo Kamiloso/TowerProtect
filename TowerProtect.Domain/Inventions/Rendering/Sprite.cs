@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using TowerProtect.Domain.Inventions.Rendering.Model;
 using TowerProtect.Domain.Model.Vectors;
-using TowerProtect.Domain.Rendering.Model;
 
-namespace TowerProtect.Domain.Rendering;
+namespace TowerProtect.Domain.Inventions.Rendering;
 
 public readonly record struct Sprite(
     Rect TextureArea, string TextureName, Layer DisplayLayer) : IRenderable<Sprite>

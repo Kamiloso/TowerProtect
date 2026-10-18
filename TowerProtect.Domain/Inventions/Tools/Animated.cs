@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace TowerProtect.Domain.Tools;
+namespace TowerProtect.Domain.Inventions.Tools;
 
 public class Animated<T>(T initial,
     Stopwatch stopwatch,

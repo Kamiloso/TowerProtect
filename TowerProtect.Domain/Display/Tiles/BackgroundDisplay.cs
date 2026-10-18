@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using TowerProtect.Domain.Interfaces;
-using TowerProtect.Domain.Rendering;
-using TowerProtect.Domain.Rendering.Model;
-using TowerProtect.Domain.Tools;
+using TowerProtect.Domain.Inventions.Rendering;
+using TowerProtect.Domain.Inventions.Rendering.Model;
+using TowerProtect.Domain.Inventions.Tools;
 
 namespace TowerProtect.Domain.Display.Tiles;
 
