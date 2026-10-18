@@ -1,4 +1,4 @@
-﻿using TowerProtect.Domain.Inventions.Networking.Packets.Interfaces;
+﻿using TowerProtect.Domain.Inventions.Networking.Interfaces;
 
 namespace TowerProtect.Domain.Inventions.Networking.Packets.Requests;
 

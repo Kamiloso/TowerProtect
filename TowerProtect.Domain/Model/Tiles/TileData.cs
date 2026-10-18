@@ -2,7 +2,7 @@
 
 public readonly record struct TileData(
     TileType Type,
-    int Durability)
+    byte Durability)
 {
     public static TileData Air => new(TileType.Air, 0);
 }

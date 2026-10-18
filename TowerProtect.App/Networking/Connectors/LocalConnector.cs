@@ -2,7 +2,7 @@
 using System;
 using TowerProtect.App.Networking.Backend;
 using TowerProtect.App.Networking.Client;
-using TowerProtect.Domain.Interfaces;
+using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Inventions.Networking;
 
 namespace TowerProtect.App.Networking.Connectors;

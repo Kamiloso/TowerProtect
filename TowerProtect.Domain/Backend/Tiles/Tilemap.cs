@@ -2,7 +2,7 @@
 using TowerProtect.Domain.Model.Vectors;
 using TowerProtect.Domain.Backend.Tiles.Specific;
 using TowerProtect.Domain.Model.Tiles;
-using TowerProtect.Domain.Backend.Maps;
+using TowerProtect.Domain.Backend.Worldgen;
 using AutoInterfaceAttributes;
 using TowerProtect.Domain.Inventions.Tools;
 
@@ -15,7 +15,7 @@ public class Tilemap : ITilemap
 {
     private readonly Area<Tile> _area;
 
-    public event Action<PosTileData>? TileUpdateEvent;
+    public event Action<Vec2Int, TileData>? TileUpdateEvent;
 
     public Tilemap(IMap map)
     {
@@ -26,14 +26,14 @@ public class Tilemap : ITilemap
             tile.OnBreakEvent += () =>
             {
                 _area[pos] = new AirTile();
-                TileUpdateEvent?.Invoke(_area[pos].GetPosTileData(pos));
+                TileUpdateEvent?.Invoke(pos, _area[pos].TileData);
             };
             return tile;
         });
     }
 
     public TilemapData CollectTilemapData()
-        => TilemapData.FromArea(_area, (pos, t) => t.GetPosTileData(pos));
+        => TilemapData.FromArea(_area, t => t.TileData);
 
     public bool TryBreak(Vec2Int pos) => _area[pos].TryBreak();
 }

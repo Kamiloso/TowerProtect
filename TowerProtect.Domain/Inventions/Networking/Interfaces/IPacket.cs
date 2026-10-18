@@ -1,4 +1,4 @@
-﻿namespace TowerProtect.Domain.Inventions.Networking.Packets.Interfaces;
+﻿namespace TowerProtect.Domain.Inventions.Networking.Interfaces;
 
 public interface IPacket : IHasValidation
 {

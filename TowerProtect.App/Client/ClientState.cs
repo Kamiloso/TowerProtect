@@ -1,9 +1,10 @@
 ﻿using AutoInterfaceAttributes;
 using System.Collections.Generic;
 using TowerProtect.Domain.Display.Tiles;
-using TowerProtect.Domain.Interfaces;
+using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Inventions.Networking.Packets.Responses;
 using TowerProtect.Domain.Inventions.Rendering;
+using TowerProtect.Domain.Inventions.Rendering.Sprites;
 
 namespace TowerProtect.App.Client;
 

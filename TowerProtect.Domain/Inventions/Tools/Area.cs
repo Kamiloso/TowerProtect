@@ -6,8 +6,8 @@ namespace TowerProtect.Domain.Inventions.Tools;
 public class Area<T>
 {
     public int Range { get; }
-    public int Size => 2 * Range + 1;
-    public int Capacity => Size * Size;
+    public int Size => Area.Size(Range);
+    public int Capacity => Area.Capacity(Range);
 
     private readonly T[] _data;
 
@@ -46,6 +46,9 @@ public class Area<T>
 
 public static class Area
 {
+    public static int Size(int range) => 2 * range + 1;
+    public static int Capacity(int range) => Size(range) * Size(range);
+
     public static bool ContainsKey(int range, Vec2Int pos)
         => Math.Abs(pos.x) <= range && Math.Abs(pos.y) <= range;
 

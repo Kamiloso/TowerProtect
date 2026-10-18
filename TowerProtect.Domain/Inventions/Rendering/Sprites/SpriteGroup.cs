@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TowerProtect.Domain.Model.Vectors;
 
-namespace TowerProtect.Domain.Inventions.Rendering;
+namespace TowerProtect.Domain.Inventions.Rendering.Sprites;
 
 public readonly struct SpriteGroup(Vec2 position, IEnumerable<Sprite> sprites) : IRenderable<SpriteGroup>
 {

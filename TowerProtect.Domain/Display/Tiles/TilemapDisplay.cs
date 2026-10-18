@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using TowerProtect.Domain.Interfaces;
+using TowerProtect.Domain.Display.Tiles.Extensions;
+using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Inventions.Rendering;
+using TowerProtect.Domain.Inventions.Rendering.Sprites;
 using TowerProtect.Domain.Inventions.Tools;
 using TowerProtect.Domain.Model.Tiles;
 using TowerProtect.Domain.Model.Vectors;

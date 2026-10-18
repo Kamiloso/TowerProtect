@@ -1,4 +1,4 @@
-﻿using TowerProtect.Domain.Interfaces;
+﻿using TowerProtect.Domain.Inventions.Interfaces;
 
 namespace TowerProtect.App.Root.App;
 

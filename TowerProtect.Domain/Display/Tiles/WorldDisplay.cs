@@ -1,7 +1,8 @@
 ﻿using AutoInterfaceAttributes;
 using System.Collections.Generic;
-using TowerProtect.Domain.Interfaces;
+using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Inventions.Rendering;
+using TowerProtect.Domain.Inventions.Rendering.Sprites;
 using TowerProtect.Domain.Model.Tiles;
 using TowerProtect.Domain.Model.Vectors;
 

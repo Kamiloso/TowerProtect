@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 using TowerProtect.App.Scopes;
-using TowerProtect.Domain.Interfaces;
-using TowerProtect.Domain.Inventions.Networking.Packets.Interfaces;
 using TowerProtect.Domain.Inventions.Networking;
+using TowerProtect.Domain.Inventions.Interfaces;
+using TowerProtect.Domain.Inventions.Networking.Interfaces;
 
 namespace TowerProtect.App.Networking.Client;
 

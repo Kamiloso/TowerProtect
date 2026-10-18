@@ -1,5 +1,5 @@
 ﻿using System.Collections.Immutable;
-using TowerProtect.Domain.Inventions.Networking.Packets.Interfaces;
+using TowerProtect.Domain.Inventions.Networking.Interfaces;
 using TowerProtect.Domain.Model.Entities;
 
 namespace TowerProtect.Domain.Inventions.Networking.Packets.Responses;

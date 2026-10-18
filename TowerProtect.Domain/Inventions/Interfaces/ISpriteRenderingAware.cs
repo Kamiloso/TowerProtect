@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using TowerProtect.Domain.Inventions.Rendering;
+using TowerProtect.Domain.Inventions.Rendering.Sprites;
 
-namespace TowerProtect.Domain.Interfaces;
+namespace TowerProtect.Domain.Inventions.Interfaces;
 
 public interface ISpriteRenderingAware
 {

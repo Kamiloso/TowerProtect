@@ -1,6 +1,6 @@
 ﻿using TowerProtect.Domain.Model.Vectors;
 
-namespace TowerProtect.App.Interfaces;
+namespace TowerProtect.App.Client.Technology;
 
 public interface IInputSystem
 {

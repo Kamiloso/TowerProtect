@@ -34,14 +34,10 @@ internal sealed class ScopeManager(IServiceProvider serviceProvider)
     }
 
     public T? Locate<T>() where T : notnull
-    {
-        return _currentScope.ServiceProvider.GetService<T>();
-    }
+        => _currentScope.ServiceProvider.GetService<T>();
 
     public T LocateRequired<T>() where T : notnull
-    {
-        return _currentScope.ServiceProvider.GetRequiredService<T>();
-    }
+        => _currentScope.ServiceProvider.GetRequiredService<T>();
 
     public void Dispose() => _currentScope.Dispose();
 }

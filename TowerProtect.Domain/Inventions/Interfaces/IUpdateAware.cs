@@ -1,4 +1,4 @@
-﻿namespace TowerProtect.Domain.Interfaces;
+﻿namespace TowerProtect.Domain.Inventions.Interfaces;
 
 public interface IUpdateAware
 {

@@ -9,6 +9,7 @@ using TowerProtect.App.Root.Display;
 using TowerProtect.Framework.Rendering.Textures;
 using TowerProtect.Domain.Inventions.Rendering;
 using TowerProtect.Domain.Inventions.Rendering.Model;
+using TowerProtect.Domain.Inventions.Rendering.Sprites;
 
 namespace TowerProtect.Framework.Rendering;
 

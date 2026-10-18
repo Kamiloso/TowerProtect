@@ -1,11 +1,11 @@
 ﻿using AutoInterfaceAttributes;
-using TowerProtect.Domain.Interfaces;
 using TowerProtect.Domain.Display.Camera;
 using TowerProtect.Domain.Model.Vectors;
-using TowerProtect.App.Interfaces;
 using TowerProtect.App.Networking.Client;
 using TowerProtect.Domain.Inventions.Networking.Packets.Requests;
 using TowerProtect.Domain.Inventions.Networking.Packets.Responses;
+using TowerProtect.Domain.Inventions.Interfaces;
+using TowerProtect.App.Client.Technology;
 
 namespace TowerProtect.App.Client;
 

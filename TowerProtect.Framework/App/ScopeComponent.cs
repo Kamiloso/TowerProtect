@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using TowerProtect.App.Interfaces;
 using TowerProtect.App.Scopes;
 using TowerProtect.Domain.Model.Scopes;
 using TowerProtect.Domain.Inventions.Rendering;
+using TowerProtect.App.Client.Technology;
 
 namespace TowerProtect.Framework.App;
 

@@ -2,9 +2,8 @@
 using Microsoft.Xna.Framework;
 using System;
 using TowerProtect.Framework;
-using TowerProtect.Registry;
 
-namespace TowerProtect.MonoGame;
+namespace TowerProtect.Registry;
 
 internal static class MonoGameRegistryExtensions
 {

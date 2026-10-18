@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using TowerProtect.App.Interfaces;
+using TowerProtect.App.Client.Technology;
 using TowerProtect.Domain.Model.Vectors;
 
-namespace TowerProtect.Framework.Input;
+namespace TowerProtect.Framework.Technology;
 
 internal class InputComponent(Game game) : GameComponent(game), IInputSystem
 {

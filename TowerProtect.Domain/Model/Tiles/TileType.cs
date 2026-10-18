@@ -3,7 +3,7 @@ using TowerProtect.Domain.Inventions.Rendering.Model;
 
 namespace TowerProtect.Domain.Model.Tiles;
 
-public enum TileType
+public enum TileType : byte
 {
     Air = default,
     Stone = 1,

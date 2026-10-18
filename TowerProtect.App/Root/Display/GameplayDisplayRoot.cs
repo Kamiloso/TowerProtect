@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TowerProtect.App.Client;
 using TowerProtect.Domain.Inventions.Rendering;
+using TowerProtect.Domain.Inventions.Rendering.Sprites;
 
 namespace TowerProtect.App.Root.Display;
 

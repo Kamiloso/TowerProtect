@@ -6,7 +6,7 @@ using TowerProtect.Domain.Model.Tiles;
 using AutoInterfaceAttributes;
 using TowerProtect.Domain.Inventions.Tools;
 
-namespace TowerProtect.Domain.Backend.Maps;
+namespace TowerProtect.Domain.Backend.Worldgen;
 
 [AutoInterface]
 public abstract class Map : IMap

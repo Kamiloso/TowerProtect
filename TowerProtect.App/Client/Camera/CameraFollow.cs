@@ -1,6 +1,6 @@
 ﻿using System;
 using AutoInterfaceAttributes;
-using TowerProtect.Domain.Interfaces;
+using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Inventions.Rendering;
 using TowerProtect.Domain.Model.Vectors;
 using static TowerProtect.Domain.Config.CameraConfig;

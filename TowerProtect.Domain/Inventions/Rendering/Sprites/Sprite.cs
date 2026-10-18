@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TowerProtect.Domain.Inventions.Rendering.Model;
 using TowerProtect.Domain.Model.Vectors;
 
-namespace TowerProtect.Domain.Inventions.Rendering;
+namespace TowerProtect.Domain.Inventions.Rendering.Sprites;
 
 public readonly record struct Sprite(
     Rect TextureArea, string TextureName, Layer DisplayLayer) : IRenderable<Sprite>
