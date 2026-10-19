@@ -1,5 +1,5 @@
 ﻿using AutoInterfaceAttributes;
-using TowerProtect.App.Client.Technology;
+using TowerProtect.App.Client.Input;
 using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Inventions.Rendering;
 using static TowerProtect.Domain.Config.CameraConfig;
@@ -13,21 +13,21 @@ internal class CameraZoomControl(
     IInputSystem inputSystem,
     ICameraView cameraView) : ICameraZoomControl
 {
-    private int _cameraZoomLevel = 0;
+    private int _zoomLevel = 0;
 
     public void Update(double deltaTime)
     {
         if (inputSystem.IsKeyPressed("LeftControl"))
         {
-            if (inputSystem.ScrollSign > 0 && _cameraZoomLevel < MaxZoomPoint)
+            if (inputSystem.ScrollSign > 0 && _zoomLevel < MaxZoomPoint)
             {
-                _cameraZoomLevel++;
+                _zoomLevel++;
                 cameraView.Zoom += ZoomStep;
             }
 
-            if (inputSystem.ScrollSign < 0 && _cameraZoomLevel > MinZoomPoint)
+            if (inputSystem.ScrollSign < 0 && _zoomLevel > MinZoomPoint)
             {
-                _cameraZoomLevel--;
+                _zoomLevel--;
                 cameraView.Zoom -= ZoomStep;
             }
         }

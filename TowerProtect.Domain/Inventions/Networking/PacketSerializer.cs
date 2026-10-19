@@ -1,6 +1,6 @@
 ﻿using AutoInterfaceAttributes;
 using System.Text.Json;
-using TowerProtect.Domain.Inventions.Networking.Interfaces;
+using TowerProtect.App.Networking.Packets;
 
 namespace TowerProtect.Domain.Inventions.Networking;
 

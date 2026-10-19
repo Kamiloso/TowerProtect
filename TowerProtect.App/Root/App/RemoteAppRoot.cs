@@ -2,15 +2,15 @@
 
 namespace TowerProtect.App.Root.App;
 
-internal class RemoteAppRoot(IClientManager clientManager) : IAppRoot
+internal class RemoteAppRoot(IClientOrchestrator clientOrchestrator) : IAppRoot
 {
     public void Start()
     {
-        clientManager.Start();
+        clientOrchestrator.Start();
     }
 
     public void Update(double deltaTime)
     {
-        clientManager.Update(deltaTime);
+        clientOrchestrator.Update(deltaTime);
     }
 }

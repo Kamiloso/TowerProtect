@@ -18,21 +18,16 @@ public class WorldDisplay : IWorldDisplay
     private BackgroundDisplay _background = new(TypicalMapRange);
     private TilemapDisplay? _tilemap;
 
-    private bool _initialized;
-
-    public void Initialize(TilemapData tilemapData)
+    public void PushInformation(TilemapData tilemap)
     {
-        if (_initialized) return;
-        _initialized = true;
-
-        int range = tilemapData.Range;
-        var populator = tilemapData.GetPopulator();
-
-        _background = new BackgroundDisplay(range);
-        _tilemap = new TilemapDisplay(range, populator);
+        _background = new BackgroundDisplay(tilemap.Range);
+        _tilemap = new TilemapDisplay(tilemap.Range, tilemap.GetPopulator());
     }
 
-    public void Set(Vec2Int pos, TileData tileData) => _tilemap?.Set(pos, tileData);
+    public void Set(Vec2Int pos, TileData tile)
+    {
+        _tilemap?.Set(pos, tile);
+    }
 
     public void RenderSprites(List<Sprite> targetSprites, ICameraView cameraView)
     {

@@ -1,18 +1,14 @@
-﻿using TowerProtect.Domain.Inventions.Interfaces;
+﻿using TowerProtect.Domain.Backend.Entities.Abstract.Dynamic.Controllable;
+using TowerProtect.Domain.Backend.Entities.Movement;
+using TowerProtect.Domain.Inventions.Interfaces;
+using TowerProtect.Domain.Model.Entities;
 using TowerProtect.Domain.Model.Vectors;
 
 namespace TowerProtect.Domain.Backend.Entities.Specific;
 
-public sealed class PlayerEntity(Vec2 position)
-    : Entity(position, 0.0, health: 100), IUpdateAware
+public sealed class PlayerEntity(Vec2 position, IController controller)
+    : RangedEntity(position, health: 5, controller), IUpdateAware
 {
-    public double Speed => 4.0;
-
-    public void Update(double deltaTime)
-    {
-        double angle = Rotation;
-        double magnitude = deltaTime * Speed;
-
-        Position += magnitude * Vec2.Right.Rotate(angle);
-    }
+    public override EntityType Type => EntityType.Player;
+    public override double MovementSpeed => 4.0;
 }

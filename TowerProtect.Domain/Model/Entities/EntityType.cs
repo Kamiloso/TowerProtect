@@ -2,10 +2,18 @@
 
 namespace TowerProtect.Domain.Model.Entities;
 
-public enum EntityType
+public enum EntityType : byte
 {
     Player = default,
-    Monster = 1,
+    Animal = 1,
+    Monster = 2,
+    Sniper = 3,
+    Insect = 4,
+    Operator = 5,
+    Drone = 6,
+    Projectile = 7,
+    Fruit = 8,
+    Nest = 9,
 }
 
 public static class EntityTypeExtensions

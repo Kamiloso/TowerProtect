@@ -5,6 +5,7 @@ using TowerProtect.Domain.Model.Tiles;
 using TowerProtect.Domain.Backend.Worldgen;
 using AutoInterfaceAttributes;
 using TowerProtect.Domain.Inventions.Tools;
+using TowerProtect.Domain.Backend.Tiles.Abstract;
 
 namespace TowerProtect.Domain.Backend.Tiles;
 
@@ -25,7 +26,7 @@ public class Tilemap : ITilemap
             Tile tile = map.CreateTileAt(pos);
             tile.OnBreakEvent += () =>
             {
-                _area[pos] = new AirTile();
+                _area[pos] = AirTile.Instance;
                 TileUpdateEvent?.Invoke(pos, _area[pos].TileData);
             };
             return tile;

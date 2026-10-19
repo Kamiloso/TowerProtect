@@ -11,7 +11,11 @@ internal class NetInstance : INetInstance
 
     public NetInstance()
     {
-        byte[] buffer = RandomNumberGenerator.GetBytes(8);
-        Id = BitConverter.ToInt64(buffer, 0);
+        do
+        {
+            byte[] buffer = RandomNumberGenerator.GetBytes(8);
+            Id = BitConverter.ToInt64(buffer, 0);
+        }
+        while (Id == 0);
     }
 }

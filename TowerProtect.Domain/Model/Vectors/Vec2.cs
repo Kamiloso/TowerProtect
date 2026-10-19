@@ -3,15 +3,16 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Text.Json.Serialization;
 
 namespace TowerProtect.Domain.Model.Vectors;
 
 public readonly record struct Vec2(double x, double y)
 {
-    public double Magnitude => Math.Sqrt(x * x + y * y);
-    public double SqrMagnitude => x * x + y * y;
-    public Vec2 Normalized => Magnitude > 1E-15 ? this / Magnitude : Right;
-    public Vec2 Abs => new(Math.Abs(x), Math.Abs(y));
+    [JsonIgnore] public double Magnitude => Math.Sqrt(x * x + y * y);
+    [JsonIgnore] public double SqrMagnitude => x * x + y * y;
+    [JsonIgnore] public Vec2 Normalized => Magnitude > 1E-15 ? this / Magnitude : Right;
+    [JsonIgnore] public Vec2 Abs => new(Math.Abs(x), Math.Abs(y));
 
     public Vec2 Rotate(double angle)
     {

@@ -1,10 +1,10 @@
 ﻿using System;
-using TowerProtect.Domain.Backend.Tiles;
 using TowerProtect.Domain.Model.Vectors;
 using TowerProtect.Domain.Backend.Tiles.Specific;
 using TowerProtect.Domain.Model.Tiles;
 using AutoInterfaceAttributes;
 using TowerProtect.Domain.Inventions.Tools;
+using TowerProtect.Domain.Backend.Tiles.Abstract;
 
 namespace TowerProtect.Domain.Backend.Worldgen;
 
@@ -46,12 +46,12 @@ public abstract class Map : IMap
         TileType tile = _table[pos];
         return tile switch
         {
-            TileType.Air => new AirTile(),
-            TileType.Stone => new StoneTile(),
-            TileType.Spawner => new SpawnerTile(),
-            TileType.Water => new WaterTile(),
-            TileType.Bedrock => new BedrockTile(),
-            TileType.Rock => new RockTile(),
+            TileType.Air => AirTile.Instance,
+            TileType.Stone => StoneTile.Instance,
+            TileType.Spawner => SpawnerTile.New(),
+            TileType.Water => WaterTile.Instance,
+            TileType.Bedrock => BedrockTile.Instance,
+            TileType.Rock => RockTile.New(),
             _ => throw new InvalidOperationException($"Invalid tile type: {tile}")
         };
     }

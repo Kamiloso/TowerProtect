@@ -3,7 +3,7 @@ using System;
 using TowerProtect.App.Scopes;
 using TowerProtect.Domain.Model.Scopes;
 using TowerProtect.Domain.Inventions.Rendering;
-using TowerProtect.App.Client.Technology;
+using TowerProtect.App.Client.Input;
 
 namespace TowerProtect.Framework.App;
 

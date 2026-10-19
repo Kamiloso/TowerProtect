@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
-using TowerProtect.App.Client;
+using TowerProtect.Domain.Display.Entities;
+using TowerProtect.Domain.Display.Tiles;
 using TowerProtect.Domain.Inventions.Rendering;
 using TowerProtect.Domain.Inventions.Rendering.Sprites;
 
 namespace TowerProtect.App.Root.Display;
 
 internal class GameplayDisplayRoot(
-    IClientState clientState,
+    IWorldDisplay worldDisplay,
+    IEntitiesDisplay entitiesDisplay,
     ICameraView cameraView) : IDisplayRoot
 {
     private readonly List<Sprite> _targetSprites = [];
@@ -14,7 +16,9 @@ internal class GameplayDisplayRoot(
     public IEnumerable<Sprite> DrawNextFrame()
     {
         _targetSprites.Clear();
-        clientState.RenderSprites(_targetSprites, cameraView);
+
+        worldDisplay.RenderSprites(_targetSprites, cameraView);
+        entitiesDisplay.RenderSprites(_targetSprites, cameraView);
 
         return _targetSprites;
     }

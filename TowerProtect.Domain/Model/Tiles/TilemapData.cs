@@ -9,18 +9,47 @@ public readonly record struct TilemapData(int Range, string Base64)
 {
     public static TilemapData FromArea<T>(Area<T> area, Func<T, TileData> mapper)
     {
-        int ptr = 0;
-        var bytes = new byte[area.Capacity * 2];
+        var bytes = new List<byte>(area.Capacity * 3);
+
+        bool hasFirst = false;
+        TileData currentTile = default;
+        byte count = 0;
 
         area.Iterate(pos =>
         {
-            var tileData = mapper(area[pos]);
+            TileData tileData = mapper(area[pos]);
 
-            bytes[ptr++] = (byte)tileData.Type;
-            bytes[ptr++] = tileData.Durability;
+            if (!hasFirst)
+            {
+                currentTile = tileData;
+                count = 1;
+                hasFirst = true;
+                return;
+            }
+
+            if (tileData == currentTile && count < byte.MaxValue)
+            {
+                count++;
+            }
+            else
+            {
+                bytes.Add((byte)currentTile.Type);
+                bytes.Add(currentTile.Durability);
+                bytes.Add(count);
+
+                currentTile = tileData;
+                count = 1;
+            }
         });
 
-        return new TilemapData(area.Range, Convert.ToBase64String(bytes));
+        if (hasFirst)
+        {
+            bytes.Add((byte)currentTile.Type);
+            bytes.Add(currentTile.Durability);
+            bytes.Add(count);
+        }
+
+        return new TilemapData(area.Range, Convert.ToBase64String(bytes.ToArray()));
     }
 
     public Func<Vec2Int, TileData> GetPopulator()
@@ -30,12 +59,25 @@ public readonly record struct TilemapData(int Range, string Base64)
         int ptr = 0;
         byte[] bytes = Convert.FromBase64String(Base64);
 
+        TileData currentTile = default;
+        int remainingCount = 0;
+
         Area.Iterate(Range, pos =>
         {
-            var tileType = (TileType)bytes[ptr++];
-            byte durability = bytes[ptr++];
+            if (remainingCount == 0)
+            {
+                if (ptr + 2 >= bytes.Length)
+                    return;
 
-            dict.Add(pos, new TileData(tileType, durability));
+                var tileType = (TileType)bytes[ptr++];
+                byte durability = bytes[ptr++];
+                remainingCount = bytes[ptr++];
+
+                currentTile = new TileData(tileType, durability);
+            }
+
+            dict.Add(pos, currentTile);
+            remainingCount--;
         });
 
         return pos => dict.GetValueOrDefault(pos, TileData.Air);
