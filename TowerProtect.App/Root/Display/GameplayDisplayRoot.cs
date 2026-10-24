@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using TowerProtect.Domain.Display.Entities;
+using TowerProtect.Domain.Client.Entities;
 using TowerProtect.Domain.Display.Tiles;
 using TowerProtect.Domain.Inventions.Rendering;
 using TowerProtect.Domain.Inventions.Rendering.Sprites;

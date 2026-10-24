@@ -2,7 +2,7 @@
 using TowerProtect.App.Networking.Client;
 using TowerProtect.App.Networking.Packets.Requests;
 using TowerProtect.App.Networking.Packets.Responses;
-using TowerProtect.Domain.Display.Entities;
+using TowerProtect.Domain.Client.Entities;
 using TowerProtect.Domain.Display.Tiles;
 using TowerProtect.Domain.Inventions.Interfaces;
 

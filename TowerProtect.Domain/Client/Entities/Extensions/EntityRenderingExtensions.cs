@@ -7,7 +7,7 @@ using TowerProtect.Domain.Inventions.Tools;
 using TowerProtect.Domain.Model.Entities;
 using TowerProtect.Domain.Model.Vectors;
 
-namespace TowerProtect.Domain.Display.Entities.Extensions;
+namespace TowerProtect.Domain.Client.Entities.Extensions;
 
 internal static class EntityRenderingExtensions
 {

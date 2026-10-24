@@ -26,7 +26,7 @@ using TowerProtect.App.Networking.Routing.Backend;
 using TowerProtect.App.Networking.Routing.Client;
 using TowerProtect.App.Client.Input;
 using TowerProtect.App.Backend.Entities;
-using TowerProtect.Domain.Display.Entities;
+using TowerProtect.Domain.Client.Entities;
 
 namespace TowerProtect;
 

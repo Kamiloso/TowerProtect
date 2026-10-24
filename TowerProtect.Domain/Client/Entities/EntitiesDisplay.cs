@@ -2,13 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using TowerProtect.Domain.Display.Entities.Extensions;
+using TowerProtect.Domain.Client.Entities.Extensions;
 using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Inventions.Rendering;
 using TowerProtect.Domain.Inventions.Rendering.Sprites;
 using TowerProtect.Domain.Model.Entities;
 
-namespace TowerProtect.Domain.Display.Entities;
+namespace TowerProtect.Domain.Client.Entities;
 
 partial interface IEntitiesDisplay : ISpriteRenderingAware;
 
