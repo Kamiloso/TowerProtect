@@ -16,12 +16,12 @@ public class EntityBag : IEntityBag
     private readonly Dictionary<Guid, Entity> _entities = [];
 
     private IEnumerable<Entity> EntitiesView => _entities.Values;
-    private IEnumerable<Entity> EntitiesSnapshotSafe => EntitiesView.ToList()
+    private IEnumerable<Entity> EntitiesSnapshotWhereAlive => EntitiesView.ToList()
         .Where(e => e.IsAlive);
 
     public void Update(double deltaTime)
     {
-        foreach (var entity in EntitiesSnapshotSafe)
+        foreach (var entity in EntitiesSnapshotWhereAlive)
         {
             var updateAware = entity as IUpdateAware;
             updateAware?.Update(deltaTime);
@@ -40,5 +40,11 @@ public class EntityBag : IEntityBag
     }
 
     public EntityListData CollectEntityListData()
-        => new([.. EntitiesView.Select(e => e.EntityData)]);
+    {
+        List<EntityData> entityDataList = [.. EntitiesView
+            .Where(e => e.IsRendered)
+            .Select(e => e.EntityData)];
+
+        return new([.. entityDataList]);
+    }
 }

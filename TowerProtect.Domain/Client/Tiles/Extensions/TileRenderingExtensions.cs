@@ -1,11 +1,11 @@
 ﻿using System;
-using TowerProtect.Domain.Display.Tiles.Model;
-using TowerProtect.Domain.Inventions.Rendering;
-using TowerProtect.Domain.Inventions.Rendering.Sprites;
+using TowerProtect.Domain.Client.Tiles.Model;
 using TowerProtect.Domain.Model.Tiles;
 using TowerProtect.Domain.Model.Vectors;
+using TowerProtect.Domain.Rendering;
+using TowerProtect.Domain.Rendering.Sprites;
 
-namespace TowerProtect.Domain.Display.Tiles.Extensions;
+namespace TowerProtect.Domain.Client.Tiles.Extensions;
 
 internal static class TileRenderingExtensions
 {

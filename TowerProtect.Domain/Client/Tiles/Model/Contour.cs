@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TowerProtect.Domain.Display.Tiles.Model;
+namespace TowerProtect.Domain.Client.Tiles.Model;
 
 [Flags]
 public enum Contour : byte

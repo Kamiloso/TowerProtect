@@ -3,13 +3,13 @@ using System;
 using TowerProtect.Domain.Model.Vectors;
 using static TowerProtect.Domain.Config.CameraConfig;
 
-namespace TowerProtect.Domain.Inventions.Rendering;
+namespace TowerProtect.Domain.Rendering.Camera;
 
 [AutoInterface]
 public class CameraView : ICameraView
 {
-    public Vec2 Center { get; set; } = Vec2.Zero;
-    public double Zoom { get; set; } = 0.0;
+    public Vec2 Center { get; set; }
+    public double Zoom { get; set; }
 
     public Rect VisionArea => new(Center, AspectRatio >= 1.0
         ? Side * new Vec2(AspectRatio, 1.0)

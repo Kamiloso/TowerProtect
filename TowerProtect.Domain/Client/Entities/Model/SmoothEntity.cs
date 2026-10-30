@@ -1,26 +1,41 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using TowerProtect.Domain.Client.Entities.Interpolation;
+using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Model.Entities;
 using TowerProtect.Domain.Model.Vectors;
 
 namespace TowerProtect.Domain.Client.Entities.Model;
 
-internal class SmoothEntity
+internal class SmoothEntity : IUpdateAware
 {
-    private const int BufferSize = 5;
+    private readonly PositionInterpolator _positionItp = new();
+    private readonly RotationInterpolator _rotationItp = new();
 
-    private readonly LinkedList<Vec2> _positions = [];
-    private readonly LinkedList<double> _rotations = [];
+    private EntityData? _initialEntity;
 
-    public SmoothEntity(EntityData initialEntity)
+    public void Tick(EntityData currentEntity, double tickTime)
     {
-        _positions.AddLast(initialEntity.Position);
-        _rotations.AddLast(initialEntity.Rotation);
+        _initialEntity ??= currentEntity;
+
+        _positionItp.Tick(currentEntity.Position, tickTime);
+        _rotationItp.Tick(currentEntity.Rotation, tickTime);
     }
 
-    public void NextFrame(EntityData nextEntity)
+    public void Update(double deltaTime)
     {
-        
+        _positionItp.Update(deltaTime);
+        _rotationItp.Update(deltaTime);
     }
 
-    private record Transform(Vec2 Position, double Rotation);
+    public EntityData Interpolate()
+    {
+        if (!_initialEntity.HasValue)
+            throw new InvalidOperationException("Cannot interpolate before first tick");
+
+        return _initialEntity.Value with
+        {
+            Position = _positionItp.Interpolate(),
+            Rotation = _rotationItp.Interpolate(),
+        };
+    }
 }

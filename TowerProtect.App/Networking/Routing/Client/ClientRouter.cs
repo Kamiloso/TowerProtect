@@ -1,7 +1,6 @@
 ﻿using AutoInterfaceAttributes;
 using System;
 using System.Collections.Generic;
-using TowerProtect.App.Networking.Packets;
 using TowerProtect.App.Networking.Routing.Client;
 using TowerProtect.App.Scopes;
 using TowerProtect.Domain.Inventions.Interfaces;

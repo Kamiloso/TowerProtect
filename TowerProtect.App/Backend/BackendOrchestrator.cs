@@ -13,6 +13,7 @@ internal class BackendOrchestrator(
     IBackendRouter backendRouter,
     IEntityBag entityBag,
     IPlayerManager playerManager,
+    IEnemyManager enemyManager,
     IBroadcastSender broadcastSender) : IBackendOrchestrator
 {
     public void Start()
@@ -24,6 +25,7 @@ internal class BackendOrchestrator(
     {
         backendRouter.Update(deltaTime);
         entityBag.Update(deltaTime);
+        enemyManager.Update(deltaTime);
         broadcastSender.Update(deltaTime);
     }
 }

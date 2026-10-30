@@ -6,19 +6,19 @@ namespace TowerProtect.App.Root.App;
 
 internal class LocalAppRoot(
     ILocalConnector localConnector,
-    IClientOrchestrator clientOrchestrator,
-    IBackendOrchestrator backendOrchestrator) : IAppRoot
+    IBackendOrchestrator backendOrchestrator,
+    IClientOrchestrator clientOrchestrator) : IAppRoot
 {
     public void Start()
     {
         localConnector.Start();
-        clientOrchestrator.Start();
         backendOrchestrator.Start();
+        clientOrchestrator.Start();
     }
 
     public void Update(double deltaTime)
     {
-        clientOrchestrator.Update(deltaTime);
         backendOrchestrator.Update(deltaTime);
+        clientOrchestrator.Update(deltaTime);
     }
 }

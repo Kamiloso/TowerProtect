@@ -1,6 +1,6 @@
 ﻿using TowerProtect.Domain.Inventions.Interfaces;
 
-namespace TowerProtect.App.Networking.Packets;
+namespace TowerProtect.Domain.Inventions.Networking;
 
 public interface IPacket : IHasValidation
 {

@@ -9,16 +9,24 @@ public abstract class ControllableEntity(Vec2 position, byte health, IController
 {
     public override bool IsDamageable => true;
     public override bool IsFlying => false;
+    public override bool IsRendered => _inputReceived && base.IsRendered;
+
+    private bool _inputReceived;
 
     public virtual void Update(double deltaTime)
     {
-        Rotation = controller.Rotation;
+        if (controller.InputReceived)
+        {
+            Rotation = controller.Rotation;
 
-        if (controller.IsMoving)
-            MovementStep(deltaTime);
+            if (controller.IsMoving)
+                MovementStep(deltaTime);
 
-        if (controller.IsShooting)
-            ShootingStep(deltaTime);
+            if (controller.IsShooting)
+                ShootingStep(deltaTime);
+
+            _inputReceived = true;
+        }
     }
 
     protected abstract void ShootingStep(double deltaTime);

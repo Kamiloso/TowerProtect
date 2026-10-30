@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using TowerProtect.App.Scopes;
 using TowerProtect.App.Root.App;
+using System;
+using static TowerProtect.Domain.Config.LoopConfig;
 
 namespace TowerProtect.Framework.App;
 
@@ -16,8 +18,10 @@ internal class AppComponent(Game game, Dynamic<IAppRoot> appRoot) : GameComponen
             _ref.Start();
         }
 
-        double deltaTime = gameTime.ElapsedGameTime.TotalMilliseconds / 1000.0;
-        appRoot.Current.Update(deltaTime);
+        double realDeltaTime = gameTime.ElapsedGameTime.TotalMilliseconds / 1000.0;
+        double safeDeltaTime = Math.Min(realDeltaTime, MaxDeltaTime);
+
+        appRoot.Current.Update(safeDeltaTime);
 
         base.Update(gameTime);
     }

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using TowerProtect.Domain.Inventions.Rendering.Sprites;
 using TowerProtect.Domain.Model.Vectors;
+using TowerProtect.Domain.Rendering.Sprites;
 
-namespace TowerProtect.Domain.Inventions.Rendering;
+namespace TowerProtect.Domain.Rendering;
 
 public interface IRenderable
 {

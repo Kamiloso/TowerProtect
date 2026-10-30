@@ -7,9 +7,9 @@ using TowerProtect.Framework.Extensions;
 using TowerProtect.Framework.Rendering.Model;
 using TowerProtect.App.Root.Display;
 using TowerProtect.Framework.Rendering.Textures;
-using TowerProtect.Domain.Inventions.Rendering;
-using TowerProtect.Domain.Inventions.Rendering.Model;
-using TowerProtect.Domain.Inventions.Rendering.Sprites;
+using TowerProtect.Domain.Rendering.Camera;
+using TowerProtect.Domain.Rendering.Model;
+using TowerProtect.Domain.Rendering.Sprites;
 
 namespace TowerProtect.Framework.Rendering;
 

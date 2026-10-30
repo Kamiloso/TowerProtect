@@ -1,4 +1,5 @@
 ﻿using System;
+using TowerProtect.Domain.Inventions.Networking;
 using TowerProtect.Domain.Model.Tiles;
 
 namespace TowerProtect.App.Networking.Packets.Responses;

@@ -2,8 +2,8 @@
 using System;
 using TowerProtect.App.Scopes;
 using TowerProtect.Domain.Model.Scopes;
-using TowerProtect.Domain.Inventions.Rendering;
-using TowerProtect.App.Client.Input;
+using TowerProtect.Domain.Rendering.Camera;
+using TowerProtect.App.Client.Interfaces;
 
 namespace TowerProtect.Framework.App;
 
@@ -16,15 +16,10 @@ internal class ScopeComponent(
 {
     public override void Update(GameTime gameTime)
     {
-        if (inputSystem.IsKeyDown("Space")) // TODO: temporary, remove
-        {
-            switch (Random.Shared.Next(3))
-            {
-                case 0: scopeSwitcher.SwitchScope(new StartLocalData("Username")); break;
-                case 1: scopeSwitcher.SwitchScope(new StartRemoteData("Username", "Password", "Address")); break;
-                case 2: scopeSwitcher.SwitchScope(new StartMenuData()); break;
-            }
-        } // end temporary
+        // TODO: Remove
+        if (inputSystem.IsKeyDown("Space"))
+            scopeSwitcher.SwitchScope(new StartLocalData("Username"));
+        // END TEMPORARY
 
         if (scopeExchanger.ExchangeScopeIfDelayed())
         {

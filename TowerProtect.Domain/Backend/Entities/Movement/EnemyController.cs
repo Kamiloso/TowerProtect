@@ -2,13 +2,15 @@
 
 namespace TowerProtect.Domain.Backend.Entities.Movement;
 
-internal class EnemyController : IController
+public class EnemyController : IController
 {
-    private readonly Stopwatch _sw = Stopwatch.StartNew();
+    public bool InputReceived => true; // Enemy AI always has some input
 
     public double Rotation => _sw.ElapsedMilliseconds / 1000.0;
     public bool IsMoving => true;
     public bool IsShooting => true;
 
     // TODO: Implement enemy AI logic
+
+    private readonly Stopwatch _sw = Stopwatch.StartNew();
 }

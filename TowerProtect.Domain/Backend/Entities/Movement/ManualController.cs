@@ -1,15 +1,22 @@
-﻿namespace TowerProtect.Domain.Backend.Entities.Movement;
+﻿using TowerProtect.Domain.Model.Unions;
+
+namespace TowerProtect.Domain.Backend.Entities.Movement;
 
 public class ManualController : IController
 {
+    public bool InputReceived { get; private set; }
+
+    // Input properties
     public double Rotation { get; private set; }
     public bool IsMoving { get; private set; }
     public bool IsShooting { get; private set; }
 
-    public void Update(double rotation, bool isMoving, bool isShooting)
+    public void AcceptInput(InputUnion inputUnion)
     {
-        Rotation = rotation;
-        IsMoving = isMoving;
-        IsShooting = isShooting;
+        InputReceived = true;
+
+        Rotation = inputUnion.Rotation;
+        IsMoving = inputUnion.IsMoving;
+        IsShooting = inputUnion.IsShooting;
     }
 }

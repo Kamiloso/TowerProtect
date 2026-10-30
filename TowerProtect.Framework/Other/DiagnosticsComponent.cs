@@ -3,8 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Diagnostics;
 using TowerProtect.Domain.Model.Vectors;
-using TowerProtect.Domain.Inventions.Rendering;
-using TowerProtect.App.Client.Input;
+using TowerProtect.Domain.Rendering.Camera;
+using TowerProtect.App.Client.Interfaces;
 
 namespace TowerProtect.Framework.Other;
 

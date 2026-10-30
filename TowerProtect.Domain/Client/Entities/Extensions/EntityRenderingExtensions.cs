@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
-using TowerProtect.Domain.Inventions.Rendering;
-using TowerProtect.Domain.Inventions.Rendering.Model;
-using TowerProtect.Domain.Inventions.Rendering.Sprites;
 using TowerProtect.Domain.Inventions.Tools;
 using TowerProtect.Domain.Model.Entities;
 using TowerProtect.Domain.Model.Vectors;
+using TowerProtect.Domain.Rendering;
+using TowerProtect.Domain.Rendering.Model;
+using TowerProtect.Domain.Rendering.Sprites;
 
 namespace TowerProtect.Domain.Client.Entities.Extensions;
 

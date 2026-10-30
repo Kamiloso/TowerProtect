@@ -2,44 +2,61 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using TowerProtect.Domain.Rendering.Camera;
 using TowerProtect.Domain.Client.Entities.Extensions;
+using TowerProtect.Domain.Client.Entities.Model;
 using TowerProtect.Domain.Inventions.Interfaces;
-using TowerProtect.Domain.Inventions.Rendering;
-using TowerProtect.Domain.Inventions.Rendering.Sprites;
-using TowerProtect.Domain.Model.Entities;
+using TowerProtect.Domain.Inventions.Tools;
+using TowerProtect.Domain.Model.Unions;
+using TowerProtect.Domain.Rendering;
+using TowerProtect.Domain.Rendering.Sprites;
 
 namespace TowerProtect.Domain.Client.Entities;
 
-partial interface IEntitiesDisplay : ISpriteRenderingAware;
+partial interface IEntitiesDisplay : IUpdateAware, ISpriteRenderingAware;
 
 [AutoInterface]
 internal class EntitiesDisplay : IEntitiesDisplay
 {
-    private readonly Dictionary<Guid, EntityData> _entities = [];
+    private readonly Swap<Dictionary<Guid, SmoothEntity>> _smoothEntities = new();
     private readonly Stopwatch _sw = Stopwatch.StartNew();
 
-    private Guid _mainGuid;
+    private Guid _playerGuid;
 
-    public void PushInformation(Guid mainGuid)
+    public void Tick(FrameUnion frameUnion)
     {
-        _mainGuid = mainGuid;
+        _playerGuid = frameUnion.PlayerGuid;
+
+        frameUnion.ForEach(entity =>
+        {
+            var guid = entity.Guid;
+
+            _smoothEntities.Current.TryGetValue(guid, out var smoothEntity);
+
+            smoothEntity ??= new SmoothEntity();
+            smoothEntity.Tick(entity, frameUnion.TickTime);
+
+            _smoothEntities.Other[guid] = smoothEntity;
+        });
+
+        _smoothEntities.Exchange();
+        _smoothEntities.Other.Clear();
     }
 
-    public void NextUpdate(EntityListData entityList)
+    public void Update(double deltaTime)
     {
-        _entities.Clear();
-
-        foreach (var entity in entityList.Unpack())
+        foreach (var smoothEntity in _smoothEntities.Current.Values)
         {
-            _entities.Add(entity.Guid, entity);
+            smoothEntity.Update(deltaTime);
         }
     }
 
     public void RenderSprites(List<Sprite> targetSprites, ICameraView cameraView)
     {
-        foreach (var entity in _entities.Values)
+        foreach (var smoothEntity in _smoothEntities.Current.Values)
         {
-            var sprites = entity.Render(_mainGuid, _sw).Sprites;
+            var entity = smoothEntity.Interpolate();
+            var sprites = entity.Render(_playerGuid, _sw).Sprites;
             targetSprites.AddRange(sprites);
         }
     }

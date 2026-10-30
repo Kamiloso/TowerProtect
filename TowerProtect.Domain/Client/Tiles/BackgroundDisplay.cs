@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using TowerProtect.Domain.Inventions.Interfaces;
-using TowerProtect.Domain.Inventions.Rendering;
-using TowerProtect.Domain.Inventions.Rendering.Sprites;
-using TowerProtect.Domain.Inventions.Rendering.Model;
 using TowerProtect.Domain.Inventions.Tools;
+using TowerProtect.Domain.Rendering.Camera;
+using TowerProtect.Domain.Rendering.Model;
+using TowerProtect.Domain.Rendering.Sprites;
+using TowerProtect.Domain.Rendering;
 
-namespace TowerProtect.Domain.Display.Tiles;
+namespace TowerProtect.Domain.Client.Tiles;
 
 internal class BackgroundDisplay(int range) : ISpriteRenderingAware
 {

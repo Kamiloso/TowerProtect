@@ -2,7 +2,8 @@
 
 namespace TowerProtect.App.Root.App;
 
-internal class RemoteAppRoot(IClientOrchestrator clientOrchestrator) : IAppRoot
+internal class RemoteAppRoot(
+    IClientOrchestrator clientOrchestrator) : IAppRoot
 {
     public void Start()
     {

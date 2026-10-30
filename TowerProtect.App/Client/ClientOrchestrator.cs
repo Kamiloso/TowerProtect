@@ -1,9 +1,10 @@
 ﻿using AutoInterfaceAttributes;
-using TowerProtect.Domain.Display.Camera;
-using TowerProtect.Domain.Model.Vectors;
-using TowerProtect.App.Networking.Client;
-using TowerProtect.Domain.Inventions.Interfaces;
+using TowerProtect.App.Client.Camera;
 using TowerProtect.App.Client.Input;
+using TowerProtect.App.Client.Receivers;
+using TowerProtect.App.Networking.Client;
+using TowerProtect.Domain.Client.Entities;
+using TowerProtect.Domain.Inventions.Interfaces;
 
 namespace TowerProtect.App.Client;
 
@@ -12,33 +13,21 @@ partial interface IClientOrchestrator : IStartAware, IUpdateAware;
 [AutoInterface]
 internal class ClientOrchestrator(
     IClientRouter clientRouter,
-    IClientStateManager clientStateManager,
+    IInformationDivider informationDivider,
     IInputSender inputSender,
-    ICameraZoomControl cameraZoomControl,
-    ICameraFollow cameraFollow,
-
-
-    // TODO: move this
-    IInputSystem inputSystem) : IClientOrchestrator
+    IEntitiesDisplay entitiesDisplay,
+    ICameraControl cameraControl) : IClientOrchestrator
 {
     public void Start()
     {
-        clientStateManager.Start();
+        informationDivider.Start();
     }
 
     public void Update(double deltaTime)
     {
         clientRouter.Update(deltaTime);
         inputSender.Update(deltaTime);
-        cameraZoomControl.Update(deltaTime);
-        cameraFollow.Update(deltaTime);
-
-
-        // TODO: move this somewhere else (follow player)
-        if (inputSystem.ArrowsVector != Vec2.Zero)
-        {
-            cameraFollow.Enabled = true;
-            cameraFollow.Target += inputSystem.ArrowsVector;
-        }
+        entitiesDisplay.Update(deltaTime);
+        cameraControl.Update(deltaTime);
     }
 }

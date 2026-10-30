@@ -1,5 +1,5 @@
 ﻿using System;
-using TowerProtect.Domain.Inventions.Rendering.Model;
+using TowerProtect.Domain.Rendering.Model;
 
 namespace TowerProtect.Domain.Model.Tiles;
 

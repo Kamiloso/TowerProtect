@@ -1,10 +1,11 @@
 ﻿using AutoInterfaceAttributes;
 using System.Collections.Generic;
-using TowerProtect.Domain.Inventions.Interfaces;
-using TowerProtect.Domain.Inventions.Rendering;
-using TowerProtect.Domain.Inventions.Rendering.Sprites;
+using TowerProtect.Domain.Rendering.Camera;
+using TowerProtect.Domain.Client.Tiles;
 using TowerProtect.Domain.Model.Tiles;
 using TowerProtect.Domain.Model.Vectors;
+using TowerProtect.Domain.Rendering;
+using TowerProtect.Domain.Rendering.Sprites;
 
 namespace TowerProtect.Domain.Display.Tiles;
 

@@ -1,7 +1,7 @@
 ﻿using AutoInterfaceAttributes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using TowerProtect.Domain.Display.Tiles.Model;
+using TowerProtect.Domain.Client.Tiles.Model;
 
 namespace TowerProtect.Framework.Rendering.Textures;
 
