@@ -6,7 +6,7 @@ namespace TowerProtect.Domain.Backend.Tiles.Specific;
 public sealed class RockTile : Tile
 {
     private RockTile() : base(durability: 30) { }
-    public static RockTile New() => new();
+    public static RockTile Create() => new();
 
     public override TileType Type => TileType.Rock;
     public override bool IsBreakable => true;

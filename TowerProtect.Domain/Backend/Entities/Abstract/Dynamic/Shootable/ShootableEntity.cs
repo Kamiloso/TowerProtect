@@ -3,7 +3,7 @@ using TowerProtect.Domain.Model.Vectors;
 
 namespace TowerProtect.Domain.Backend.Entities.Abstract.Dynamic.Shootable;
 
-public abstract class ShootableEntity(Vec2 position, double rotation)
+internal abstract class ShootableEntity(Vec2 position, double rotation)
     : DynamicEntity(position, rotation, 0), IUpdateAware
 {
     public sealed override bool IsDamageable => false;

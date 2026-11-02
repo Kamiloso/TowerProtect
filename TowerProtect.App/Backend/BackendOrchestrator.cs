@@ -1,7 +1,7 @@
 ﻿using AutoInterfaceAttributes;
 using TowerProtect.App.Backend.Entities;
 using TowerProtect.App.Networking.Backend;
-using TowerProtect.Domain.Backend.Entities;
+using TowerProtect.Domain.Backend.Entities.Bags;
 using TowerProtect.Domain.Inventions.Interfaces;
 
 namespace TowerProtect.App.Backend;

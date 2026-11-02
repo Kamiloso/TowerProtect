@@ -18,17 +18,20 @@ public class Tilemap : ITilemap
 
     public event Action<Vec2Int, TileData>? TileUpdateEvent;
 
-    public Tilemap(IMap map)
+    public Tilemap(IMap map, ITileFactory tileFactory)
     {
         _area = new Area<Tile>(map.Range);
         _area.Populate(pos =>
         {
-            Tile tile = map.CreateTileAt(pos);
+            var tileType = map[pos];
+            var tile = tileFactory.CreateTile(tileType);
+
             tile.OnBreakEvent += () =>
             {
                 _area[pos] = AirTile.Instance;
                 TileUpdateEvent?.Invoke(pos, _area[pos].TileData);
             };
+
             return tile;
         });
     }

@@ -6,12 +6,15 @@ using TowerProtect.Domain.Backend.Entities.Abstract;
 using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Model.Entities;
 
-namespace TowerProtect.Domain.Backend.Entities;
+namespace TowerProtect.Domain.Backend.Entities.Bags;
 
-public partial interface IEntityBag : IUpdateAware;
+partial interface IEntityBag : IUpdateAware
+{
+    internal void SpawnEntity(Entity entity, out Guid guid);
+}
 
 [AutoInterface]
-public class EntityBag : IEntityBag
+internal class EntityBag : IEntityBag
 {
     private readonly Dictionary<Guid, Entity> _entities = [];
 
@@ -28,6 +31,7 @@ public class EntityBag : IEntityBag
         }
     }
 
+    [IgnoreAutoInterface]
     public void SpawnEntity(Entity entity, out Guid guid)
     {
         entity.OnDeathEvent += () =>

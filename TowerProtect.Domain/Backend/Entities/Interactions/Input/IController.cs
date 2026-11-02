@@ -1,4 +1,4 @@
-﻿namespace TowerProtect.Domain.Backend.Entities.Movement;
+﻿namespace TowerProtect.Domain.Backend.Entities.Interactions.Input;
 
 public interface IController
 {

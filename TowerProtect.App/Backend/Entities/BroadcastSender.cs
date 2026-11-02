@@ -1,7 +1,7 @@
 ﻿using AutoInterfaceAttributes;
 using TowerProtect.App.Networking.Backend;
 using TowerProtect.App.Networking.Packets.Responses;
-using TowerProtect.Domain.Backend.Entities;
+using TowerProtect.Domain.Backend.Entities.Bags;
 using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Inventions.Tools;
 using static TowerProtect.Domain.Config.PeriodConfig;

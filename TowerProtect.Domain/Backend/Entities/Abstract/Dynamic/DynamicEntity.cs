@@ -2,7 +2,7 @@
 
 namespace TowerProtect.Domain.Backend.Entities.Abstract.Dynamic;
 
-public abstract class DynamicEntity(Vec2 position, double rotation, byte health)
+internal abstract class DynamicEntity(Vec2 position, double rotation, byte health)
     : Entity(position, rotation, health)
 {
     public abstract double MovementSpeed { get; }

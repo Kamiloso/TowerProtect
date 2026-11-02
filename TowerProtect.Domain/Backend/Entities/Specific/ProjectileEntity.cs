@@ -5,7 +5,7 @@ using TowerProtect.Domain.Model.Vectors;
 
 namespace TowerProtect.Domain.Backend.Entities.Specific;
 
-public sealed class ProjectileEntity(Vec2 position, double rotation)
+internal sealed class ProjectileEntity(Vec2 position, double rotation)
     : ShootableEntity(position, rotation), IUpdateAware
 {
     public override EntityType Type => EntityType.Projectile;

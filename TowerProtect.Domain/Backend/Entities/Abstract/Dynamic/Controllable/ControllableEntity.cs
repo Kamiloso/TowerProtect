@@ -1,10 +1,10 @@
-﻿using TowerProtect.Domain.Backend.Entities.Movement;
+﻿using TowerProtect.Domain.Backend.Entities.Interactions.Input;
 using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Model.Vectors;
 
 namespace TowerProtect.Domain.Backend.Entities.Abstract.Dynamic.Controllable;
 
-public abstract class ControllableEntity(Vec2 position, byte health, IController controller)
+internal abstract class ControllableEntity(Vec2 position, byte health, IController controller)
     : DynamicEntity(position, 0f, health), IUpdateAware
 {
     public override bool IsDamageable => true;

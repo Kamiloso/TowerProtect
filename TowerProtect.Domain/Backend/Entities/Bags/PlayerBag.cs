@@ -1,7 +1,7 @@
 ﻿using AutoInterfaceAttributes;
 using System;
 using System.Collections.Generic;
-using TowerProtect.Domain.Backend.Entities.Movement;
+using TowerProtect.Domain.Backend.Entities.Interactions.Input;
 using TowerProtect.Domain.Backend.Entities.Specific;
 using TowerProtect.Domain.Model.Unions;
 using TowerProtect.Domain.Model.Vectors;
@@ -9,7 +9,7 @@ using TowerProtect.Domain.Model.Vectors;
 namespace TowerProtect.Domain.Backend.Entities.Bags;
 
 [AutoInterface]
-public class PlayerBag(IEntityBag entityBag) : IPlayerBag
+internal class PlayerBag(IEntityBag entityBag) : IPlayerBag
 {
     private readonly Dictionary<long, ManualController> _controllers = [];
 

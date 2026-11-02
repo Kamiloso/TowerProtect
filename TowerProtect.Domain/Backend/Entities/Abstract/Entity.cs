@@ -1,10 +1,11 @@
 ﻿using System;
+using TowerProtect.Domain.Backend.Entities.Interactions.Output;
 using TowerProtect.Domain.Model.Entities;
 using TowerProtect.Domain.Model.Vectors;
 
 namespace TowerProtect.Domain.Backend.Entities.Abstract;
 
-public abstract class Entity(Vec2 position, double rotation, byte health)
+internal abstract class Entity(Vec2 position, double rotation, byte health)
 {
     public Guid Guid { get; } = Guid.NewGuid();
 
@@ -18,6 +19,8 @@ public abstract class Entity(Vec2 position, double rotation, byte health)
     public byte MaxHealth { get; } = health;
     public byte Health { get; private set; } = health;
     public bool IsAlive { get; private set; } = true;
+
+    // protected IEntityPanel Panel { get; } = panel;
     public EntityData EntityData => new(Guid, Type, Position, Rotation);
 
     public event Action? OnDeathEvent;

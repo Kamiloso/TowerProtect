@@ -46,7 +46,7 @@
 /processorParam:Version=3.8.6.0
 /build:Floor.png
 
-#begin Stone.png
+#begin Wall.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -57,7 +57,7 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.6.0
-/build:Stone.png
+/build:Wall.png
 
 #begin Bedrock.png
 /importer:TextureImporter

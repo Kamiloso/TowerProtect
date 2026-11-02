@@ -1,60 +1,28 @@
-﻿using System;
-using TowerProtect.Domain.Model.Vectors;
-using TowerProtect.Domain.Backend.Tiles.Specific;
-using TowerProtect.Domain.Model.Tiles;
-using AutoInterfaceAttributes;
+﻿using AutoInterfaceAttributes;
+using System;
 using TowerProtect.Domain.Inventions.Tools;
-using TowerProtect.Domain.Backend.Tiles.Abstract;
+using TowerProtect.Domain.Model.Tiles;
+using TowerProtect.Domain.Model.Vectors;
 
 namespace TowerProtect.Domain.Backend.Worldgen;
 
 [AutoInterface]
-public abstract class Map : IMap
+internal abstract class Map : IMap
 {
     public abstract int Range { get; }
     public int Size => 2 * Range + 1;
     public int Capacity => Size * Size;
 
-    private readonly Area<TileType> _table;
+    private readonly Area<TileType> _area;
+    public TileType this[Vec2Int pos] => _area[pos];
 
-    public Map()
+    protected Map()
     {
-        _table = new Area<TileType>(Range, out int size);
+        _area = GenerateArea();
 
-        TileType[,] tiles = GenerateTiles();
-        {
-            int dim1 = tiles.GetLength(0);
-            int dim2 = tiles.GetLength(1);
-
-            if (dim1 != size || dim2 != size)
-            {
-                throw new InvalidOperationException($"Invalid dimensions: {dim1}x{dim2}");
-            }
-        }
-
-        _table.Populate(pos =>
-        {
-            int i = Range - pos.y;
-            int j = pos.x + Range;
-
-            return tiles[i, j];
-        });
+        if (_area.Range != Range)
+            throw new InvalidOperationException("Invalid table range");
     }
 
-    public Tile CreateTileAt(Vec2Int pos)
-    {
-        TileType tile = _table[pos];
-        return tile switch
-        {
-            TileType.Air => AirTile.Instance,
-            TileType.Stone => StoneTile.Instance,
-            TileType.Spawner => SpawnerTile.New(),
-            TileType.Water => WaterTile.Instance,
-            TileType.Bedrock => BedrockTile.Instance,
-            TileType.Rock => RockTile.New(),
-            _ => throw new InvalidOperationException($"Invalid tile type: {tile}")
-        };
-    }
-
-    protected abstract TileType[,] GenerateTiles();
+    protected abstract Area<TileType> GenerateArea();
 }

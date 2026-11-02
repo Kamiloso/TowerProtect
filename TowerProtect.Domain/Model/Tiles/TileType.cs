@@ -6,20 +6,24 @@ namespace TowerProtect.Domain.Model.Tiles;
 public enum TileType : byte
 {
     Air = default,
-    Stone = 1,
+    Wall = 1,
     Water = 2,
     Rock = 3,
     Spawner = 4,
     Bedrock = 5,
+
+    // Spawn markers
+    AnimalMarker = 101,
+    MonsterMarker = 102,
 }
 
 public static class TileTypeExtensions
 {
     public static string GetTextureName(this TileType self)
-        => Enum.GetName(self) ?? Assets.Unknown;
+        => !IsMarker(self) && Enum.GetName(self) is { } name ? name : Assets.Unknown;
 
     public static bool IsSolid(this TileType self)
-        => self is TileType.Stone or TileType.Bedrock;
+        => self is TileType.Wall or TileType.Bedrock;
 
     public static bool IsUnsolid(this TileType self)
         => self is TileType.Rock or TileType.Spawner;
@@ -32,6 +36,9 @@ public static class TileTypeExtensions
 
     public static bool IsContoured(this TileType self)
         => self.GetContourLevel() > 0;
+
+    public static bool IsMarker(this TileType self)
+        => Enum.GetName(self)?.StartsWith("Marker") ?? false;
 
     public static Layer GetDisplayLayer(this TileType self) => 0 switch
     {

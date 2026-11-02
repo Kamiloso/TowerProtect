@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using TowerProtect.Domain.Inventions.Interfaces;
-using static TowerProtect.Domain.Config.InterpolationConfig;
 
 namespace TowerProtect.Domain.Client.Entities.Interpolation;
 
 internal abstract class InterpolatorBase<T> : IUpdateAware
 {
+    private const double TimeCatchUpSpeed = 1.0;
+
     private readonly LinkedList<TimePoint> _buffer = [];
     private bool _firstUpdate = true;
 

@@ -1,7 +1,7 @@
 ﻿#pragma warning disable IDE1006 // Naming Styles
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Globalization;
 using System.Text.Json.Serialization;
 
@@ -55,12 +55,12 @@ public readonly record struct Vec2(double x, double y)
 
     public static readonly Vec2 Zero = new(0, 0);
     public static readonly Vec2 One = new(1, 1);
-    public static readonly Vec2 Down = new(0, 1);
     public static readonly Vec2 Up = new(0, -1);
-    public static readonly Vec2 Right = new(1, 0);
+    public static readonly Vec2 Down = new(0, 1);
     public static readonly Vec2 Left = new(-1, 0);
+    public static readonly Vec2 Right = new(1, 0);
 
-    public static IEnumerable<Vec2> MainDirections => [ Up, Right, Down, Left ];
+    public static ImmutableArray<Vec2> MainDirections => [ Up, Right, Down, Left ];
 
     public static Vec2 MinCorner(Vec2 a, Vec2 b) => new(Math.Min(a.x, b.x), Math.Min(a.y, b.y));
     public static Vec2 MaxCorner(Vec2 a, Vec2 b) => new(Math.Max(a.x, b.x), Math.Max(a.y, b.y));

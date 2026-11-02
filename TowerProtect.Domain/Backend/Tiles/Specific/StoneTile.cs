@@ -4,10 +4,10 @@ using TowerProtect.Domain.Model.Tiles;
 
 namespace TowerProtect.Domain.Backend.Tiles.Specific;
 
-public sealed class StoneTile : Tile
+public sealed class WallTile : Tile
 {
-    private StoneTile() : base() { }
-    public static StoneTile Instance { get; } = new();
+    private WallTile() : base() { }
+    public static WallTile Instance { get; } = new();
 
-    public override TileType Type => TileType.Stone;
+    public override TileType Type => TileType.Wall;
 }

@@ -6,7 +6,7 @@ namespace TowerProtect.Domain.Backend.Tiles.Specific;
 public sealed class SpawnerTile : Tile
 {
     private SpawnerTile() : base() { }
-    public static SpawnerTile New() => new();
+    public static SpawnerTile Create() => new();
 
     public override TileType Type => TileType.Spawner;
 }
