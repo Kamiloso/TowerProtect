@@ -1,5 +1,4 @@
 ﻿using System;
-using TowerProtect.Domain.Backend.Entities.Interactions.Output;
 using TowerProtect.Domain.Model.Entities;
 using TowerProtect.Domain.Model.Vectors;
 
@@ -20,10 +19,17 @@ internal abstract class Entity(Vec2 position, double rotation, byte health)
     public byte Health { get; private set; } = health;
     public bool IsAlive { get; private set; } = true;
 
-    // protected IEntityPanel Panel { get; } = panel;
     public EntityData EntityData => new(Guid, Type, Position, Rotation);
 
     public event Action? OnDeathEvent;
+    public event Action<Vec2, EntityType>? OnSummonEvent;
+    public event Action<Vec2, double>? OnShootEvent;
+
+    protected void Summon(Vec2 position, EntityType entityType)
+        => OnSummonEvent?.Invoke(position, entityType);
+
+    protected void Shoot(Vec2 position, double rotation)
+        => OnShootEvent?.Invoke(position, rotation);
 
     public virtual bool ApplyDamage()
     {

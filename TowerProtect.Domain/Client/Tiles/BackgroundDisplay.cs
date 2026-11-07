@@ -16,8 +16,8 @@ internal class BackgroundDisplay(int range) : ISpriteRenderingAware
             bool isBelowTilemap = Area.ContainsKey(range, pos);
 
             Sprite bgSprite = isBelowTilemap
-                ? new(pos, Assets.Floor, Layer.Floor)
-                : new(pos, Assets.Border, Layer.Border);
+                ? new(Assets.Floor, pos, Layer.Floor)
+                : new(Assets.Border, pos, Layer.Border);
 
             targetSprites.Add(bgSprite);
         });

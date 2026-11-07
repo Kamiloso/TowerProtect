@@ -1,55 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
 using TowerProtect.Domain.Model.Vectors;
-using TowerProtect.Domain.Rendering;
 using TowerProtect.Domain.Rendering.Model;
 
 namespace TowerProtect.Domain.Rendering.Sprites;
 
-public readonly record struct Sprite(
-    Rect TextureArea, string TextureName, Layer DisplayLayer) : IRenderable<Sprite>
+public sealed class Sprite(
+    string textureName,
+    Rect textureArea,
+    Layer displayLayer,
+    double rotation = 0.0) : IRenderable
 {
-    public Vec2 Position => TextureArea.Center;
-    public double Rotation { get; private init; } = 0.0;
+    public Vec2 Position => textureArea.Center;
+    public double Rotation => rotation;
     public IEnumerable<Sprite> Sprites => [this];
 
-    public Sprite(Vec2 position, string textureName, Layer displayLayer)
-        : this(new Rect(position), textureName, displayLayer) { }
+    public string TextureName => textureName;
+    public Rect TextureArea => textureArea;
+    public Layer DisplayLayer => displayLayer;
 
-    public Sprite Move(Vec2 deltaPosition)
+    public Sprite(string textureName, Vec2 position, Layer displayLayer, double rotation = 0.0)
+        : this(textureName, new Rect(position), displayLayer, rotation) { }
+
+    public Sprite(string textureName, double side, Layer displayLayer, double rotation = 0.0)
+        : this(textureName, new Rect(side), displayLayer, rotation) { }
+
+    public Sprite(string textureName, Layer displayLayer, double rotation = 0.0)
+        : this(textureName, new Rect(), displayLayer, rotation) { }
+
+    public IRenderable Move(Vec2 deltaPosition)
     {
         if (deltaPosition == Vec2.Zero)
             return this;
 
-        Vec2 newCenter = Position + deltaPosition;
-        Rect newTextureArea = TextureArea with { Center = newCenter };
-
-        return this with { TextureArea = newTextureArea };
+        return WithCenter(Position + deltaPosition);
     }
 
-    public Sprite Rotate(double deltaRotation)
+    public IRenderable Rotate(double deltaRotation)
     {
         if (deltaRotation == 0.0)
             return this;
 
-        double newRotation = Rotation + deltaRotation;
-        newRotation %= Math.PI * 2;
-
-        return this with { Rotation = newRotation };
+        return WithRotation((rotation + deltaRotation) % (Math.PI * 2));
     }
 
-    public Sprite MoveLocal(Vec2 deltaPositionLocal)
+    public IRenderable MoveLocal(Vec2 deltaPositionLocal)
     {
         if (deltaPositionLocal == Vec2.Zero)
             return this;
 
-        Vec2 newCenter = Position + deltaPositionLocal.Rotate(Rotation);
-        Rect newTextureArea = TextureArea with { Center = newCenter };
-
-        return this with { TextureArea = newTextureArea };
+        return WithCenter(Position + deltaPositionLocal.Rotate(rotation));
     }
 
-    public Sprite RotateAround(Vec2 pivot, double deltaRotation)
+    public IRenderable RotateAround(Vec2 pivot, double deltaRotation)
     {
         if (deltaRotation == 0.0)
             return this;
@@ -58,15 +61,15 @@ public readonly record struct Sprite(
         Vec2 rotatedOffset = offset.Rotate(deltaRotation);
         Vec2 newCenter = pivot + rotatedOffset;
 
-        Rect newTextureArea = TextureArea with { Center = newCenter };
-
-        double newRotation = Rotation + deltaRotation;
-        newRotation %= Math.PI * 2;
-
-        return this with
-        {
-            TextureArea = newTextureArea,
-            Rotation = newRotation
-        };
+        return WithCenterAndRotation(newCenter, (rotation + deltaRotation) % (Math.PI * 2));
     }
+
+    private Sprite WithCenter(Vec2 newCenter) =>
+        new(textureName, textureArea with { Center = newCenter }, displayLayer, rotation);
+
+    private Sprite WithRotation(double newRotation) =>
+        new(textureName, textureArea, displayLayer, newRotation);
+
+    private Sprite WithCenterAndRotation(Vec2 newCenter, double newRotation) =>
+        new(textureName, textureArea with { Center = newCenter }, displayLayer, newRotation);
 }

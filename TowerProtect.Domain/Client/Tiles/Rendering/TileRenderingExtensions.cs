@@ -5,7 +5,7 @@ using TowerProtect.Domain.Model.Vectors;
 using TowerProtect.Domain.Rendering;
 using TowerProtect.Domain.Rendering.Sprites;
 
-namespace TowerProtect.Domain.Client.Tiles.Extensions;
+namespace TowerProtect.Domain.Client.Tiles.Rendering;
 
 internal static class TileRenderingExtensions
 {
@@ -31,9 +31,9 @@ internal static class TileRenderingExtensions
             return self.GetMainRenderable(pos);
 
         Sprite contourSprite = new(
-            TextureName: $"#c:{contour.ToKey()}",
-            TextureArea: new Rect(pos),
-            DisplayLayer: self.GetDisplayLayer() + 1
+            textureName: $"#c:{contour.ToKey()}",
+            position: pos,
+            displayLayer: self.GetDisplayLayer() + 1
         );
 
         return self.IsInvisible()
@@ -45,5 +45,5 @@ internal static class TileRenderingExtensions
         => self.IsInvisible() ? NoSprites.Instance : self.GetMainSprite(position);
 
     private static Sprite GetMainSprite(this TileType self, Vec2 position)
-        => new(position, self.GetTextureName(), self.GetDisplayLayer());
+        => new(self.GetTextureName(), position, self.GetDisplayLayer());
 }

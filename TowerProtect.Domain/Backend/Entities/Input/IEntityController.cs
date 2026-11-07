@@ -1,6 +1,6 @@
-﻿namespace TowerProtect.Domain.Backend.Entities.Interactions.Input;
+﻿namespace TowerProtect.Domain.Backend.Entities.Input;
 
-public interface IController
+public interface IEntityController
 {
     bool InputReceived { get; }
 

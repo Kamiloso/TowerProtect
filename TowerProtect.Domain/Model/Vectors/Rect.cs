@@ -1,17 +1,20 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace TowerProtect.Domain.Model.Vectors;
 
 public readonly record struct Rect(Vec2 Center, Vec2 Size)
 {
-    public Vec2 CornerMain => Center - Size / 2.0;
-    public Vec2 CornerOpposite => Center + Size / 2.0;
+    [JsonIgnore] public Vec2 CornerMain => Center - Size / 2.0;
+    [JsonIgnore] public Vec2 CornerOpposite => Center + Size / 2.0;
 
-    public Vec2 MinCorner => Vec2.MinCorner(CornerMain, CornerOpposite);
-    public Vec2 MaxCorner => Vec2.MaxCorner(CornerMain, CornerOpposite);
+    [JsonIgnore] public Vec2 MinCorner => Vec2.MinCorner(CornerMain, CornerOpposite);
+    [JsonIgnore] public Vec2 MaxCorner => Vec2.MaxCorner(CornerMain, CornerOpposite);
 
     public Rect(Vec2 center, double side) : this(center, new Vec2(side, side)) { } // square
     public Rect(Vec2 center) : this(center, 1.0) { } // unit square
+    public Rect(double side) : this(Vec2.Zero, side) { } // square (center)
+    public Rect() : this(1.0) { } // unit square (center)
 
     public bool Contains(Vec2 point)
     {

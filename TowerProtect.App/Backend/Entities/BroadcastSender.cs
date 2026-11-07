@@ -1,7 +1,7 @@
 ﻿using AutoInterfaceAttributes;
 using TowerProtect.App.Networking.Backend;
 using TowerProtect.App.Networking.Packets.Responses;
-using TowerProtect.Domain.Backend.Entities.Bags;
+using TowerProtect.Domain.Backend.Entities.Systems;
 using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Inventions.Tools;
 using static TowerProtect.Domain.Config.PeriodConfig;
@@ -12,7 +12,7 @@ partial interface IBroadcastSender : IUpdateAware;
 
 [AutoInterface]
 internal class BroadcastSender(
-    IEntityBag entityBag,
+    IEntitySystem entitySystem,
     IBackendRouter backendRouter) : IBroadcastSender
 {
     private readonly LoopCycle _broadcastCycle = new(BroadcastSendPeriod);
@@ -22,7 +22,7 @@ internal class BroadcastSender(
         _broadcastCycle.StackInvoke(deltaTime, frames =>
         {
             double tickTime = frames * BroadcastSendPeriod;
-            var entityList = entityBag.CollectEntityListData();
+            var entityList = entitySystem.CollectEntityListData();
 
             backendRouter.Send(0, new BroadcastDto(entityList, tickTime));
         });

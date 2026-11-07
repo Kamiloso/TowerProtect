@@ -3,8 +3,8 @@ using System.Diagnostics;
 
 namespace TowerProtect.Domain.Inventions.Tools;
 
-public class Animated<T>(Func<long, T> animate)
+public class Animated<T>(Func<double, T> animate)
 {
     public T Evaluate(Stopwatch stopwatch)
-        => animate(stopwatch.ElapsedMilliseconds);
+        => animate(stopwatch.ElapsedMilliseconds / 1000.0);
 }

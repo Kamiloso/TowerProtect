@@ -8,7 +8,6 @@ using TowerProtect.App.Networking.Client;
 using TowerProtect.App.Networking.Connectors;
 using TowerProtect.App.Root.App;
 using TowerProtect.App.Root.Display;
-using TowerProtect.Domain.Backend.Entities;
 using TowerProtect.Domain.Backend.Worldgen;
 using TowerProtect.Domain.Backend.Tiles;
 using TowerProtect.Domain.Display.Tiles;
@@ -28,10 +27,12 @@ using TowerProtect.Domain.Client.Entities;
 using TowerProtect.App.Client.Receivers;
 using TowerProtect.App.Client.Camera;
 using TowerProtect.Domain.Rendering.Camera;
-using TowerProtect.Domain.Backend.Entities.Bags;
+using TowerProtect.Domain.Backend.Entities.Systems;
 using TowerProtect.App.Client.Interfaces;
 using TowerProtect.Domain.Backend.Worldgen.Mazes;
 using TowerProtect.Domain.Backend.Worldgen.Rooms;
+using TowerProtect.Domain.Backend.Entities.Utils;
+using TowerProtect.Domain.Backend.Gameplay;
 
 namespace TowerProtect;
 
@@ -95,6 +96,7 @@ public static class Program
         // Utilities
         srv.AddSingleton<INetInstance, NetInstance>();
         srv.AddSingleton<IPacketSerializer, PacketSerializer>();
+        srv.AddSingleton<Random>();
     }
 
     private static void AddScopedServices(this IServiceCollection srv)
@@ -132,18 +134,20 @@ public static class Program
             // Application
             srv.UseLocalScoped<IBackendOrchestrator, BackendOrchestrator>();
             srv.UseLocalScoped<IPlayerManager, PlayerManager>();
-            srv.UseLocalScoped<IEnemyManager, EnemyManager>();
+            srv.UseLocalScoped<IEntityManager, EntityManager>();
             srv.UseLocalScoped<IBroadcastSender, BroadcastSender>();
 
             // Domain
-            srv.UseLocalScoped<IEntityBag, EntityBag>();
-            srv.UseLocalScoped<IPlayerBag, PlayerBag>();
-            srv.UseLocalScoped<IEnemyBag, EnemyBag>();
+            srv.UseLocalScoped<IEntitySystem, EntitySystem>();
+            srv.UseLocalScoped<IPlayerSystem, PlayerSystem>();
+            srv.UseLocalScoped<ISpawnSystem, SpawnSystem>();
+            srv.UseLocalScoped<IEntityProvider, EntityProvider>();
             srv.UseLocalScoped<ITilemap, Tilemap>();
             srv.UseLocalScoped<ITileFactory, TileFactory>();
             srv.UseLocalScoped<IMap, GeneratedMap>();
             srv.UseLocalScoped<IMazeGenerator, WilsonMazeGenerator>();
             srv.UseLocalScoped<IRoomPlacer, DefaultRoomPlacer>();
+            srv.UseLocalScoped<IProgressSystem, ProgressSystem>();
         }
 
         // Client

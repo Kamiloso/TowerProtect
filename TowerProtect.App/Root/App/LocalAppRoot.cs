@@ -1,6 +1,8 @@
-﻿using TowerProtect.App.Backend;
+﻿using System.Collections.Generic;
+using TowerProtect.App.Backend;
 using TowerProtect.App.Client;
 using TowerProtect.App.Networking.Connectors;
+using TowerProtect.Domain.Inventions.Interfaces;
 
 namespace TowerProtect.App.Root.App;
 
@@ -9,16 +11,9 @@ internal class LocalAppRoot(
     IBackendOrchestrator backendOrchestrator,
     IClientOrchestrator clientOrchestrator) : IAppRoot
 {
-    public void Start()
-    {
-        localConnector.Start();
-        backendOrchestrator.Start();
-        clientOrchestrator.Start();
-    }
-
-    public void Update(double deltaTime)
-    {
-        backendOrchestrator.Update(deltaTime);
-        clientOrchestrator.Update(deltaTime);
-    }
+    IEnumerable<object> IAwareChain.Children => [
+        localConnector,
+        backendOrchestrator,
+        clientOrchestrator,
+    ];
 }

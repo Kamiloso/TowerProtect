@@ -9,12 +9,9 @@ public interface IRenderable
     Vec2 Position { get; }
     double Rotation { get; }
     IEnumerable<Sprite> Sprites { get; }
-}
 
-public interface IRenderable<T> : IRenderable where T : IRenderable<T>
-{
-    T Move(Vec2 deltaPosition);
-    T Rotate(double deltaRotation);
-    T MoveLocal(Vec2 deltaPositionLocal);
-    T RotateAround(Vec2 pivot, double deltaRotation);
+    IRenderable Move(Vec2 deltaPosition);
+    IRenderable Rotate(double deltaRotation);
+    IRenderable MoveLocal(Vec2 deltaPositionLocal);
+    IRenderable RotateAround(Vec2 pivot, double deltaRotation);
 }

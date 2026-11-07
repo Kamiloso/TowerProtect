@@ -1,15 +1,13 @@
 ﻿using AutoInterfaceAttributes;
 using System;
 using System.Collections.Generic;
-using TowerProtect.Domain.Backend.Entities.Interactions.Input;
-using TowerProtect.Domain.Backend.Entities.Specific;
+using TowerProtect.Domain.Backend.Entities.Input;
 using TowerProtect.Domain.Model.Unions;
-using TowerProtect.Domain.Model.Vectors;
 
-namespace TowerProtect.Domain.Backend.Entities.Bags;
+namespace TowerProtect.Domain.Backend.Entities.Systems;
 
 [AutoInterface]
-internal class PlayerBag(IEntityBag entityBag) : IPlayerBag
+internal class PlayerSystem(ISpawnSystem spawnSystem) : IPlayerSystem
 {
     private readonly Dictionary<long, ManualController> _controllers = [];
 
@@ -18,16 +16,16 @@ internal class PlayerBag(IEntityBag entityBag) : IPlayerBag
 
     public bool TrySpawn(long client, out Guid guid)
     {
-        guid = Guid.Empty;
-
         if (_controllers.ContainsKey(client))
-            return false;
+        {
+			guid = Guid.Empty;
+			return false;
+		}
 
         var controller = new ManualController();
         _controllers.Add(client, controller);
 
-        var player = new PlayerEntity(Vec2.Zero, controller);
-        entityBag.SpawnEntity(player, out guid);
+        guid = spawnSystem.SpawnPlayer(controller);
 
         return true;
     }

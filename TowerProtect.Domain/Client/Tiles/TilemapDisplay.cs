@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TowerProtect.Domain.Rendering.Camera;
-using TowerProtect.Domain.Client.Tiles.Extensions;
+using TowerProtect.Domain.Client.Tiles.Rendering;
 using TowerProtect.Domain.Inventions.Tools;
 using TowerProtect.Domain.Model.Tiles;
 using TowerProtect.Domain.Model.Vectors;

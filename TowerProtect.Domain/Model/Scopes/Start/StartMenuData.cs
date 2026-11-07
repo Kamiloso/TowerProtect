@@ -1,4 +1,4 @@
-﻿namespace TowerProtect.Domain.Model.Scopes;
+﻿namespace TowerProtect.Domain.Model.Scopes.Start;
 
 public record StartMenuData : StartData
 {

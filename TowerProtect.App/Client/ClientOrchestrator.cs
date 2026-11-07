@@ -1,4 +1,5 @@
 ﻿using AutoInterfaceAttributes;
+using System.Collections.Generic;
 using TowerProtect.App.Client.Camera;
 using TowerProtect.App.Client.Input;
 using TowerProtect.App.Client.Receivers;
@@ -8,7 +9,7 @@ using TowerProtect.Domain.Inventions.Interfaces;
 
 namespace TowerProtect.App.Client;
 
-partial interface IClientOrchestrator : IStartAware, IUpdateAware;
+partial interface IClientOrchestrator : IAwareChain;
 
 [AutoInterface]
 internal class ClientOrchestrator(
@@ -18,16 +19,11 @@ internal class ClientOrchestrator(
     IEntitiesDisplay entitiesDisplay,
     ICameraControl cameraControl) : IClientOrchestrator
 {
-    public void Start()
-    {
-        informationDivider.Start();
-    }
-
-    public void Update(double deltaTime)
-    {
-        clientRouter.Update(deltaTime);
-        inputSender.Update(deltaTime);
-        entitiesDisplay.Update(deltaTime);
-        cameraControl.Update(deltaTime);
-    }
+    IEnumerable<object> IAwareChain.Children => [
+        clientRouter,
+        informationDivider,
+        inputSender,
+        entitiesDisplay,
+        cameraControl,
+    ];
 }

@@ -1,12 +1,15 @@
-﻿using TowerProtect.Domain.Backend.Entities.Interactions.Input;
+﻿using TowerProtect.Domain.Backend.Entities.Input;
 using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Model.Vectors;
 
 namespace TowerProtect.Domain.Backend.Entities.Abstract.Dynamic.Controllable;
 
-internal abstract class ControllableEntity(Vec2 position, byte health, IController controller)
+internal abstract class ControllableEntity(Vec2 position, byte health,
+    IEntityController controller)
     : DynamicEntity(position, 0f, health), IUpdateAware
 {
+    protected IEntityController Controller { get; } = controller;
+    
     public override bool IsDamageable => true;
     public override bool IsFlying => false;
     public override bool IsRendered => _inputReceived && base.IsRendered;
@@ -15,14 +18,14 @@ internal abstract class ControllableEntity(Vec2 position, byte health, IControll
 
     public virtual void Update(double deltaTime)
     {
-        if (controller.InputReceived)
+        if (Controller.InputReceived)
         {
-            Rotation = controller.Rotation;
+            Rotation = Controller.Rotation;
 
-            if (controller.IsMoving)
+            if (Controller.IsMoving)
                 MovementStep(deltaTime);
 
-            if (controller.IsShooting)
+            if (Controller.IsShooting)
                 ShootingStep(deltaTime);
 
             _inputReceived = true;

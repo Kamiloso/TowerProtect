@@ -1,17 +1,13 @@
-﻿using TowerProtect.App.Client;
+﻿using System.Collections.Generic;
+using TowerProtect.App.Client;
+using TowerProtect.Domain.Inventions.Interfaces;
 
 namespace TowerProtect.App.Root.App;
 
 internal class RemoteAppRoot(
     IClientOrchestrator clientOrchestrator) : IAppRoot
 {
-    public void Start()
-    {
-        clientOrchestrator.Start();
-    }
-
-    public void Update(double deltaTime)
-    {
-        clientOrchestrator.Update(deltaTime);
-    }
+    IEnumerable<object> IAwareChain.Children => [
+        clientOrchestrator,
+    ];
 }

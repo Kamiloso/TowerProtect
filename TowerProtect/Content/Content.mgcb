@@ -12,13 +12,31 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Fonts/PTSans-Bold.ttf
-/importer:FontImporter
-/processor:FontDescriptionProcessor
+#begin Animal.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=True
 /processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
 /processorParam:Version=3.8.6.0
-/build:Fonts/PTSans-Bold.ttf
+/build:Animal.png
+
+#begin Bedrock.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=True
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.6.0
+/build:Bedrock.png
 
 #begin Border.png
 /importer:TextureImporter
@@ -46,20 +64,15 @@
 /processorParam:Version=3.8.6.0
 /build:Floor.png
 
-#begin Wall.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=True
+#begin Fonts/PTSans-Bold.ttf
+/importer:FontImporter
+/processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
+/processorParam:TextureFormat=Compressed
 /processorParam:Version=3.8.6.0
-/build:Wall.png
+/build:Fonts/PTSans-Bold.ttf
 
-#begin Bedrock.png
+#begin Monster.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -70,9 +83,9 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.6.0
-/build:Bedrock.png
+/build:Monster.png
 
-#begin Water.png
+#begin Player.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -83,9 +96,9 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.6.0
-/build:Water.png
+/build:Player.png
 
-#begin Spawner.png
+#begin Projectile.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -96,7 +109,7 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.6.0
-/build:Spawner.png
+/build:Projectile.png
 
 #begin Rock.png
 /importer:TextureImporter
@@ -111,6 +124,19 @@
 /processorParam:Version=3.8.6.0
 /build:Rock.png
 
+#begin Spawner.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=True
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.6.0
+/build:Spawner.png
+
 #begin Unknown.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -123,3 +149,29 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.6.0
 /build:Unknown.png
+
+#begin Wall.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=True
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.6.0
+/build:Wall.png
+
+#begin Water.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=True
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.6.0
+/build:Water.png

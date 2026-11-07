@@ -1,5 +1,6 @@
 ﻿using System;
 using TowerProtect.Domain.Model.Scopes;
+using TowerProtect.Domain.Model.Scopes.Start;
 
 namespace TowerProtect.App.Scopes;
 

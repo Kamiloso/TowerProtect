@@ -1,31 +1,29 @@
 ﻿using AutoInterfaceAttributes;
+using System.Collections.Generic;
 using TowerProtect.App.Backend.Entities;
 using TowerProtect.App.Networking.Backend;
-using TowerProtect.Domain.Backend.Entities.Bags;
+using TowerProtect.Domain.Backend.Entities.Systems;
 using TowerProtect.Domain.Inventions.Interfaces;
 
 namespace TowerProtect.App.Backend;
 
-partial interface IBackendOrchestrator : IStartAware, IUpdateAware;
+partial interface IBackendOrchestrator : IAwareChain;
 
 [AutoInterface]
 internal class BackendOrchestrator(
     IBackendRouter backendRouter,
-    IEntityBag entityBag,
+	IEntityManager entityManager,
     IPlayerManager playerManager,
-    IEnemyManager enemyManager,
+	IEntitySystem entitySystem,
+    ISpawnSystem spawnSystem,
     IBroadcastSender broadcastSender) : IBackendOrchestrator
 {
-    public void Start()
-    {
-        playerManager.Start();
-    }
-
-    public void Update(double deltaTime)
-    {
-        backendRouter.Update(deltaTime);
-        entityBag.Update(deltaTime);
-        enemyManager.Update(deltaTime);
-        broadcastSender.Update(deltaTime);
-    }
+    IEnumerable<object> IAwareChain.Children => [
+        backendRouter,
+        entityManager,
+        playerManager,
+        entitySystem,
+        spawnSystem,
+        broadcastSender,
+    ];
 }

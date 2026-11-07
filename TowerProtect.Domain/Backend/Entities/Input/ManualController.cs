@@ -1,8 +1,8 @@
 ﻿using TowerProtect.Domain.Model.Unions;
 
-namespace TowerProtect.Domain.Backend.Entities.Interactions.Input;
+namespace TowerProtect.Domain.Backend.Entities.Input;
 
-public class ManualController : IController
+public class ManualController : IEntityController
 {
     public bool InputReceived { get; private set; }
 

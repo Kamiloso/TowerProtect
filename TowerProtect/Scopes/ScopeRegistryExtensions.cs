@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using TowerProtect.App.Scopes;
 using TowerProtect.Domain.Model.Scopes;
+using TowerProtect.Domain.Model.Scopes.Start;
 using TowerProtect.Registry;
 
 namespace TowerProtect.Scopes;

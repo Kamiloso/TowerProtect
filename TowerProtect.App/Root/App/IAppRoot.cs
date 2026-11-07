@@ -2,4 +2,4 @@
 
 namespace TowerProtect.App.Root.App;
 
-public interface IAppRoot : IStartAware, IUpdateAware { }
+public interface IAppRoot : IAwareChain { }

@@ -5,18 +5,22 @@ using System.Linq;
 using TowerProtect.Domain.Backend.Entities.Abstract;
 using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Model.Entities;
+using TowerProtect.Domain.Model.Vectors;
 
-namespace TowerProtect.Domain.Backend.Entities.Bags;
+namespace TowerProtect.Domain.Backend.Entities.Systems;
 
-partial interface IEntityBag : IUpdateAware
+partial interface IEntitySystem : IUpdateAware
 {
     internal void SpawnEntity(Entity entity, out Guid guid);
 }
 
 [AutoInterface]
-internal class EntityBag : IEntityBag
+internal class EntitySystem : IEntitySystem
 {
     private readonly Dictionary<Guid, Entity> _entities = [];
+
+    public event Action<Vec2, EntityType>? OnSummonEvent;
+    public event Action<Vec2, double>? OnShootEvent;
 
     private IEnumerable<Entity> EntitiesView => _entities.Values;
     private IEnumerable<Entity> EntitiesSnapshotWhereAlive => EntitiesView.ToList()
@@ -26,18 +30,22 @@ internal class EntityBag : IEntityBag
     {
         foreach (var entity in EntitiesSnapshotWhereAlive)
         {
-            var updateAware = entity as IUpdateAware;
-            updateAware?.Update(deltaTime);
+            var aware = entity as IUpdateAware;
+            aware?.Update(deltaTime);
         }
     }
 
     [IgnoreAutoInterface]
     public void SpawnEntity(Entity entity, out Guid guid)
     {
-        entity.OnDeathEvent += () =>
-        {
-            _entities.Remove(entity.Guid);
-        };
+        entity.OnDeathEvent +=
+            () => _entities.Remove(entity.Guid);
+
+        entity.OnSummonEvent +=
+            (position, entityType) => OnSummonEvent?.Invoke(position, entityType);
+
+        entity.OnShootEvent +=
+            (position, rotation) => OnShootEvent?.Invoke(position, rotation);
 
         _entities.Add(entity.Guid, entity);
         guid = entity.Guid;

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using TowerProtect.Domain.Rendering.Camera;
-using TowerProtect.Domain.Client.Entities.Extensions;
+using TowerProtect.Domain.Client.Entities.Rendering;
 using TowerProtect.Domain.Client.Entities.Model;
 using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Inventions.Tools;

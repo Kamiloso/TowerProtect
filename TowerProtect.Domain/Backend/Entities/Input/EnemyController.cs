@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 
-namespace TowerProtect.Domain.Backend.Entities.Interactions.Input;
+namespace TowerProtect.Domain.Backend.Entities.Input;
 
-public class EnemyController : IController
+public class EnemyController : IEntityController
 {
     public bool InputReceived => true; // Enemy AI always has some input
 

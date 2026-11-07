@@ -2,6 +2,7 @@
 using System;
 using TowerProtect.App.Scopes;
 using TowerProtect.Domain.Model.Scopes;
+using TowerProtect.Domain.Model.Scopes.Start;
 
 namespace TowerProtect.Scopes;
 
