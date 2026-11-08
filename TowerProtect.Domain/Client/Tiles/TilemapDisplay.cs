@@ -27,7 +27,7 @@ internal class TilemapDisplay(int range, Func<Vec2Int, TileData> populator) : IS
         TileType? TileAt(Vec2Int pos)
             => _area.ContainsKey(pos) ? _area[pos].Type : null;
 
-        cameraView.ExtendedVisionArea.GridIterate(pos =>
+        cameraView.ExtendedVisionArea(1).GridIterate(pos =>
         {
             if (!_area.ContainsKey(pos))
                 return;

@@ -29,6 +29,7 @@ internal class MainGame : Game
     protected override void LoadContent()
     {
         Font = Content.Load<SpriteFont>(Assets.PTSansBold);
+        Font.DefaultCharacter = '*';
 
         base.LoadContent();
     }

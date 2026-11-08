@@ -9,7 +9,8 @@ namespace TowerProtect.Framework.Rendering.Textures;
 [AutoInterface]
 internal class TextureComponent(
     Game game,
-    IContourTextureComponent contourTextureComponent) : GameComponent(game), ITextureComponent
+    IContourTextureComponent contourTextureComponent,
+    IRepeatTextureComponent repeatTextureComponent) : GameComponent(game), ITextureComponent
 {
     private LazyProvider<string, Texture2D> _textures = null!;
 
@@ -27,8 +28,13 @@ internal class TextureComponent(
         if (!fullKey.StartsWith('#'))
             return Game.Content.Load<Texture2D>(fullKey);
 
+        string key = fullKey.Split(':')[1];
+
         if (fullKey.StartsWith("#c:"))
-            return contourTextureComponent.CreateByKey(fullKey.Split(':')[1]);
+            return contourTextureComponent.CreateByKey(key);
+
+        if (fullKey.StartsWith("#r:"))
+            return repeatTextureComponent.CreateByKey(key);
 
         throw new ContentLoadException($"Invalid texture pattern: {fullKey}");
     }

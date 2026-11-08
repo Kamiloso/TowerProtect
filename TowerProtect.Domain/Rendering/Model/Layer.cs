@@ -10,7 +10,6 @@ public enum Layer
     Fluid = 10,
     Default = 0,
     Floor = -10,
-    Border = -20,
 }
 
 public static class LayerExtensions

@@ -21,19 +21,27 @@ internal static class EntityRenderingExtensions
         Animated<IRenderable> animated = RenderEmpty();
 
         if (entityType.IsSimpleRender())
-            animated = RenderSimple(entityType, layer);
+            animated = RenderSimple(entityType, layer, guid);
 
         if (entityType is EntityType.Projectile)
-            animated = RenderProjectile(layer);
+            animated = RenderProjectile(layer, guid);
 
         return animated.Evaluate(sw).Move(position).Rotate(rotation);
     }
 
     private static Animated<IRenderable> RenderEmpty() => new(_ => NoSprites.Instance);
 
-    private static Animated<IRenderable> RenderSimple(EntityType entityType, Layer layer)
-        => new(_ => new Sprite(entityType.GetTextureName(), layer));
+    private static Animated<IRenderable> RenderSimple(EntityType entityType, Layer layer, Guid guid)
+        => new(_ => new Sprite(
+            textureName: entityType.GetTextureName(),
+            displayLayer: layer,
+            sortEntropy: guid.GetHashCode())
+        );
 
-    private static Animated<IRenderable> RenderProjectile(Layer layer)
-        => new(_ => new Sprite(EntityType.Projectile.GetTextureName(), layer));
+    private static Animated<IRenderable> RenderProjectile(Layer layer, Guid guid)
+        => new(_ => new Sprite(
+            textureName: EntityType.Projectile.GetTextureName(),
+            displayLayer: layer,
+            sortEntropy: guid.GetHashCode())
+        );
 }

@@ -5,35 +5,32 @@ using TowerProtect.Domain.Rendering.Model;
 
 namespace TowerProtect.Domain.Rendering.Sprites;
 
-public sealed class Sprite(
-    string textureName,
-    Rect textureArea,
-    Layer displayLayer,
-    double rotation = 0.0) : IRenderable
+public sealed record Sprite(
+    string TextureName,
+    Rect TextureArea,
+    Layer DisplayLayer,
+    double Rotation = 0.0,
+    int SortEntropy = 0) : IRenderable
 {
-    public Vec2 Position => textureArea.Center;
-    public double Rotation => rotation;
+    public Vec2 Position => TextureArea.Center;
     public IEnumerable<Sprite> Sprites => [this];
 
-    public string TextureName => textureName;
-    public Rect TextureArea => textureArea;
-    public Layer DisplayLayer => displayLayer;
+    public Sprite(string textureName, Vec2 position, Layer displayLayer, double rotation = 0.0, int sortEntropy = 0)
+        : this(textureName, new Rect(position), displayLayer, rotation, sortEntropy) { }
 
-    public Sprite(string textureName, Vec2 position, Layer displayLayer, double rotation = 0.0)
-        : this(textureName, new Rect(position), displayLayer, rotation) { }
+    public Sprite(string textureName, double side, Layer displayLayer, double rotation = 0.0, int sortEntropy = 0)
+        : this(textureName, new Rect(side), displayLayer, rotation, sortEntropy) { }
 
-    public Sprite(string textureName, double side, Layer displayLayer, double rotation = 0.0)
-        : this(textureName, new Rect(side), displayLayer, rotation) { }
-
-    public Sprite(string textureName, Layer displayLayer, double rotation = 0.0)
-        : this(textureName, new Rect(), displayLayer, rotation) { }
+    public Sprite(string textureName, Layer displayLayer, double rotation = 0.0, int sortEntropy = 0)
+        : this(textureName, new Rect(), displayLayer, rotation, sortEntropy) { }
 
     public IRenderable Move(Vec2 deltaPosition)
     {
         if (deltaPosition == Vec2.Zero)
             return this;
 
-        return WithCenter(Position + deltaPosition);
+        Vec2 newCenter = Position + deltaPosition;
+        return this with { TextureArea = TextureArea with { Center = newCenter } };
     }
 
     public IRenderable Rotate(double deltaRotation)
@@ -41,7 +38,8 @@ public sealed class Sprite(
         if (deltaRotation == 0.0)
             return this;
 
-        return WithRotation((rotation + deltaRotation) % (Math.PI * 2));
+        double newRotation = (Rotation + deltaRotation) % (Math.PI * 2);
+        return this with { Rotation = newRotation };
     }
 
     public IRenderable MoveLocal(Vec2 deltaPositionLocal)
@@ -49,7 +47,8 @@ public sealed class Sprite(
         if (deltaPositionLocal == Vec2.Zero)
             return this;
 
-        return WithCenter(Position + deltaPositionLocal.Rotate(rotation));
+        Vec2 newCenter = Position + deltaPositionLocal.Rotate(Rotation);
+        return this with { TextureArea = TextureArea with { Center = newCenter } };
     }
 
     public IRenderable RotateAround(Vec2 pivot, double deltaRotation)
@@ -58,18 +57,13 @@ public sealed class Sprite(
             return this;
 
         Vec2 offset = Position - pivot;
-        Vec2 rotatedOffset = offset.Rotate(deltaRotation);
-        Vec2 newCenter = pivot + rotatedOffset;
+        Vec2 newCenter = pivot + offset.Rotate(deltaRotation);
+        double newRotation = (Rotation + deltaRotation) % (Math.PI * 2);
 
-        return WithCenterAndRotation(newCenter, (rotation + deltaRotation) % (Math.PI * 2));
+        return this with
+        {
+            TextureArea = TextureArea with { Center = newCenter },
+            Rotation = newRotation
+        };
     }
-
-    private Sprite WithCenter(Vec2 newCenter) =>
-        new(textureName, textureArea with { Center = newCenter }, displayLayer, rotation);
-
-    private Sprite WithRotation(double newRotation) =>
-        new(textureName, textureArea, displayLayer, newRotation);
-
-    private Sprite WithCenterAndRotation(Vec2 newCenter, double newRotation) =>
-        new(textureName, textureArea with { Center = newCenter }, displayLayer, newRotation);
 }

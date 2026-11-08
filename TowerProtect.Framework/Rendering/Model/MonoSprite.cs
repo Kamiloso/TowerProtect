@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace TowerProtect.Framework.Rendering.Model;
 
@@ -6,7 +7,8 @@ internal readonly record struct MonoSprite(
     Texture2D Texture,
     RectangleF TextureArea,
     float DepthLayer,
-    float Rotation)
+    float Rotation,
+    int SortEntropy) : IComparable<MonoSprite>
 {
     public Vector2 Origin { get; } = new(Texture.Width / 2f, Texture.Height / 2f);
 
@@ -19,4 +21,12 @@ internal readonly record struct MonoSprite(
         TextureArea.X + TextureArea.Width / 2f,
         TextureArea.Y + TextureArea.Height / 2f
     );
+
+    public int CompareTo(MonoSprite other)
+    {
+        int primary = DepthLayer.CompareTo(other.DepthLayer);
+        if (primary != 0) return primary;
+
+        return SortEntropy.CompareTo(other.SortEntropy);
+    }
 }

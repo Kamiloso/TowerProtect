@@ -18,46 +18,45 @@ internal class WilsonMazeGenerator : IMazeGenerator
 
         visited[Vec2Int.Zero] = true;
 
-        for (int y = -range; y <= range; y++)
+        Area.Iterate(range, mpos =>
         {
-            for (int x = -range; x <= range; x++)
+            var (x, y) = mpos;
+
+            Vec2Int startPos = new(x, y);
+
+            if (visited[startPos])
+                return;
+
+            walk.Clear();
+            Vec2Int current = startPos;
+
+            while (!visited[current])
             {
-                Vec2Int startPos = new(x, y);
+                Vec2Int dir;
+                Vec2Int next;
 
-                if (visited[startPos])
-                    continue;
-
-                walk.Clear();
-                Vec2Int current = startPos;
-
-                while (!visited[current])
+                do
                 {
-                    Vec2Int dir;
-                    Vec2Int next;
-
-                    do
-                    {
-                        dir = Vec2Int.MainDirections[rng.Next(4)];
-                        next = current + dir;
-                    }
-                    while (next.MaxAbs > range);
-
-                    walk[current] = dir;
-                    current = next;
+                    dir = Vec2Int.MainDirections[rng.Next(4)];
+                    next = current + dir;
                 }
+                while (next.MaxAbs > range);
 
-                current = startPos;
-
-                while (!visited[current])
-                {
-                    Vec2Int dir = walk[current];
-
-                    maze.RemoveAt(current, dir);
-                    visited[current] = true;
-
-                    current += dir;
-                }
+                walk[current] = dir;
+                current = next;
             }
-        }
+
+            current = startPos;
+
+            while (!visited[current])
+            {
+                Vec2Int dir = walk[current];
+
+                maze.RemoveAt(current, dir);
+                visited[current] = true;
+
+                current += dir;
+            }
+        });
     }
 }

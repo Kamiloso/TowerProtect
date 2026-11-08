@@ -1,5 +1,4 @@
 ﻿using TowerProtect.Domain.Backend.Tiles.Abstract;
-using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Model.Tiles;
 
 namespace TowerProtect.Domain.Backend.Tiles.Specific;

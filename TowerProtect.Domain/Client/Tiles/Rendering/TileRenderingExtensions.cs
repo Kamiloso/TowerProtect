@@ -45,5 +45,9 @@ internal static class TileRenderingExtensions
         => self.IsInvisible() ? NoSprites.Instance : self.GetMainSprite(position);
 
     private static Sprite GetMainSprite(this TileType self, Vec2 position)
-        => new(self.GetTextureName(), position, self.GetDisplayLayer());
+        => new(
+            textureName: self.GetTextureName(),
+            position: position,
+            displayLayer: self.GetDisplayLayer()
+        );
 }

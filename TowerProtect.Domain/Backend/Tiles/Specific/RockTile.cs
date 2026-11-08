@@ -3,11 +3,7 @@ using TowerProtect.Domain.Model.Tiles;
 
 namespace TowerProtect.Domain.Backend.Tiles.Specific;
 
-public sealed class RockTile : Tile
+public sealed class RockTile(byte durability) : BreakableTile(durability)
 {
-    private RockTile() : base(durability: 30) { }
-    public static RockTile Create() => new();
-
     public override TileType Type => TileType.Rock;
-    public override bool IsBreakable => true;
 }

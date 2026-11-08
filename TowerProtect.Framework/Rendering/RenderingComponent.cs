@@ -10,6 +10,7 @@ using TowerProtect.Framework.Rendering.Textures;
 using TowerProtect.Domain.Rendering.Camera;
 using TowerProtect.Domain.Rendering.Model;
 using TowerProtect.Domain.Rendering.Sprites;
+using System;
 
 namespace TowerProtect.Framework.Rendering;
 
@@ -33,22 +34,29 @@ internal class RenderingComponent(
 
     public override void Draw(GameTime gameTime)
     {
-		cameraView.AspectRatio = ScreenBounds.Width / ScreenBounds.Height;
+        cameraView.AspectRatio = ScreenBounds.Width / ScreenBounds.Height;
 
         Rect cameraBounds = cameraView.VisionArea;
         Rect screenBounds = ScreenBounds.ToRect();
 
         _monoSprites.Clear();
+
         foreach (var sprite in displayRoot.Current.DrawNextFrame())
         {
             var monoSprite = ToMonoSprite(sprite, cameraBounds, screenBounds);
             _monoSprites.Add(monoSprite);
         }
 
-        GraphicsDevice.Clear(Color.CornflowerBlue);
-        _spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
+        _monoSprites.Sort();
 
-		foreach (var monoSprite in _monoSprites)
+        GraphicsDevice.Clear(Color.CornflowerBlue);
+
+        _spriteBatch.Begin(
+            sortMode: SpriteSortMode.Deferred,
+            blendState: BlendState.AlphaBlend
+        );
+
+        foreach (var monoSprite in _monoSprites)
         {
             _spriteBatch.Draw(
                 texture: monoSprite.Texture,
@@ -74,10 +82,11 @@ internal class RenderingComponent(
         Rect screenTextureArea = Rect.MapRect(cameraTextureArea, cameraBounds, screenBounds);
 
         return new MonoSprite(
-            textureComponent.Get(sprite.TextureName),
-            screenTextureArea.ToRectangleF(),
-            sprite.DisplayLayer.ToDepthLayer(),
-            (float)sprite.Rotation
+            Texture: textureComponent.Get(sprite.TextureName),
+            TextureArea: screenTextureArea.ToRectangleF(),
+            DepthLayer: sprite.DisplayLayer.ToDepthLayer(),
+            Rotation: (float)sprite.Rotation,
+            SortEntropy: sprite.SortEntropy
         );
     }
 }

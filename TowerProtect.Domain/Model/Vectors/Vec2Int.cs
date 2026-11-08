@@ -10,6 +10,7 @@ public readonly record struct Vec2Int(int x, int y)
 {
     [JsonIgnore] public int MinAbs => Math.Min(Math.Abs(x), Math.Abs(y));
     [JsonIgnore] public int MaxAbs => Math.Max(Math.Abs(x), Math.Abs(y));
+    [JsonIgnore] public Vec2Int Abs => new(Math.Abs(x), Math.Abs(y));
     [JsonIgnore] public Vec2Int Orthogonal => Rot90(1);
 
     public Vec2Int Rot90(int rots)

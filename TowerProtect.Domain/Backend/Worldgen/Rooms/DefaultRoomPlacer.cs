@@ -20,7 +20,7 @@ internal class DefaultRoomPlacer : IRoomPlacer
 
         worldArea.Iterate(pos =>
         {
-            if (pos.MaxAbs <= 1)
+            if (pos.MaxAbs <= RoomPeriod)
             {
                 if (pos == Vec2Int.Zero)
                     PlaceSpawnRoom(worldArea, pos, rng);

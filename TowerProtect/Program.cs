@@ -39,7 +39,7 @@ namespace TowerProtect;
 public static class Program
 {
     [STAThread]
-    static void Main()
+    private static void Main()
     {
         var srv = new ServiceCollection();
 
@@ -77,6 +77,7 @@ public static class Program
         // 4. No update methods (no ordering required)
         srv.AddMonoGameSingleton<ITextureComponent, TextureComponent>();
         srv.AddMonoGameSingleton<IContourTextureComponent, ContourTextureComponent>();
+        srv.AddMonoGameSingleton<IRepeatTextureComponent, RepeatTextureComponent>();
 
         // 5. Late
         srv.AddMonoGameSingleton<ScopeComponent>();

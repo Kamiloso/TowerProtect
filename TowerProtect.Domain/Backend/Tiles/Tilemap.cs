@@ -26,7 +26,7 @@ public class Tilemap : ITilemap
             var tileType = map[pos];
             var tile = tileFactory.CreateTile(tileType);
 
-            tile.OnBreakEvent += () =>
+            (tile as BreakableTile)?.OnBreakEvent += () =>
             {
                 _area[pos] = AirTile.Instance;
                 TileUpdateEvent?.Invoke(pos, _area[pos].TileData);
@@ -39,5 +39,6 @@ public class Tilemap : ITilemap
     public TilemapData CollectTilemapData()
         => TilemapData.FromArea(_area, t => t.TileData);
 
-    public bool TryBreak(Vec2Int pos) => _area[pos].TryBreak();
+    public bool TryBreak(Vec2Int pos)
+        => (_area[pos] as BreakableTile)?.TryBreak() ?? false;
 }

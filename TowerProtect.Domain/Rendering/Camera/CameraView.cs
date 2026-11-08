@@ -15,8 +15,8 @@ public class CameraView : ICameraView
         ? Side * new Vec2(AspectRatio, 1.0)
         : Side * new Vec2(1.0, 1.0 / AspectRatio));
 
-    public Rect ExtendedVisionArea
-        => new(Center, VisionArea.Size * CullingRangeMultiplier);
+    public Rect ExtendedVisionArea(double deltaSide)
+        => new(Center, (VisionArea.Size + deltaSide * Vec2.One).Abs);
 
     public double AspectRatio
     {
@@ -38,10 +38,10 @@ public class CameraView : ICameraView
 
     public void ResetTransform() => ApplyTransform(Vec2.Zero, 0.0);
 
-    public bool IsCulled(Vec2 position)
+    public bool IsCulled(Vec2 position, double deltaSide)
     {
         Vec2 delta = (Center - position).Abs;
-        Vec2 limit = ExtendedVisionArea.Size / 2.0;
+        Vec2 limit = ExtendedVisionArea(deltaSide).Size / 2.0;
 
         return delta.x > limit.x || delta.y > limit.y;
     }

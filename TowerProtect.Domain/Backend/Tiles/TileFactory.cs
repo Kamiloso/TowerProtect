@@ -7,16 +7,18 @@ using TowerProtect.Domain.Model.Tiles;
 namespace TowerProtect.Domain.Backend.Tiles;
 
 [AutoInterface]
-internal class TileFactory : ITileFactory
+internal class TileFactory(Random rng) : ITileFactory
 {
     public Tile CreateTile(TileType tileType) => tileType switch
     {
         TileType.Air => AirTile.Instance,
         TileType.Wall => WallTile.Instance,
-        TileType.Spawner => SpawnerTile.Create(),
+        TileType.Spawner => SpawnerTile.Instance,
         TileType.Water => WaterTile.Instance,
         TileType.Bedrock => BedrockTile.Instance,
-        TileType.Rock => RockTile.Create(),
+        TileType.Rock => new RockTile(GetRockDurability()),
         _ => throw new InvalidOperationException($"Invalid tile type: {tileType}")
     };
+
+    private byte GetRockDurability() => (byte)rng.Next(1, 10);
 }

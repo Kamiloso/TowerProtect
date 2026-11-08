@@ -35,7 +35,13 @@ internal class DiagnosticsComponent(
 
     public override void Update(GameTime gameTime)
     {
-        if (inputSystem.IsKeyDown("F3"))
+        if (inputSystem.IsKeyPressed("LeftControl") && inputSystem.IsKeyDown("G")) // force GC
+        {
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, blocking: true, compacting: true);
+            GC.WaitForPendingFinalizers();
+        }
+
+        if (inputSystem.IsKeyDown("F3")) // debug menu
         {
             _enabled = !_enabled;
 
