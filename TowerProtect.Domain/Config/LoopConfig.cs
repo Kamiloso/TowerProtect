@@ -1,6 +1,8 @@
 ﻿namespace TowerProtect.Domain.Config;
 
-public static class LoopConfig
+public sealed record LoopConfig
 {
-    public const double MaxDeltaTime = 0.1;
+    public double MaxDeltaTime { get; init; } = 0.1;
+    public double InputSendPeriod { get; init; } = 0.05;
+    public double BroadcastSendPeriod { get; init; } = 0.05;
 }

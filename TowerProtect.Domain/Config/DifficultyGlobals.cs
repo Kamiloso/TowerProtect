@@ -4,7 +4,7 @@ using TowerProtect.Domain.Model.Gameplay;
 
 namespace TowerProtect.Domain.Config;
 
-public class DifficultyConfig
+public class DifficultyGlobals
 {
     public static readonly IReadOnlyDictionary<Difficulty, DifficultySettings> Difficulties =
         new Dictionary<Difficulty, DifficultySettings>()

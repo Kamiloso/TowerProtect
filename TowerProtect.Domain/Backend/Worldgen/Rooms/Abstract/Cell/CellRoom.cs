@@ -1,5 +1,5 @@
 ﻿using System;
-using static TowerProtect.Domain.Config.WorldgenConfig;
+using static TowerProtect.Domain.Config.WorldgenGlobals;
 
 namespace TowerProtect.Domain.Backend.Worldgen.Rooms.Abstract.Cell;
 

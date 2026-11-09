@@ -3,10 +3,10 @@ using System;
 using TowerProtect.App.Client.Interfaces;
 using TowerProtect.App.Networking.Client;
 using TowerProtect.App.Networking.Packets.Requests;
+using TowerProtect.Domain.Config;
 using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Inventions.Tools;
 using TowerProtect.Domain.Model.Vectors;
-using static TowerProtect.Domain.Config.PeriodConfig;
 
 namespace TowerProtect.App.Client.Input;
 
@@ -15,9 +15,10 @@ partial interface IInputSender : IUpdateAware;
 [AutoInterface]
 internal class InputSender(
     IInputSystem inputSystem,
-    IClientRouter clientRouter) : IInputSender
+    IClientRouter clientRouter,
+    LoopConfig cfg) : IInputSender
 {
-    private readonly LoopCycle _inputCycle = new(InputSendPeriod);
+    private readonly LoopCycle _inputCycle = new(cfg.InputSendPeriod);
 
     public void Update(double deltaTime)
     {

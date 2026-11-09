@@ -5,7 +5,7 @@ using TowerProtect.Domain.Model.Vectors;
 using TowerProtect.Domain.Backend.Worldgen.Extended;
 using TowerProtect.Domain.Backend.Worldgen.Mazes;
 using TowerProtect.Domain.Backend.Worldgen.Rooms;
-using static TowerProtect.Domain.Config.WorldgenConfig;
+using static TowerProtect.Domain.Config.WorldgenGlobals;
 
 namespace TowerProtect.Domain.Backend.Worldgen;
 

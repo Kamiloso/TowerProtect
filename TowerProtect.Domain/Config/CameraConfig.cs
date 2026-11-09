@@ -1,11 +1,11 @@
 ﻿namespace TowerProtect.Domain.Config;
 
-public static class CameraConfig
+public sealed record CameraConfig
 {
-    public const double DefaultSide = 20.0;
-    public const double CullingRangeMultiplier = 1.5;
-    public const double SmoothTime = 0.2;
-    public const double ZoomStep = 0.2;
-    public const int MinZoomPoint = -4;
-    public const int MaxZoomPoint = 4;
+    public double DefaultSide { get; init; } = 20.0;
+    public double CullingRangeMultiplier { get; init; } = 1.5;
+    public double SmoothTime { get; init; } = 0.2;
+    public double ZoomStep { get; init; } = 0.2;
+    public int MinZoomPoint { get; init; } = -4;
+    public int MaxZoomPoint { get; init; } = 4;
 }

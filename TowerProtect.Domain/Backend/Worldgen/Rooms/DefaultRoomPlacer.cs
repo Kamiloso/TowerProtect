@@ -6,7 +6,7 @@ using TowerProtect.Domain.Backend.Worldgen.Rooms.Specific.Farm;
 using TowerProtect.Domain.Inventions.Tools;
 using TowerProtect.Domain.Model.Tiles;
 using TowerProtect.Domain.Model.Vectors;
-using static TowerProtect.Domain.Config.WorldgenConfig;
+using static TowerProtect.Domain.Config.WorldgenGlobals;
 
 namespace TowerProtect.Domain.Backend.Worldgen.Rooms;
 

@@ -1,5 +1,6 @@
 ﻿using AutoInterfaceAttributes;
 using System;
+using TowerProtect.Domain.Config;
 using TowerProtect.Domain.Model.Vectors;
 using static TowerProtect.Domain.Config.CameraConfig;
 
@@ -8,13 +9,15 @@ namespace TowerProtect.Domain.Rendering.Camera;
 partial interface ICameraFollow;
 
 [AutoInterface]
-public class CameraFollow(ICameraView cameraView) : ICameraFollow
+public class CameraFollow(
+    ICameraView cameraView,
+    CameraConfig cfg) : ICameraFollow
 {
     private Vec2 _velocity;
 
     public void Follow(Vec2 target, double deltaTime)
     {
-        double smoothTime = Math.Max(0.0001, SmoothTime);
+        double smoothTime = Math.Max(0.0001, cfg.SmoothTime);
         double omega = 2.0 / smoothTime;
         double x = omega * deltaTime;
 

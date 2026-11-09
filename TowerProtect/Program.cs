@@ -33,6 +33,7 @@ using TowerProtect.Domain.Backend.Worldgen.Mazes;
 using TowerProtect.Domain.Backend.Worldgen.Rooms;
 using TowerProtect.Domain.Backend.Entities.Utils;
 using TowerProtect.Domain.Backend.Gameplay;
+using TowerProtect.Domain.Config;
 
 namespace TowerProtect;
 
@@ -93,6 +94,11 @@ public static class Program
 
         // Technical
         srv.AddSingleton<GameSynchronizationContext>();
+
+        // Configs
+        srv.AddSingleton<CameraConfig>();
+        srv.AddSingleton<LoopConfig>();
+        srv.AddSingleton<ScreenConfig>();
 
         // Utilities
         srv.AddSingleton<INetInstance, NetInstance>();

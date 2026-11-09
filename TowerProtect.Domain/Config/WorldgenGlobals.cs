@@ -1,6 +1,6 @@
 ﻿namespace TowerProtect.Domain.Config;
 
-public static class WorldgenConfig
+public static class WorldgenGlobals
 {
     public const int CellRange = 2;
     public const int CellSize = 2 * CellRange + 1;

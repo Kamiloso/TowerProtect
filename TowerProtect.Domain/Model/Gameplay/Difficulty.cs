@@ -4,7 +4,11 @@ using System.Linq;
 using TowerProtect.Domain.Inventions.Tools;
 using TowerProtect.Domain.Model.Entities;
 using TowerProtect.Domain.Model.Exceptions;
-using static TowerProtect.Domain.Config.DifficultyConfig;
+using static TowerProtect.Domain.Config.DifficultyGlobals;
+
+using Diff__ = System.Collections.Generic.IReadOnlyDictionary<
+    TowerProtect.Domain.Model.Gameplay.Difficulty,
+    TowerProtect.Domain.Model.Gameplay.DifficultySettings>;
 
 namespace TowerProtect.Domain.Model.Gameplay;
 

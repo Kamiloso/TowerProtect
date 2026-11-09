@@ -1,12 +1,12 @@
 ﻿using AutoInterfaceAttributes;
 using System;
+using TowerProtect.Domain.Config;
 using TowerProtect.Domain.Model.Vectors;
-using static TowerProtect.Domain.Config.CameraConfig;
 
 namespace TowerProtect.Domain.Rendering.Camera;
 
 [AutoInterface]
-public class CameraView : ICameraView
+public class CameraView(CameraConfig cfg) : ICameraView
 {
     public Vec2 Center { get; set; }
     public double Zoom { get; set; }
@@ -28,7 +28,7 @@ public class CameraView : ICameraView
         }
     } = 1.0;
 
-    private double Side => DefaultSide / Math.Pow(2.0, Zoom);
+    private double Side => cfg.DefaultSide / Math.Pow(2.0, Zoom);
 
     public void ApplyTransform(Vec2 center, double zoom)
     {
