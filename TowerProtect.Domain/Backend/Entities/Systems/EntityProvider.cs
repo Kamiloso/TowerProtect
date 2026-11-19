@@ -5,8 +5,9 @@ using System.Linq;
 using TowerProtect.Domain.Backend.Entities.Abstract;
 using TowerProtect.Domain.Backend.Entities.Input;
 using TowerProtect.Domain.Backend.Entities.Specific;
-using TowerProtect.Domain.Model.Entities;
-using TowerProtect.Domain.Model.Gameplay;
+using TowerProtect.Domain.Config;
+using TowerProtect.Domain.Model.Gameplay.Difficulties;
+using TowerProtect.Domain.Model.Gameplay.Entities;
 using TowerProtect.Domain.Model.Vectors;
 
 namespace TowerProtect.Domain.Backend.Entities.Utils;
@@ -20,7 +21,9 @@ partial interface IEntityProvider
 }
 
 [AutoInterface]
-internal class EntityProvider(Random rng) : IEntityProvider
+internal class EntityProvider(
+    DifficultyConfig cfg,
+    Random rng) : IEntityProvider
 {
     [IgnoreAutoInterface]
     public Entity GetPlayer(IEntityController controller)
@@ -48,7 +51,7 @@ internal class EntityProvider(Random rng) : IEntityProvider
     [IgnoreAutoInterface]
     public IEnumerable<Entity> GetEnemyBurst(Func<Vec2> getPosition, Difficulty difficulty)
     {
-        return [.. difficulty.GetEnemyBurst(rng)
+        return [.. difficulty.GetEnemyBurst(cfg.Difficulties, rng)
             .Select(enemyType => GetEnemy(getPosition(), enemyType))];
     }
 }

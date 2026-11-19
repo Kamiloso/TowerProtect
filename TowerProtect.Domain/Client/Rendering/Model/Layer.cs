@@ -1,4 +1,4 @@
-﻿namespace TowerProtect.Domain.Rendering.Model;
+﻿namespace TowerProtect.Domain.Client.Rendering.Model;
 
 public enum Layer
 {

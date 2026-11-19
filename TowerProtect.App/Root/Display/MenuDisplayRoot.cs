@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using TowerProtect.Domain.Rendering.Sprites;
+using TowerProtect.Domain.Client.Rendering.Sprites;
 
 namespace TowerProtect.App.Root.Display;
 

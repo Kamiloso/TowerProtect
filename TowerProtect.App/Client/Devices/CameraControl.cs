@@ -1,5 +1,5 @@
 ﻿using AutoInterfaceAttributes;
-using TowerProtect.Domain.Rendering.Camera;
+using TowerProtect.Domain.Client.Rendering.Camera;
 using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Model.Unions;
 using TowerProtect.Domain.Model.Vectors;

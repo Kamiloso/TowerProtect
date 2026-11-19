@@ -1,11 +1,11 @@
 ﻿using System;
 using TowerProtect.Domain.Inventions.Tools;
-using TowerProtect.Domain.Model.Tiles;
 using TowerProtect.Domain.Model.Vectors;
 using TowerProtect.Domain.Backend.Worldgen.Extended;
 using TowerProtect.Domain.Backend.Worldgen.Mazes;
 using TowerProtect.Domain.Backend.Worldgen.Rooms;
-using static TowerProtect.Domain.Config.WorldgenGlobals;
+using static TowerProtect.Domain.Backend.Worldgen.WorldgenConst;
+using TowerProtect.Domain.Model.Gameplay.Tiles;
 
 namespace TowerProtect.Domain.Backend.Worldgen;
 

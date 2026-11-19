@@ -1,5 +1,5 @@
 ﻿using System;
-using TowerProtect.Domain.Model.Entities;
+using TowerProtect.Domain.Model.Gameplay.Entities;
 
 namespace TowerProtect.Domain.Model.Unions;
 

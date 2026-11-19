@@ -1,10 +1,9 @@
 ﻿using System;
 using TowerProtect.Domain.Client.Entities.Interpolation;
 using TowerProtect.Domain.Inventions.Interfaces;
-using TowerProtect.Domain.Model.Entities;
-using TowerProtect.Domain.Model.Vectors;
+using TowerProtect.Domain.Model.Gameplay.Entities;
 
-namespace TowerProtect.Domain.Client.Entities.Model;
+namespace TowerProtect.Domain.Client.Entities;
 
 internal class SmoothEntity : IUpdateAware
 {

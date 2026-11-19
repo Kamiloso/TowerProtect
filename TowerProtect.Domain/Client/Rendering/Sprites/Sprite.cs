@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using TowerProtect.Domain.Client.Rendering;
+using TowerProtect.Domain.Client.Rendering.Model;
 using TowerProtect.Domain.Model.Vectors;
-using TowerProtect.Domain.Rendering.Model;
 
-namespace TowerProtect.Domain.Rendering.Sprites;
+namespace TowerProtect.Domain.Client.Rendering.Sprites;
 
 public sealed record Sprite(
     string TextureName,

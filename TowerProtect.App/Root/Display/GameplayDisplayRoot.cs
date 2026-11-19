@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using TowerProtect.Domain.Rendering.Camera;
+using TowerProtect.Domain.Client.Rendering.Camera;
 using TowerProtect.Domain.Client.Entities;
 using TowerProtect.Domain.Display.Tiles;
-using TowerProtect.Domain.Rendering.Sprites;
+using TowerProtect.Domain.Client.Rendering.Sprites;
 
 namespace TowerProtect.App.Root.Display;
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using TowerProtect.Domain.Model.Vectors;
 
-namespace TowerProtect.Domain.Model.Entities;
+namespace TowerProtect.Domain.Model.Gameplay.Entities;
 
 public readonly record struct EntityData(
     Guid Guid,

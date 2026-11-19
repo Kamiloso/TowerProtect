@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using TowerProtect.Domain.Rendering.Camera;
+using TowerProtect.Domain.Client.Rendering.Camera;
 using TowerProtect.Domain.Client.Tiles.Rendering;
 using TowerProtect.Domain.Inventions.Tools;
-using TowerProtect.Domain.Model.Tiles;
 using TowerProtect.Domain.Model.Vectors;
-using TowerProtect.Domain.Rendering;
-using TowerProtect.Domain.Rendering.Sprites;
+using TowerProtect.Domain.Client.Rendering;
+using TowerProtect.Domain.Client.Rendering.Sprites;
+using TowerProtect.Domain.Model.Gameplay.Tiles;
 
 namespace TowerProtect.Domain.Client.Tiles;
 

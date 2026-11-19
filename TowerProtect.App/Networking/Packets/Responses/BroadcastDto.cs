@@ -1,6 +1,6 @@
 ﻿using System;
 using TowerProtect.Domain.Inventions.Networking;
-using TowerProtect.Domain.Model.Entities;
+using TowerProtect.Domain.Model.Gameplay.Entities;
 using TowerProtect.Domain.Model.Unions;
 
 namespace TowerProtect.App.Networking.Packets.Responses;

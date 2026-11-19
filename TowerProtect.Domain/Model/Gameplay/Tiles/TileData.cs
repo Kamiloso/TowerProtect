@@ -1,4 +1,4 @@
-﻿namespace TowerProtect.Domain.Model.Tiles;
+﻿namespace TowerProtect.Domain.Model.Gameplay.Tiles;
 
 public readonly record struct TileData(
     TileType Type,

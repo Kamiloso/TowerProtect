@@ -17,7 +17,9 @@ public class PacketSerializer : IPacketSerializer
         payload = "";
 
         int splitIndex = message.IndexOf(':');
-        if (splitIndex == -1) return false;
+
+        if (splitIndex == -1)
+            return false;
 
         if (!int.TryParse(message[..splitIndex], out identifier))
             return false;

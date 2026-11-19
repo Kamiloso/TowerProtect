@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TowerProtect.Domain.Model.Entities;
+namespace TowerProtect.Domain.Model.Gameplay.Entities;
 
 public enum EntityType : byte
 {

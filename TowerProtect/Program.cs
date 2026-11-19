@@ -26,7 +26,7 @@ using TowerProtect.App.Backend.Entities;
 using TowerProtect.Domain.Client.Entities;
 using TowerProtect.App.Client.Receivers;
 using TowerProtect.App.Client.Camera;
-using TowerProtect.Domain.Rendering.Camera;
+using TowerProtect.Domain.Client.Rendering.Camera;
 using TowerProtect.Domain.Backend.Entities.Systems;
 using TowerProtect.App.Client.Interfaces;
 using TowerProtect.Domain.Backend.Worldgen.Mazes;
@@ -99,6 +99,7 @@ public static class Program
         srv.AddSingleton<CameraConfig>();
         srv.AddSingleton<LoopConfig>();
         srv.AddSingleton<ScreenConfig>();
+        srv.AddSingleton<DifficultyConfig>();
 
         // Utilities
         srv.AddSingleton<INetInstance, NetInstance>();

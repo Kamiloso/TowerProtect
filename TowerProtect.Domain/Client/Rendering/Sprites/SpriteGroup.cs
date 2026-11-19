@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using TowerProtect.Domain.Client.Rendering;
 using TowerProtect.Domain.Model.Vectors;
 
-namespace TowerProtect.Domain.Rendering.Sprites;
+namespace TowerProtect.Domain.Client.Rendering.Sprites;
 
 public sealed class SpriteGroup(
     Vec2 position,

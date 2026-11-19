@@ -2,7 +2,7 @@
 using System;
 using TowerProtect.Domain.Backend.Tiles.Abstract;
 using TowerProtect.Domain.Backend.Tiles.Specific;
-using TowerProtect.Domain.Model.Tiles;
+using TowerProtect.Domain.Model.Gameplay.Tiles;
 
 namespace TowerProtect.Domain.Backend.Tiles;
 

@@ -1,11 +1,11 @@
 ﻿using System;
 using TowerProtect.Domain.Model.Vectors;
 using TowerProtect.Domain.Backend.Tiles.Specific;
-using TowerProtect.Domain.Model.Tiles;
 using TowerProtect.Domain.Backend.Worldgen;
 using AutoInterfaceAttributes;
 using TowerProtect.Domain.Inventions.Tools;
 using TowerProtect.Domain.Backend.Tiles.Abstract;
+using TowerProtect.Domain.Model.Gameplay.Tiles;
 
 namespace TowerProtect.Domain.Backend.Tiles;
 

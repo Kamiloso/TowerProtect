@@ -1,6 +1,6 @@
 ﻿using System;
 using TowerProtect.Domain.Inventions.Tools;
-using TowerProtect.Domain.Model.Tiles;
+using TowerProtect.Domain.Model.Gameplay.Tiles;
 using TowerProtect.Domain.Model.Vectors;
 
 namespace TowerProtect.Domain.Backend.Worldgen.Rooms.Abstract;

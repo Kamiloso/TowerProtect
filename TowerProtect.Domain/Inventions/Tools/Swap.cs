@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TowerProtect.Domain.Inventions.Tools;
+﻿namespace TowerProtect.Domain.Inventions.Tools;
 
 internal class Swap<T>() where T : class, new()
 {

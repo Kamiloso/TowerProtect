@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using TowerProtect.Domain.Inventions.Tools;
-using TowerProtect.Domain.Model.Entities;
-using TowerProtect.Domain.Model.Exceptions;
-using static TowerProtect.Domain.Config.DifficultyGlobals;
+using TowerProtect.Domain.Exceptions;
+using TowerProtect.Domain.Model.Gameplay.Entities;
 
-using Diff__ = System.Collections.Generic.IReadOnlyDictionary<
-    TowerProtect.Domain.Model.Gameplay.Difficulty,
-    TowerProtect.Domain.Model.Gameplay.DifficultySettings>;
+using DifficultyProvider = System.Collections.Generic.IReadOnlyDictionary<
+    TowerProtect.Domain.Model.Gameplay.Difficulties.Difficulty,
+    TowerProtect.Domain.Model.Gameplay.Difficulties.DifficultySettings>;
 
-namespace TowerProtect.Domain.Model.Gameplay;
+namespace TowerProtect.Domain.Model.Gameplay.Difficulties;
 
 public enum Difficulty
 {
@@ -23,30 +22,30 @@ public enum Difficulty
 
 public static class DifficultyExtensions
 {
-    public static Difficulty GetByScore(int score)
+    public static Difficulty GetByScore(DifficultyProvider diffs, int score)
     {
         foreach (var difficulty in Enum.GetValues<Difficulty>().Reverse())
         {
-            if (score >= Difficulties[difficulty].MinScore)
+            if (score >= diffs[difficulty].MinScore)
                 return difficulty;
         }
 
         throw new UnreachableException();
     }
 
-    public static (int Min, int Max) GetScoreRange(this Difficulty self)
+    public static (int Min, int Max) GetScoreRange(this Difficulty self, DifficultyProvider diffs)
     {
-        int min = Difficulties[self].MinScore;
-        int max = Difficulties[self].IsLast
+        int min = diffs[self].MinScore;
+        int max = diffs[self].IsLast
             ? int.MaxValue
-            : Difficulties[self + 1].MinScore - 1;
+            : diffs[self + 1].MinScore - 1;
 
         return (min, max);
     }
 
-    public static IEnumerable<EntityType> GetEnemyBurst(this Difficulty self, Random rng)
+    public static IEnumerable<EntityType> GetEnemyBurst(this Difficulty self, DifficultyProvider diffs, Random rng)
     {
-        var settings = Difficulties[self];
+        var settings = diffs[self];
 
         foreach (var _ in Enumerable.Range(0, settings.BurstSize))
         {
@@ -62,9 +61,9 @@ public static class DifficultyExtensions
         }
     }
 
-    public static double GetWaitingTime(this Difficulty self, Random rng)
+    public static double GetWaitingTime(this Difficulty self, DifficultyProvider diffs, Random rng)
     {
-        var settings = Difficulties[self];
+        var settings = diffs[self];
         var (min, max) = settings.WaitingTimeRange;
 
         return max > min

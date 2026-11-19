@@ -2,14 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using TowerProtect.Domain.Rendering.Camera;
-using TowerProtect.Domain.Client.Entities.Rendering;
-using TowerProtect.Domain.Client.Entities.Model;
+using TowerProtect.Domain.Client.Rendering.Camera;
 using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Inventions.Tools;
 using TowerProtect.Domain.Model.Unions;
-using TowerProtect.Domain.Rendering;
-using TowerProtect.Domain.Rendering.Sprites;
+using TowerProtect.Domain.Client.Rendering;
+using TowerProtect.Domain.Client.Rendering.Sprites;
+using TowerProtect.Domain.Client.Entities.Rendering;
 
 namespace TowerProtect.Domain.Client.Entities;
 

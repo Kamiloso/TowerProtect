@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using TowerProtect.Domain.Rendering.Camera;
-using TowerProtect.Domain.Rendering.Sprites;
+using TowerProtect.Domain.Client.Rendering.Sprites;
+using TowerProtect.Domain.Client.Rendering.Camera;
 
-namespace TowerProtect.Domain.Rendering;
+namespace TowerProtect.Domain.Client.Rendering;
 
 public interface ISpriteRenderingAware
 {

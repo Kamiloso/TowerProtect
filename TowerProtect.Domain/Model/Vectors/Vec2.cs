@@ -34,14 +34,7 @@ public readonly record struct Vec2(double x, double y)
         );
     }
 
-    public static double Distance(Vec2 a, Vec2 b)
-    {
-        double dx = a.x - b.x;
-        double dy = a.y - b.y;
-
-        return Math.Sqrt(dx * dx + dy * dy);
-    }
-
+    public static double Distance(Vec2 a, Vec2 b) => (a - b).Magnitude;
     public static double Dot(Vec2 a, Vec2 b) => a.x * b.x + a.y * b.y;
     public static double Cross(Vec2 a, Vec2 b) => a.x * b.y - a.y * b.x;
 

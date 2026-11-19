@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Immutable;
 
-namespace TowerProtect.Domain.Model.Entities;
+namespace TowerProtect.Domain.Model.Gameplay.Entities;
 
 public readonly record struct EntityListData(
     ImmutableArray<EntityData> Entities)

@@ -1,6 +1,6 @@
 ﻿using System;
 using TowerProtect.Domain.Inventions.Networking;
-using TowerProtect.Domain.Model.Tiles;
+using TowerProtect.Domain.Model.Gameplay.Tiles;
 
 namespace TowerProtect.App.Networking.Packets.Responses;
 

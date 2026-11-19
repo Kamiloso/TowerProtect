@@ -1,7 +1,7 @@
 ﻿using System.Collections.Immutable;
-using TowerProtect.Domain.Model.Entities;
+using TowerProtect.Domain.Model.Gameplay.Entities;
 
-namespace TowerProtect.Domain.Model.Gameplay;
+namespace TowerProtect.Domain.Model.Gameplay.Difficulties;
 
 public record DifficultySettings
 {

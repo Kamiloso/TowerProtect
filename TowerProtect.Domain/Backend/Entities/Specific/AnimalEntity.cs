@@ -1,7 +1,7 @@
 ﻿using TowerProtect.Domain.Backend.Entities.Abstract.Dynamic.Controllable;
 using TowerProtect.Domain.Backend.Entities.Input;
 using TowerProtect.Domain.Inventions.Interfaces;
-using TowerProtect.Domain.Model.Entities;
+using TowerProtect.Domain.Model.Gameplay.Entities;
 using TowerProtect.Domain.Model.Vectors;
 
 namespace TowerProtect.Domain.Backend.Entities.Specific;

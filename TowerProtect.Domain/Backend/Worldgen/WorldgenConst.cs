@@ -1,9 +1,10 @@
-﻿namespace TowerProtect.Domain.Config;
+﻿namespace TowerProtect.Domain.Backend.Worldgen;
 
-public static class WorldgenGlobals
+internal static class WorldgenConst
 {
     public const int CellRange = 2;
     public const int CellSize = 2 * CellRange + 1;
+    public const int RoomPeriod = CellSize + 1;
     public const int MazeRange = 30;
     public const int TilemapRange = CellRange + 1 + MazeRange * (CellSize + 1);
 }

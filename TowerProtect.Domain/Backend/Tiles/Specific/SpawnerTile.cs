@@ -1,5 +1,5 @@
 ﻿using TowerProtect.Domain.Backend.Tiles.Abstract;
-using TowerProtect.Domain.Model.Tiles;
+using TowerProtect.Domain.Model.Gameplay.Tiles;
 
 namespace TowerProtect.Domain.Backend.Tiles.Specific;
 

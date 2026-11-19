@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using TowerProtect.Domain.Client.Rendering;
 using TowerProtect.Domain.Model.Vectors;
 
-namespace TowerProtect.Domain.Rendering.Sprites;
+namespace TowerProtect.Domain.Client.Rendering.Sprites;
 
 public sealed class NoSprites : IRenderable
 {

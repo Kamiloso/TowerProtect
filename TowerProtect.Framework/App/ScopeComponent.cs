@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using TowerProtect.App.Scopes;
-using TowerProtect.Domain.Rendering.Camera;
+using TowerProtect.Domain.Client.Rendering.Camera;
 using TowerProtect.App.Client.Interfaces;
 using TowerProtect.Domain.Model.Scopes.Start;
 

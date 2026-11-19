@@ -1,7 +1,7 @@
 ﻿using System;
-using TowerProtect.Domain.Rendering.Model;
+using TowerProtect.Domain.Client.Rendering.Model;
 
-namespace TowerProtect.Domain.Model.Tiles;
+namespace TowerProtect.Domain.Model.Gameplay.Tiles;
 
 public enum TileType : byte
 {

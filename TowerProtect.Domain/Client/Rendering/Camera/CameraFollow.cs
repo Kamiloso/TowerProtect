@@ -4,7 +4,7 @@ using TowerProtect.Domain.Config;
 using TowerProtect.Domain.Model.Vectors;
 using static TowerProtect.Domain.Config.CameraConfig;
 
-namespace TowerProtect.Domain.Rendering.Camera;
+namespace TowerProtect.Domain.Client.Rendering.Camera;
 
 partial interface ICameraFollow;
 

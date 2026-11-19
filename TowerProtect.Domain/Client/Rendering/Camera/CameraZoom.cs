@@ -1,7 +1,7 @@
 ﻿using AutoInterfaceAttributes;
 using TowerProtect.Domain.Config;
 
-namespace TowerProtect.Domain.Rendering.Camera;
+namespace TowerProtect.Domain.Client.Rendering.Camera;
 
 partial interface ICameraZoom;
 

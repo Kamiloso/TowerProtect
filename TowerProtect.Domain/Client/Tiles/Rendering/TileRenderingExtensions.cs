@@ -1,9 +1,9 @@
 ﻿using System;
+using TowerProtect.Domain.Client.Rendering;
+using TowerProtect.Domain.Client.Rendering.Sprites;
 using TowerProtect.Domain.Client.Tiles.Model;
-using TowerProtect.Domain.Model.Tiles;
+using TowerProtect.Domain.Model.Gameplay.Tiles;
 using TowerProtect.Domain.Model.Vectors;
-using TowerProtect.Domain.Rendering;
-using TowerProtect.Domain.Rendering.Sprites;
 
 namespace TowerProtect.Domain.Client.Tiles.Rendering;
 

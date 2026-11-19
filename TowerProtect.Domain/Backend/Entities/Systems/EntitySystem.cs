@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TowerProtect.Domain.Backend.Entities.Abstract;
 using TowerProtect.Domain.Inventions.Interfaces;
-using TowerProtect.Domain.Model.Entities;
+using TowerProtect.Domain.Model.Gameplay.Entities;
 using TowerProtect.Domain.Model.Vectors;
 
 namespace TowerProtect.Domain.Backend.Entities.Systems;
