@@ -17,10 +17,11 @@ partial interface ITilemap : IUpdateAware;
 public class Tilemap : ITilemap
 {
     private readonly Area<Tile> _area;
-    private readonly OnceExecutor _onceExecutor = new();
 
     public event Action<Vec2Int, TileData>? OnTileUpdateEvent;
     public event Action<Vec2Int, EntityType>? OnSummonEvent;
+
+    private bool _initialized;
 
     public Tilemap(IMap map, ITileFactory tileFactory)
     {
@@ -38,7 +39,7 @@ public class Tilemap : ITilemap
 
     public void Update(double deltaTime)
     {
-        _onceExecutor.WhenFirstRun(() =>
+        if (!_initialized)
         {
             _area.Iterate(pos =>
             {
@@ -48,7 +49,9 @@ public class Tilemap : ITilemap
                 SetTile(pos, AirTile.Instance);
                 OnSummonEvent?.Invoke(pos, tile.SpawnEntityType);
             });
-        });
+
+            _initialized = true;
+        }
     }
 
     public TilemapData CollectTilemapData()

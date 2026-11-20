@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Model.Vectors;
 using static TowerProtect.Domain.Backend.Physics.PhysicsConst;
 
 namespace TowerProtect.Domain.Backend.Physics;
 
-public record DynamicCollider
+public record DynamicCollider : IUpdateAware
 {
     public required Vec2 Position { get; set; }
     public required Vec2 Size { get; set; }
@@ -15,7 +16,14 @@ public record DynamicCollider
     public Vec2 Velocity { get; set; } = Vec2.Zero;
     public Rect RectArea => new(Position, Size);
 
-    private IReadOnlyList<StaticCollider> _currentColliders = [];
+    public event Action<DynamicCollider, double>? OnUpdateEvent;
+
+    private IReadOnlyList<StaticCollider> _colliders = [];
+
+    public void Update(double deltaTime)
+    {
+        OnUpdateEvent?.Invoke(this, deltaTime);
+    }
 
     internal void Move(double deltaTime, IReadOnlyList<StaticCollider> colliders)
     {
@@ -26,8 +34,8 @@ public record DynamicCollider
             Vec2 p1 = Position;
             Vec2 p2 = Position + deltaTime * Velocity;
 
-            _currentColliders = colliders;
-            _currentColliders = WouldCollideAt(p1) ? [] : colliders;
+            _colliders = colliders;
+            _colliders = WouldCollideAt(p1) ? [] : colliders;
 
             var (finalPosition, timeElapsed, isHorizontal, isVertical) = MoveStraight(p1, p2, deltaTime);
 
@@ -90,7 +98,7 @@ public record DynamicCollider
 
     private bool WouldCollideAt(Vec2 position)
     {
-        foreach (var collider in _currentColliders)
+        foreach (var collider in _colliders)
         {
             Rect expandedRect = new(collider.Position, collider.Size + Size);
 

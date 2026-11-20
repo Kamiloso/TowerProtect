@@ -21,6 +21,7 @@ internal abstract class Entity(Vec2 position, double rotation, byte health)
     public bool IsAlive { get; private set; } = true;
 
     public EntityData EntityData => new(Guid, Type, Position, Rotation);
+    public Vec2 PointVector => Vec2.Right.Rotate(Rotation);
 
     public event Action? OnDeathEvent;
     public event Action<Vec2, EntityType>? OnSummonEvent;

@@ -3,12 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TowerProtect.Domain.Backend.Entities.Abstract;
+using TowerProtect.Domain.Backend.Entities.Abstract.Dynamic;
+using TowerProtect.Domain.Backend.Physics;
 using TowerProtect.Domain.Config;
 using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Model.Gameplay.Entities;
 using TowerProtect.Domain.Model.Vectors;
 
-namespace TowerProtect.Domain.Backend.Entities.Systems;
+namespace TowerProtect.Domain.Backend.Entities;
 
 partial interface IEntitySystem : IUpdateAware
 {
@@ -16,7 +18,9 @@ partial interface IEntitySystem : IUpdateAware
 }
 
 [AutoInterface]
-internal class EntitySystem(EntityConfig cfg) : IEntitySystem
+internal class EntitySystem(
+    IPhysicsSystem physicsSystem,
+    EntityConfig cfg) : IEntitySystem
 {
     private readonly Dictionary<Guid, Entity> _entities = [];
 
@@ -48,8 +52,7 @@ internal class EntitySystem(EntityConfig cfg) : IEntitySystem
     [IgnoreAutoInterface]
     public void SpawnEntity(Entity entity, out Guid guid)
     {
-        entity.OnDeathEvent +=
-            () => _entities.Remove(entity.Guid);
+        entity.OnDeathEvent += () => DetachEntity(entity);
 
         entity.OnSummonEvent +=
             (position, entityType) => OnSummonEvent?.Invoke(position, entityType);
@@ -57,8 +60,26 @@ internal class EntitySystem(EntityConfig cfg) : IEntitySystem
         entity.OnShootEvent +=
             (position, rotation) => OnShootEvent?.Invoke(position, rotation);
 
+        if (entity is DynamicEntity dynamicEntity)
+        {
+            var collider = dynamicEntity.Collider;
+            physicsSystem.AttachDynamicCollider(collider);
+        }
+
         _entities.Add(entity.Guid, entity);
+
         guid = entity.Guid;
+    }
+
+    private void DetachEntity(Entity entity)
+    {
+        if (entity is DynamicEntity dynamicEntity)
+        {
+            var collider = dynamicEntity.Collider;
+            physicsSystem.DetachDynamicCollider(collider);
+        }
+
+        _entities.Remove(entity.Guid);
     }
 
     public EntityListData CollectEntityListData()

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TowerProtect.Domain.Backend.Entities.Input;
 using TowerProtect.Domain.Model.Unions;
 
-namespace TowerProtect.Domain.Backend.Entities.Systems;
+namespace TowerProtect.Domain.Backend.Entities;
 
 [AutoInterface]
 internal class PlayerSystem(ISpawnSystem spawnSystem) : IPlayerSystem

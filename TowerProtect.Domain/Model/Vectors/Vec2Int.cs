@@ -13,6 +13,8 @@ public readonly record struct Vec2Int(int x, int y)
     [JsonIgnore] public Vec2Int Abs => new(Math.Abs(x), Math.Abs(y));
     [JsonIgnore] public Vec2Int Orthogonal => Rot90(1);
 
+    public Vec2Int(int xy) : this(xy, xy) { }
+
     public Vec2Int Rot90(int rots)
     {
         Vec2Int self = this;

@@ -1,13 +1,12 @@
 ﻿using TowerProtect.Domain.Backend.Entities.Abstract.Dynamic.Controllable;
 using TowerProtect.Domain.Backend.Entities.Input;
-using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Model.Gameplay.Entities;
 using TowerProtect.Domain.Model.Vectors;
 
 namespace TowerProtect.Domain.Backend.Entities.Specific;
 
 internal sealed class MonsterEntity(Vec2 position, IEntityController controller)
-    : MeleeEntity(position, health: 5, controller), IUpdateAware
+    : MeleeEntity(position, health: 5, controller)
 {
     public override EntityType Type => EntityType.Monster;
     public override double MovementSpeed => 4.0;

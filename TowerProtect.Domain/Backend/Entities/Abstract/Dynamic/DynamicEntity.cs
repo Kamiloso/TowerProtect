@@ -1,15 +1,20 @@
-﻿using TowerProtect.Domain.Model.Vectors;
+﻿using TowerProtect.Domain.Backend.Physics;
+using TowerProtect.Domain.Inventions.Interfaces;
+using TowerProtect.Domain.Model.Vectors;
 
 namespace TowerProtect.Domain.Backend.Entities.Abstract.Dynamic;
 
-internal abstract class DynamicEntity(Vec2 position, double rotation, byte health)
-    : Entity(position, rotation, health)
+internal abstract class DynamicEntity(Vec2 position, double rotation, byte health,
+    DynamicCollider collider)
+    : Entity(position, rotation, health), IUpdateAware
 {
-    public abstract double MovementSpeed { get; }
-    public abstract bool IsFlying { get; }
+    public DynamicCollider Collider { get; } = collider;
 
-    protected virtual void MovementStep(double deltaTime)
+    public abstract double MovementSpeed { get; }
+
+    public virtual void Update(double deltaTime)
     {
-        Position += Vec2.Right.Rotate(Rotation) * MovementSpeed * deltaTime;
+        Collider.Update(deltaTime);
+        Position = Collider.Position;
     }
 }

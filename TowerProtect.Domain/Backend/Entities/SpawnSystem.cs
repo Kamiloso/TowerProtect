@@ -10,7 +10,7 @@ using TowerProtect.Domain.Model.Gameplay.Difficulties;
 using TowerProtect.Domain.Model.Gameplay.Entities;
 using TowerProtect.Domain.Model.Vectors;
 
-namespace TowerProtect.Domain.Backend.Entities.Systems;
+namespace TowerProtect.Domain.Backend.Entities;
 
 partial interface ISpawnSystem : IStartAware;
 

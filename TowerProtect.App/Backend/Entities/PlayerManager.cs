@@ -3,7 +3,7 @@ using System;
 using TowerProtect.App.Networking.Backend;
 using TowerProtect.App.Networking.Packets.Requests;
 using TowerProtect.App.Networking.Packets.Responses;
-using TowerProtect.Domain.Backend.Entities.Systems;
+using TowerProtect.Domain.Backend.Entities;
 using TowerProtect.Domain.Backend.Tiles;
 using TowerProtect.Domain.Inventions.Interfaces;
 

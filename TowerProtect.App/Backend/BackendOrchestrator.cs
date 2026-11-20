@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using TowerProtect.App.Backend.Entities;
 using TowerProtect.App.Networking.Backend;
-using TowerProtect.Domain.Backend.Entities.Systems;
+using TowerProtect.Domain.Backend.Entities;
 using TowerProtect.Domain.Backend.Tiles;
 using TowerProtect.Domain.Inventions.Interfaces;
 
@@ -14,7 +14,8 @@ partial interface IBackendOrchestrator : IAwareChain;
 internal class BackendOrchestrator(
     IBackendRouter backendRouter,
     ITilemap tilemap,
-	IEntityManager entityManager,
+    ICollisionGrid collisionGrid,
+    IEntityManager entityManager,
     IPlayerManager playerManager,
 	IEntitySystem entitySystem,
     ISpawnSystem spawnSystem,
@@ -23,6 +24,7 @@ internal class BackendOrchestrator(
     IEnumerable<object> IAwareChain.Children => [
         backendRouter,
         tilemap,
+        collisionGrid,
         entityManager,
         playerManager,
         entitySystem,

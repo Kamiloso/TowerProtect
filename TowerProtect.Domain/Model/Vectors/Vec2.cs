@@ -14,6 +14,8 @@ public readonly record struct Vec2(double x, double y)
     [JsonIgnore] public Vec2 Normalized => Magnitude > 1E-15 ? this / Magnitude : Right;
     [JsonIgnore] public Vec2 Abs => new(Math.Abs(x), Math.Abs(y));
 
+    public Vec2(double xy) : this(xy, xy) { }
+
     public Vec2 Rotate(double angle)
     {
         return new Vec2(

@@ -14,7 +14,7 @@ public enum EntityType : byte
     Drone = 7,
     Projectile = 8,
     Fruit = 9,
-    Nest = 10,
+    MagicNest = 10,
 }
 
 public static class EntityTypeExtensions

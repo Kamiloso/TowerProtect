@@ -27,7 +27,7 @@ using TowerProtect.Domain.Client.Entities;
 using TowerProtect.App.Client.Receivers;
 using TowerProtect.App.Client.Camera;
 using TowerProtect.Domain.Client.Rendering.Camera;
-using TowerProtect.Domain.Backend.Entities.Systems;
+using TowerProtect.Domain.Backend.Entities;
 using TowerProtect.App.Client.Interfaces;
 using TowerProtect.Domain.Backend.Worldgen.Mazes;
 using TowerProtect.Domain.Backend.Worldgen.Rooms;
@@ -102,6 +102,7 @@ public static class Program
         srv.AddSingleton<ScreenConfig>();
         srv.AddSingleton<DifficultyConfig>();
         srv.AddSingleton<EntityConfig>();
+        srv.AddSingleton<PhysicsConfig>();
 
         // Utilities
         srv.AddSingleton<INetInstance, NetInstance>();
@@ -159,6 +160,7 @@ public static class Program
             srv.UseLocalScoped<IRoomPlacer, DefaultRoomPlacer>();
             srv.UseLocalScoped<IProgressSystem, ProgressSystem>();
             srv.UseLocalScoped<IPhysicsSystem, PhysicsSystem>();
+            srv.UseLocalScoped<ICollisionGrid, CollisionGrid>();
         }
 
         // Client

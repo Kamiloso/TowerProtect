@@ -10,7 +10,7 @@ using TowerProtect.Domain.Model.Gameplay.Difficulties;
 using TowerProtect.Domain.Model.Gameplay.Entities;
 using TowerProtect.Domain.Model.Vectors;
 
-namespace TowerProtect.Domain.Backend.Entities.Systems;
+namespace TowerProtect.Domain.Backend.Entities;
 
 [AutoInterface(Modifier = "internal")]
 internal class EntityProvider(
@@ -30,6 +30,7 @@ internal class EntityProvider(
             EntityType.Animal => new AnimalEntity(position, new EnemyController()),
             EntityType.Monster => new MonsterEntity(position, new EnemyController()),
             EntityType.Fruit => new MonsterEntity(position, new EnemyController()), // TEMP
+            EntityType.MagicNest => new MonsterEntity(position, new EnemyController()), // TEMP
             // EntityType.Insect => new InsectEntity(position, controller),
             // EntityType.Sniper => new SniperEntity(position, controller),
             // EntityType.Operator => new OperatorEntity(position, controller),

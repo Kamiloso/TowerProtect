@@ -2,7 +2,7 @@
 using TowerProtect.Domain.Model.Gameplay.Entities;
 using TowerProtect.Domain.Model.Gameplay.Tiles;
 
-namespace TowerProtect.Domain.Backend.Tiles.Specific;
+namespace TowerProtect.Domain.Backend.Tiles.Specific.Spawn;
 
 internal sealed class SpawnMonsterTile : SpawnTile
 {
