@@ -22,7 +22,7 @@ internal class GeneratedMap(
 
         BuildMaze(area, rng);
 
-        area.SpreadTile(TileType.Rock, 0.02, rng);
+        area.SpreadTile(TileType.Cracked, 0.02, rng);
         area.PlaceRooms(roomPlacer, rng);
 
         return area;

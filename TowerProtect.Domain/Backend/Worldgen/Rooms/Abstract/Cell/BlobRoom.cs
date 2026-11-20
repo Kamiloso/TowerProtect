@@ -17,17 +17,17 @@ internal abstract class BlobRoom(Random rng, char tile) : CellRoom(rng,
         if (rand == 0)
             return """
                 . . . . .
-                . * ? . .
-                . ? ? ? .
-                . * ? * .
+                . * # . .
+                . # # # .
+                . * # * .
                 . . . . .
                 """;
 
         if (rand == 1)
             return """
                 . . . . .
-                . ^ ? ^ .
-                . ? ? ? .
+                . ^ # ^ .
+                . # # # .
                 . ^ ^ ^ .
                 . . . . .
                 """;
@@ -35,8 +35,8 @@ internal abstract class BlobRoom(Random rng, char tile) : CellRoom(rng,
         if (rand == 2)
             return """
                 . . . . .
-                . . ? ^ .
-                . ^ ? ? .
+                . . # ^ .
+                . ^ # # .
                 . . ^ . .
                 . . . . .
                 """;
@@ -48,7 +48,7 @@ internal abstract class BlobRoom(Random rng, char tile) : CellRoom(rng,
     {
         '^' => _rng.Next(3) == 0 ? tile : '.',
         '*' => _rng.Next(2) == 0 ? tile : '.',
-        '?' => tile,
+        '#' => tile,
         _ => c
     });
 }

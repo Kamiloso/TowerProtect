@@ -1,6 +1,7 @@
 ﻿using AutoInterfaceAttributes;
 using TowerProtect.Domain.Backend.Entities.Systems;
 using TowerProtect.Domain.Backend.Gameplay;
+using TowerProtect.Domain.Backend.Tiles;
 using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Model.Vectors;
 

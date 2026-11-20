@@ -38,10 +38,14 @@ internal abstract class Room
     {
         '.' => TileType.Air,
         '#' => TileType.Wall,
+        '=' => TileType.Stone,
+        '+' => TileType.Cracked,
         '~' => TileType.Water,
-        'R' => TileType.Rock,
-        'S' => TileType.Spawner,
-        'B' => TileType.Bedrock,
+        '@' => TileType.MagicStone,
+        '$' => TileType.MagicNest,
+        'n' => TileType.SpawnAnimal,
+        'M' => TileType.SpawnMonster,
+        'o' => TileType.SpawnFruit,
         _ => throw new ArgumentException($"Invalid tile type: {c}")
     };
 

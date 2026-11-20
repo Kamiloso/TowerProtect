@@ -31,9 +31,9 @@ using TowerProtect.Domain.Backend.Entities.Systems;
 using TowerProtect.App.Client.Interfaces;
 using TowerProtect.Domain.Backend.Worldgen.Mazes;
 using TowerProtect.Domain.Backend.Worldgen.Rooms;
-using TowerProtect.Domain.Backend.Entities.Utils;
 using TowerProtect.Domain.Backend.Gameplay;
 using TowerProtect.Domain.Config;
+using TowerProtect.Domain.Backend.Physics;
 
 namespace TowerProtect;
 
@@ -79,6 +79,7 @@ public static class Program
         srv.AddMonoGameSingleton<ITextureComponent, TextureComponent>();
         srv.AddMonoGameSingleton<IContourTextureComponent, ContourTextureComponent>();
         srv.AddMonoGameSingleton<IRepeatTextureComponent, RepeatTextureComponent>();
+        srv.AddMonoGameSingleton<IUpscaleTextureComponent, UpscaleTextureComponent>();
 
         // 5. Late
         srv.AddMonoGameSingleton<ScopeComponent>();
@@ -100,6 +101,7 @@ public static class Program
         srv.AddSingleton<LoopConfig>();
         srv.AddSingleton<ScreenConfig>();
         srv.AddSingleton<DifficultyConfig>();
+        srv.AddSingleton<EntityConfig>();
 
         // Utilities
         srv.AddSingleton<INetInstance, NetInstance>();
@@ -156,6 +158,7 @@ public static class Program
             srv.UseLocalScoped<IMazeGenerator, WilsonMazeGenerator>();
             srv.UseLocalScoped<IRoomPlacer, DefaultRoomPlacer>();
             srv.UseLocalScoped<IProgressSystem, ProgressSystem>();
+            srv.UseLocalScoped<IPhysicsSystem, PhysicsSystem>();
         }
 
         // Client

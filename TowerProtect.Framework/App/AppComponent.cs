@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using TowerProtect.App.Scopes;
-using TowerProtect.App.Root.App;
 using System;
+using TowerProtect.App.Root.App;
+using TowerProtect.App.Scopes;
 using TowerProtect.Domain.Config;
 
 namespace TowerProtect.Framework.App;
@@ -11,18 +11,18 @@ internal class AppComponent(
     Dynamic<IAppRoot> appRoot,
     LoopConfig cfg) : GameComponent(game)
 {
-    private IAppRoot? _ref = null;
+    private IAppRoot? _prevAppRoot;
 
     public override void Update(GameTime gameTime)
     {
-        if (!ReferenceEquals(_ref, appRoot.Current))
+        if (!ReferenceEquals(_prevAppRoot, appRoot.Current))
         {
-            _ref = appRoot.Current;
-            _ref.Start();
+            _prevAppRoot = appRoot.Current;
+            _prevAppRoot.Start();
         }
 
         double realDeltaTime = gameTime.ElapsedGameTime.TotalMilliseconds / 1000.0;
-        double safeDeltaTime = Math.Min(realDeltaTime, cfg.MaxDeltaTime);
+        double safeDeltaTime = Math.Clamp(realDeltaTime, cfg.MinDeltaTime, cfg.MaxDeltaTime);
 
         appRoot.Current.Update(safeDeltaTime);
 

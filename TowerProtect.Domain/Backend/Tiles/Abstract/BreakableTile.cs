@@ -3,9 +3,9 @@ using TowerProtect.Domain.Model.Gameplay.Tiles;
 
 namespace TowerProtect.Domain.Backend.Tiles.Abstract;
 
-public abstract class BreakableTile(byte durability) : Tile
+public abstract class BreakableTile(Random rng, (byte Min, byte Max) durabilityRange) : Tile
 {
-    public byte Durability { get; private set; } = durability;
+    public byte Durability { get; private set; } = (byte)rng.Next(durabilityRange.Min, durabilityRange.Max + 1);
     public bool Exists { get; private set; } = true;
 
     public override TileData TileData => new(Type, Durability);

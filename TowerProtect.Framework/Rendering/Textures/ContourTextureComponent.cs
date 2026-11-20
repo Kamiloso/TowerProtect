@@ -2,16 +2,13 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using TowerProtect.Domain.Client.Tiles.Model;
+using static TowerProtect.Framework.Rendering.Textures.TextureConst;
 
 namespace TowerProtect.Framework.Rendering.Textures;
 
 [AutoInterface]
 internal class ContourTextureComponent(Game game) : GameComponent(game), IContourTextureComponent
 {
-    private const int TextureSize = 16;
-    private const int TextureArraySize = TextureSize * TextureSize;
-    private static readonly Color ContourColor = Color.Black * 1f;
-
     public Texture2D CreateByKey(string key)
     {
         Contour contour = ContourMethods.FromKey(key);

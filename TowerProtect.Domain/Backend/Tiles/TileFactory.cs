@@ -13,12 +13,14 @@ internal class TileFactory(Random rng) : ITileFactory
     {
         TileType.Air => AirTile.Instance,
         TileType.Wall => WallTile.Instance,
-        TileType.Spawner => SpawnerTile.Instance,
+        TileType.Stone => StoneTile.Instance,
+        TileType.Cracked => new CrackedTile(rng),
         TileType.Water => WaterTile.Instance,
-        TileType.Bedrock => BedrockTile.Instance,
-        TileType.Rock => new RockTile(GetRockDurability()),
+        TileType.MagicStone => MagicStoneTile.Instance,
+        TileType.MagicNest => new MagicNestTile(rng),
+        TileType.SpawnAnimal => SpawnAnimalTile.Instance,
+        TileType.SpawnMonster => SpawnMonsterTile.Instance,
+        TileType.SpawnFruit => SpawnFruitTile.Instance,
         _ => throw new InvalidOperationException($"Invalid tile type: {tileType}")
     };
-
-    private byte GetRockDurability() => (byte)rng.Next(1, 10);
 }

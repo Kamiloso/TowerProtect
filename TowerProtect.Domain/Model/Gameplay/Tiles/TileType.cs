@@ -7,26 +7,28 @@ public enum TileType : byte
 {
     Air = default,
     Wall = 1,
-    Water = 2,
-    Rock = 3,
-    Spawner = 4,
-    Bedrock = 5,
+    Stone = 2,
+    Cracked = 3,
+    Water = 4,
+    MagicStone = 5,
+    MagicNest = 6, // TODO: this should be entity
 
-    // Spawn markers
-    AnimalMarker = 101,
-    MonsterMarker = 102,
+    // Technical: Spawn
+    SpawnAnimal = 201,
+    SpawnMonster = 202,
+    SpawnFruit = 203,
 }
 
 public static class TileTypeExtensions
 {
     public static string GetTextureName(this TileType self)
-        => !IsMarker(self) && Enum.GetName(self) is { } name ? name : Assets.Unknown;
+        => !IsSpawn(self) && Enum.GetName(self) is { } name ? name : Assets.Unknown;
 
     public static bool IsSolid(this TileType self)
-        => self is TileType.Wall or TileType.Bedrock;
+        => self is TileType.Wall or TileType.Stone or TileType.Cracked or TileType.MagicStone;
 
     public static bool IsUnsolid(this TileType self)
-        => self is TileType.Rock or TileType.Spawner;
+        => self is TileType.MagicNest;
 
     public static bool IsFluid(this TileType self)
         => self is TileType.Air or TileType.Water;
@@ -37,8 +39,8 @@ public static class TileTypeExtensions
     public static bool IsContoured(this TileType self)
         => self.GetContourLevel() > 0;
 
-    public static bool IsMarker(this TileType self)
-        => Enum.GetName(self)?.StartsWith("Marker") ?? false;
+    public static bool IsSpawn(this TileType self)
+        => (int)self > 200;
 
     public static Layer GetDisplayLayer(this TileType self) => 0 switch
     {
@@ -51,7 +53,7 @@ public static class TileTypeExtensions
     public static int GetContourLevel(this TileType self) => 0 switch
     {
         _ when self.IsSolid() => 2,
-        _ when self.IsUnsolid() || self is TileType.Air => 1,
+        _ when self.IsUnsolid() || self.IsSpawn() || self is TileType.Air => 1,
         _ => 0
     };
 }

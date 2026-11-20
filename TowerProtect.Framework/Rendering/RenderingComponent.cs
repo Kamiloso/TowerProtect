@@ -8,7 +8,6 @@ using TowerProtect.Framework.Rendering.Model;
 using TowerProtect.App.Root.Display;
 using TowerProtect.Framework.Rendering.Textures;
 using TowerProtect.Domain.Client.Rendering.Camera;
-using System;
 using TowerProtect.Domain.Client.Rendering.Model;
 using TowerProtect.Domain.Client.Rendering.Sprites;
 
@@ -53,6 +52,7 @@ internal class RenderingComponent(
 
         _spriteBatch.Begin(
             sortMode: SpriteSortMode.Deferred,
+            samplerState: SamplerState.LinearClamp,
             blendState: BlendState.AlphaBlend
         );
 

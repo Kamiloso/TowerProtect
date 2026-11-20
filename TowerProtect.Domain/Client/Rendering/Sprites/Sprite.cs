@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using TowerProtect.Domain.Client.Rendering;
 using TowerProtect.Domain.Client.Rendering.Model;
 using TowerProtect.Domain.Model.Vectors;
 

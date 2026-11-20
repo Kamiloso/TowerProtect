@@ -28,7 +28,7 @@ internal class BackgroundDisplay(int range) : ISpriteRenderingAware
             var rect = new Rect(pos, K * Vec2Int.One);
             var layer = Layer.Floor + (isPrimaryAlignment ? 0 : 1);
 
-            targetSprites.Add(new($"#r:{asset},{K},{K}", rect, layer));
+            targetSprites.Add(new Sprite($"{asset}|r:{K},{K}", rect, layer));
         });
     }
 

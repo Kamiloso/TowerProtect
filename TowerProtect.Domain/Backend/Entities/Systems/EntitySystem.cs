@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TowerProtect.Domain.Backend.Entities.Abstract;
+using TowerProtect.Domain.Config;
 using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Model.Gameplay.Entities;
 using TowerProtect.Domain.Model.Vectors;
@@ -15,7 +16,7 @@ partial interface IEntitySystem : IUpdateAware
 }
 
 [AutoInterface]
-internal class EntitySystem : IEntitySystem
+internal class EntitySystem(EntityConfig cfg) : IEntitySystem
 {
     private readonly Dictionary<Guid, Entity> _entities = [];
 
@@ -26,12 +27,21 @@ internal class EntitySystem : IEntitySystem
     private IEnumerable<Entity> EntitiesSnapshotWhereAlive => EntitiesView.ToList()
         .Where(e => e.IsAlive);
 
+    private IEnumerable<Vec2> RootPositionsView => EntitiesView
+        .Where(e => e.IsRoot)
+        .Select(e => e.Position);
+
     public void Update(double deltaTime)
     {
+        List<Vec2> rootPositions = [.. RootPositionsView];
+
         foreach (var entity in EntitiesSnapshotWhereAlive)
         {
-            var aware = entity as IUpdateAware;
-            aware?.Update(deltaTime);
+            if (InUpdateRange(entity, rootPositions))
+            {
+                var aware = entity as IUpdateAware;
+                aware?.Update(deltaTime);
+            }
         }
     }
 
@@ -53,10 +63,23 @@ internal class EntitySystem : IEntitySystem
 
     public EntityListData CollectEntityListData()
     {
+        List<Vec2> rootPositions = [.. RootPositionsView];
+
         List<EntityData> entityDataList = [.. EntitiesView
-            .Where(e => e.IsRendered)
+            .Where(e => e.IsRendered && InUpdateRange(e, rootPositions))
             .Select(e => e.EntityData)];
 
         return new([.. entityDataList]);
+    }
+
+    private bool InUpdateRange(Entity entity, List<Vec2> rootPositions)
+    {
+        foreach (var rootPos in rootPositions)
+        {
+            if (Vec2.Distance(entity.Position, rootPos) < cfg.UpdateRange)
+                return true;
+        }
+
+        return false;
     }
 }

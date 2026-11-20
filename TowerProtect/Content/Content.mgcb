@@ -25,19 +25,6 @@
 /processorParam:Version=3.8.6.0
 /build:Animal.png
 
-#begin Bedrock.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=True
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/processorParam:Version=3.8.6.0
-/build:Bedrock.png
-
 #begin Border.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -50,6 +37,19 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.6.0
 /build:Border.png
+
+#begin Cracked.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=True
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.6.0
+/build:Cracked.png
 
 #begin Floor.png
 /importer:TextureImporter
@@ -71,6 +71,32 @@
 /processorParam:TextureFormat=Compressed
 /processorParam:Version=3.8.6.0
 /build:Fonts/PTSans-Bold.ttf
+
+#begin MagicNest.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=True
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.6.0
+/build:MagicNest.png
+
+#begin MagicStone.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=True
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.6.0
+/build:MagicStone.png
 
 #begin Monster.png
 /importer:TextureImporter
@@ -111,7 +137,7 @@
 /processorParam:Version=3.8.6.0
 /build:Projectile.png
 
-#begin Rock.png
+#begin Stone.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -122,20 +148,7 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.6.0
-/build:Rock.png
-
-#begin Spawner.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=True
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/processorParam:Version=3.8.6.0
-/build:Spawner.png
+/build:Stone.png
 
 #begin Unknown.png
 /importer:TextureImporter

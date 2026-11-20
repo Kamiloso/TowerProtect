@@ -15,7 +15,7 @@ internal static class TileRenderingExtensions
             return self.GetMainRenderable(pos);
 
         Contour PartialContour(Vec2Int delta, Contour target)
-            => self.GetContourLevel() > (tileAt(pos + delta)?.GetContourLevel() ?? 0) ? target : 0;
+            => self.GetContourLevel() > (tileAt(pos + delta)?.GetContourLevel() ?? int.MaxValue) ? target : 0;
 
         Contour contour = 0;
         contour |= PartialContour(Vec2Int.Up, Contour.Up);

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using TowerProtect.Domain.Inventions.Tools;
 
 namespace TowerProtect.Framework.Rendering.Textures;
@@ -10,14 +11,14 @@ namespace TowerProtect.Framework.Rendering.Textures;
 internal class TextureComponent(
     Game game,
     IContourTextureComponent contourTextureComponent,
-    IRepeatTextureComponent repeatTextureComponent) : GameComponent(game), ITextureComponent
+    IRepeatTextureComponent repeatTextureComponent,
+    IUpscaleTextureComponent upscaleTextureComponent) : GameComponent(game), ITextureComponent
 {
     private LazyProvider<string, Texture2D> _textures = null!;
 
     public override void Initialize()
     {
         _textures = new LazyProvider<string, Texture2D>(AllocateTexture);
-
         base.Initialize();
     }
 
@@ -25,17 +26,64 @@ internal class TextureComponent(
 
     private Texture2D AllocateTexture(string fullKey)
     {
-        if (!fullKey.StartsWith('#'))
-            return Game.Content.Load<Texture2D>(fullKey);
+        if (!fullKey.Contains('|'))
+            return AllocateBaseTexture(fullKey);
 
-        string key = fullKey.Split(':')[1];
+        string[] parts = fullKey.Split('|');
 
-        if (fullKey.StartsWith("#c:"))
-            return contourTextureComponent.CreateByKey(key);
+        Texture2D baseTexture = Get(parts[0]);
+        Texture2D current = baseTexture;
 
-        if (fullKey.StartsWith("#r:"))
-            return repeatTextureComponent.CreateByKey(key);
+        for (int i = 1; i < parts.Length; i++)
+        {
+            Texture2D next = ApplyModifier(current, parts[i]);
 
-        throw new ContentLoadException($"Invalid texture pattern: {fullKey}");
+            if (!ReferenceEquals(current, baseTexture) && !ReferenceEquals(current, next))
+                current.Dispose();
+
+            current = next;
+        }
+
+        return current;
+    }
+
+    private Texture2D AllocateBaseTexture(string baseKey)
+    {
+        bool isGenerated = baseKey.StartsWith('#');
+
+        Texture2D rawTexture = isGenerated
+            ? GenerateTexture(baseKey)
+            : Game.Content.Load<Texture2D>(baseKey);
+
+        Texture2D upscaled = upscaleTextureComponent.Upscale(rawTexture);
+
+        if (isGenerated && !ReferenceEquals(rawTexture, upscaled))
+            rawTexture.Dispose();
+
+        return upscaled;
+    }
+
+    private Texture2D GenerateTexture(string key)
+    {
+        if (key.StartsWith("#c:", StringComparison.Ordinal))
+            return contourTextureComponent.CreateByKey(key[3..]);
+
+        throw new ContentLoadException($"Invalid texture generator: {key}");
+    }
+
+    private Texture2D ApplyModifier(Texture2D source, string modifierToken)
+    {
+        string[] parts = modifierToken.Split(':', 2);
+
+        if (parts.Length != 2)
+            throw new ContentLoadException($"Invalid modifier format: {modifierToken}");
+
+        string code = parts[0];
+        string args = parts[1];
+
+        if (code == "r")
+            return repeatTextureComponent.Apply(source, args);
+
+        throw new ContentLoadException($"Unknown texture modifier: {code}");
     }
 }

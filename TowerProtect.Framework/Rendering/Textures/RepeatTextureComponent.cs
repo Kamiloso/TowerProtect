@@ -8,19 +8,24 @@ namespace TowerProtect.Framework.Rendering.Textures;
 [AutoInterface]
 internal class RepeatTextureComponent(Game game) : GameComponent(game), IRepeatTextureComponent
 {
-    public Texture2D CreateByKey(string key)
+    public Texture2D Apply(Texture2D source, string args)
     {
-        string[] parts = key.Split(',');
+        string[] parts = args.Split(',');
 
-        if (parts.Length != 3)
-            throw new ArgumentException($"Invalid repeat texture format: {key} (expected: name,rx,ry)");
+        if (parts.Length != 2)
+            throw new ArgumentException($"Invalid repeat arguments: {args} (expected: rx,ry)");
 
-        string baseTextureName = parts[0];
-        int repeatX = int.Parse(parts[1]);
-        int repeatY = int.Parse(parts[2]);
+        int repeatX = Math.Max(int.Parse(parts[0]), 1);
+        int repeatY = Math.Max(int.Parse(parts[1]), 1);
 
-        Texture2D baseTexture = Game.Content.Load<Texture2D>(baseTextureName);
+        if (repeatX == 1 && repeatY == 1)
+            return source;
 
+        return Repeat(source, repeatX, repeatY);
+    }
+
+    private Texture2D Repeat(Texture2D baseTexture, int repeatX, int repeatY)
+    {
         int baseWidth = baseTexture.Width;
         int baseHeight = baseTexture.Height;
         int targetWidth = baseWidth * repeatX;
@@ -33,15 +38,16 @@ internal class RepeatTextureComponent(Game game) : GameComponent(game), IRepeatT
 
         for (int y = 0; y < targetHeight; y++)
         {
+            int sourceRowOffset = (y % baseHeight) * baseWidth;
+            int targetRowOffset = y * targetWidth;
+
             for (int x = 0; x < targetWidth; x++)
             {
-                int sourceX = x % baseWidth;
-                int sourceY = y % baseHeight;
-                targetColorData[y * targetWidth + x] = baseColorData[sourceY * baseWidth + sourceX];
+                targetColorData[targetRowOffset + x] = baseColorData[sourceRowOffset + (x % baseWidth)];
             }
         }
 
-        Texture2D repeatedTexture = new Texture2D(Game.GraphicsDevice, targetWidth, targetHeight);
+        Texture2D repeatedTexture = new(Game.GraphicsDevice, targetWidth, targetHeight);
         repeatedTexture.SetData(targetColorData);
 
         return repeatedTexture;

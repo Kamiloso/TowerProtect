@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TowerProtect.Domain.Backend.Entities.Abstract;
 using TowerProtect.Domain.Backend.Entities.Input;
-using TowerProtect.Domain.Backend.Entities.Utils;
+using TowerProtect.Domain.Backend.Tiles;
 using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Model.Gameplay.Difficulties;
 using TowerProtect.Domain.Model.Gameplay.Entities;
@@ -17,13 +17,20 @@ partial interface ISpawnSystem : IStartAware;
 [AutoInterface]
 internal class SpawnSystem(
 	IEntitySystem entitySystem,
+	ITilemap tilemap,
 	IEntityProvider entityProvider) : ISpawnSystem
 {
 	public void Start()
 	{
-		entitySystem.OnSummonEvent += (a, b) => SpawnEnemy(a, b);
-		entitySystem.OnShootEvent += (a, b) => SpawnProjectile(a, b);
-	}
+		entitySystem.OnSummonEvent +=
+			(a, b) => SpawnEnemy(a, b);
+
+		entitySystem.OnShootEvent +=
+			(a, b) => SpawnProjectile(a, b);
+
+		tilemap.OnSummonEvent +=
+			(a, b) => SpawnEnemy(a, b);
+    }
 
 	public Guid SpawnPlayer(IEntityController controller) =>
 		Spawn(entityProvider.GetPlayer(controller));

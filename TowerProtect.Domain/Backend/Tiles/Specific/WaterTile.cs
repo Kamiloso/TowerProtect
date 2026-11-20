@@ -9,4 +9,5 @@ public sealed class WaterTile : Tile
     public static WaterTile Instance { get; } = new();
 
     public override TileType Type => TileType.Water;
+    public override bool IsProjectilePassable => true;
 }

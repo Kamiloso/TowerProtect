@@ -10,36 +10,26 @@ using TowerProtect.Domain.Model.Gameplay.Difficulties;
 using TowerProtect.Domain.Model.Gameplay.Entities;
 using TowerProtect.Domain.Model.Vectors;
 
-namespace TowerProtect.Domain.Backend.Entities.Utils;
+namespace TowerProtect.Domain.Backend.Entities.Systems;
 
-partial interface IEntityProvider
-{
-    internal Entity GetPlayer(IEntityController controller);
-    internal Entity GetProjectile(Vec2 position, double rotation);
-    internal Entity GetEnemy(Vec2 position, EntityType enemyType);
-    internal IEnumerable<Entity> GetEnemyBurst(Func<Vec2> getPosition, Difficulty difficulty);
-}
-
-[AutoInterface]
+[AutoInterface(Modifier = "internal")]
 internal class EntityProvider(
     DifficultyConfig cfg,
     Random rng) : IEntityProvider
 {
-    [IgnoreAutoInterface]
     public Entity GetPlayer(IEntityController controller)
         => new PlayerEntity(Vec2.Zero, controller);
 
-    [IgnoreAutoInterface]
     public Entity GetProjectile(Vec2 position, double rotation)
         => new ProjectileEntity(position, rotation);
 
-    [IgnoreAutoInterface]
     public Entity GetEnemy(Vec2 position, EntityType enemyType)
     {
         return enemyType switch
         {
             EntityType.Animal => new AnimalEntity(position, new EnemyController()),
             EntityType.Monster => new MonsterEntity(position, new EnemyController()),
+            EntityType.Fruit => new MonsterEntity(position, new EnemyController()), // TEMP
             // EntityType.Insect => new InsectEntity(position, controller),
             // EntityType.Sniper => new SniperEntity(position, controller),
             // EntityType.Operator => new OperatorEntity(position, controller),
@@ -48,7 +38,6 @@ internal class EntityProvider(
         };
     }
 
-    [IgnoreAutoInterface]
     public IEnumerable<Entity> GetEnemyBurst(Func<Vec2> getPosition, Difficulty difficulty)
     {
         return [.. difficulty.GetEnemyBurst(cfg.Difficulties, rng)

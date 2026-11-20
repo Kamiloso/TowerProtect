@@ -11,6 +11,7 @@ internal abstract class Entity(Vec2 position, double rotation, byte health)
     public abstract EntityType Type { get; }
     public abstract bool IsDamageable { get; }
     public virtual bool IsRendered => true;
+    public virtual bool IsRoot => false;
 
     public Vec2 Position { get; protected set; } = position;
     public double Rotation { get; protected set; } = rotation;

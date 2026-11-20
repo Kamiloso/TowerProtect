@@ -11,4 +11,5 @@ internal sealed class PlayerEntity(Vec2 position, IEntityController controller)
 {
     public override EntityType Type => EntityType.Player;
     public override double MovementSpeed => 32.0;
+    public override bool IsRoot => true;
 }

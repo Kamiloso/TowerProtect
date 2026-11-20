@@ -2,7 +2,6 @@
 using System;
 using TowerProtect.Domain.Config;
 using TowerProtect.Domain.Model.Vectors;
-using TowerProtect.Domain.Client.Rendering.Camera;
 
 namespace TowerProtect.Domain.Client.Rendering.Camera;
 
@@ -36,8 +35,6 @@ public class CameraView(CameraConfig cfg) : ICameraView
         Center = center;
         Zoom = zoom;
     }
-
-    public void ResetTransform() => ApplyTransform(Vec2.Zero, 0.0);
 
     public bool IsCulled(Vec2 position, double deltaSide)
     {

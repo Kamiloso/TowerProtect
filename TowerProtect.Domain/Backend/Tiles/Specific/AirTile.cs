@@ -9,5 +9,6 @@ public sealed class AirTile : Tile
     public static AirTile Instance { get; } = new();
 
     public override TileType Type => TileType.Air;
-    public override bool IsPassable => true;
+    public override bool IsEntityPassable => true;
+    public override bool IsProjectilePassable => true;
 }
