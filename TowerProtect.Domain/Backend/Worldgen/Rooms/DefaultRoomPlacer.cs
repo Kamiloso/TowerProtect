@@ -42,6 +42,7 @@ internal class DefaultRoomPlacer : IRoomPlacer
 
         probe.If(0.08, () => new RockRoom(rng).PlaceInWorld(worldArea, pos));
         probe.If(0.08, () => new LakeRoom(rng).PlaceInWorld(worldArea, pos));
+        probe.If(0.08, () => new TrapRoom(rng).PlaceInWorld(worldArea, pos));
 
         if (worldArea.IsDeadEnd(pos, out int rots))
         {

@@ -1,10 +1,9 @@
-﻿namespace TowerProtect.Domain.Backend.Entities.Input;
+﻿namespace TowerProtect.Domain.Backend.Entities.Control;
 
 public interface IEntityController
 {
-    bool InputReceived { get; }
+    bool InputReceived => true;
 
-    // Input properties
     double Rotation { get; }
     bool IsMoving { get; }
     bool IsShooting { get; }

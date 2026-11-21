@@ -12,12 +12,15 @@ internal class ProgressSystem(
     DifficultyConfig cfg,
     Random rng) : IProgressSystem
 {
+    private readonly DifficultyProvider _difficulties = cfg.Difficulties;
+
     public int Score { get; set; }
-    public Difficulty Difficulty => DifficultyExtensions.GetByScore(cfg.Difficulties, Score);
+    public Difficulty Difficulty => _difficulties.GetDifficulty(Score);
+    public DifficultySettings DifficultySettings => _difficulties.GetSettings(Score);
 
     public IEnumerable<EntityType> NextEnemyBurst()
-        => Difficulty.GetEnemyBurst(cfg.Difficulties, rng);
+        => DifficultySettings.GetEnemyBurst(rng);
 
     public double NextWaitingTime()
-        => Difficulty.GetWaitingTime(cfg.Difficulties, rng);
+        => DifficultySettings.GetWaitingTime(rng);
 }

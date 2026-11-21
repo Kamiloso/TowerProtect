@@ -1,4 +1,4 @@
-﻿using TowerProtect.Domain.Backend.Entities.Input;
+﻿using TowerProtect.Domain.Backend.Entities.Control;
 using TowerProtect.Domain.Backend.Entities.Physics;
 using TowerProtect.Domain.Model.Vectors;
 
@@ -6,10 +6,14 @@ namespace TowerProtect.Domain.Backend.Entities.Abstract.Dynamic.Controllable;
 
 internal abstract class ControllableEntity(Vec2 position, byte health,
     IEntityController controller,
-    PhysicalPropertiesOptional physicalProperties = default)
-    : DynamicEntity(position, rotation: 0f, health, collider: physicalProperties
-        .UseTemplate(DefaultPhysicalProperties)
-        .CreateCollider(position))
+    PhysicalProperties physicalProperties)
+    : DynamicEntity(
+        position, rotation: 0f, health,
+        collider: physicalProperties.Compile(position, new PhysicalProperties()
+        {
+            Drag = 4.0,
+            Bounciness = 0.0,
+        }))
 {
     public IEntityController Controller { get; } = controller;
 
@@ -45,12 +49,5 @@ internal abstract class ControllableEntity(Vec2 position, byte health,
         Collider.Velocity += PointVector * MovementSpeed * deltaTime;
     }
 
-    protected abstract void ShootingStep(double deltaTime);
-
-    private static readonly PhysicalProperties DefaultPhysicalProperties = new()
-    {
-        Size = new Vec2(0.8),
-        Drag = 0.15,
-        Bounciness = 0.0,
-    };
+    protected virtual void ShootingStep(double deltaTime) { }
 }

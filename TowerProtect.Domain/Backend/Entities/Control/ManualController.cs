@@ -1,12 +1,11 @@
 ﻿using TowerProtect.Domain.Model.Unions;
 
-namespace TowerProtect.Domain.Backend.Entities.Input;
+namespace TowerProtect.Domain.Backend.Entities.Control;
 
 public class ManualController : IEntityController
 {
     public bool InputReceived { get; private set; }
 
-    // Input properties
     public double Rotation { get; private set; }
     public bool IsMoving { get; private set; }
     public bool IsShooting { get; private set; }

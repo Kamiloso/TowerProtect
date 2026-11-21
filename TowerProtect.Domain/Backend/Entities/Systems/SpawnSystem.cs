@@ -3,7 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TowerProtect.Domain.Backend.Entities.Abstract;
-using TowerProtect.Domain.Backend.Entities.Input;
+using TowerProtect.Domain.Backend.Entities.Control;
+using TowerProtect.Domain.Backend.Entities.Systems;
 using TowerProtect.Domain.Backend.Tiles;
 using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Model.Gameplay.Difficulties;
@@ -18,7 +19,7 @@ partial interface ISpawnSystem : IStartAware;
 internal class SpawnSystem(
 	IEntitySystem entitySystem,
 	ITilemap tilemap,
-	IEntityProvider entityProvider) : ISpawnSystem
+	IEntityFactory entityFactory) : ISpawnSystem
 {
 	public void Start()
 	{
@@ -26,23 +27,23 @@ internal class SpawnSystem(
 			(a, b) => SpawnEnemy(a, b);
 
 		entitySystem.OnShootEvent +=
-			(a, b) => SpawnProjectile(a, b);
+			(a, b, c) => SpawnProjectile(a, b, c);
 
 		tilemap.OnSummonEvent +=
 			(a, b) => SpawnEnemy(a, b);
     }
 
 	public Guid SpawnPlayer(IEntityController controller) =>
-		Spawn(entityProvider.GetPlayer(controller));
+		Spawn(entityFactory.GetPlayer(controller));
 
-	public Guid SpawnProjectile(Vec2 position, double rotation) =>
-		Spawn(entityProvider.GetProjectile(position, rotation));
+	public Guid SpawnProjectile(Vec2 position, double rotation, EntityType projectileType) =>
+		Spawn(entityFactory.GetProjectile(position, rotation, projectileType));
 
 	public Guid SpawnEnemy(Vec2 position, EntityType entityType) =>
-		Spawn(entityProvider.GetEnemy(position, entityType));
+		Spawn(entityFactory.GetEnemy(position, entityType));
 
-	public IEnumerable<Guid> SpawnEnemyBurst(Func<Vec2> getPosition, Difficulty difficulty) =>
-		[.. entityProvider.GetEnemyBurst(getPosition, difficulty).Select(Spawn)];
+	public IEnumerable<Guid> SpawnEnemyBurst(Func<Vec2> getPosition, DifficultySettings settings) =>
+		[.. entityFactory.GetEnemyBurst(getPosition, settings).Select(Spawn)];
 
 	private Guid Spawn(Entity entity)
 	{

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using TowerProtect.Domain.Client.Entities.Rendering.Abstract;
 using TowerProtect.Domain.Client.Rendering;
-using TowerProtect.Domain.Client.Rendering.Model;
-using TowerProtect.Domain.Client.Rendering.Sprites;
-using TowerProtect.Domain.Inventions.Tools;
 using TowerProtect.Domain.Model.Gameplay.Entities;
 
 namespace TowerProtect.Domain.Client.Entities.Rendering;
@@ -14,34 +12,9 @@ internal static class EntityRenderingExtensions
     {
         var (guid, entityType, position, rotation) = entity;
 
-        var layer = guid == mainGuid
-            ? Layer.Player
-            : Layer.Entity;
+        bool isMain = guid == mainGuid;
 
-        Animated<IRenderable> animated = RenderEmpty();
-
-        if (entityType.IsSimpleRender())
-            animated = RenderSimple(entityType, layer, guid);
-
-        if (entityType is EntityType.Projectile)
-            animated = RenderProjectile(layer, guid);
-
-        return animated.Evaluate(sw).Move(position).Rotate(rotation);
+        return EntityRenderer.Of(entityType)
+            .Render(position, rotation, guid, isMain, sw);
     }
-
-    private static Animated<IRenderable> RenderEmpty() => new(_ => NoSprites.Instance);
-
-    private static Animated<IRenderable> RenderSimple(EntityType entityType, Layer layer, Guid guid)
-        => new(_ => new Sprite(
-            textureName: entityType.GetTextureName(),
-            displayLayer: layer,
-            sortEntropy: guid.GetHashCode())
-        );
-
-    private static Animated<IRenderable> RenderProjectile(Layer layer, Guid guid)
-        => new(_ => new Sprite(
-            textureName: EntityType.Projectile.GetTextureName(),
-            displayLayer: layer,
-            sortEntropy: guid.GetHashCode())
-        );
 }

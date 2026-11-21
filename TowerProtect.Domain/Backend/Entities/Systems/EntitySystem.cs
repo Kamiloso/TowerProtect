@@ -25,7 +25,7 @@ internal class EntitySystem(
     private readonly Dictionary<Guid, Entity> _entities = [];
 
     public event Action<Vec2, EntityType>? OnSummonEvent;
-    public event Action<Vec2, double>? OnShootEvent;
+    public event Action<Vec2, double, EntityType>? OnShootEvent;
 
     private IEnumerable<Entity> EntitiesView => _entities.Values;
     private IEnumerable<Entity> EntitiesSnapshotWhereAlive => EntitiesView.ToList()
@@ -55,10 +55,10 @@ internal class EntitySystem(
         entity.OnDeathEvent += () => DetachEntity(entity);
 
         entity.OnSummonEvent +=
-            (position, entityType) => OnSummonEvent?.Invoke(position, entityType);
+            (a, b) => OnSummonEvent?.Invoke(a, b);
 
         entity.OnShootEvent +=
-            (position, rotation) => OnShootEvent?.Invoke(position, rotation);
+            (a, b, c) => OnShootEvent?.Invoke(a, b, c);
 
         if (entity is DynamicEntity dynamicEntity)
         {

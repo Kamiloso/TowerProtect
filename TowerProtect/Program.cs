@@ -34,6 +34,7 @@ using TowerProtect.Domain.Backend.Worldgen.Rooms;
 using TowerProtect.Domain.Backend.Gameplay;
 using TowerProtect.Domain.Config;
 using TowerProtect.Domain.Backend.Physics;
+using TowerProtect.Domain.Backend.Entities.Systems;
 
 namespace TowerProtect;
 
@@ -152,7 +153,7 @@ public static class Program
             srv.UseLocalScoped<IEntitySystem, EntitySystem>();
             srv.UseLocalScoped<IPlayerSystem, PlayerSystem>();
             srv.UseLocalScoped<ISpawnSystem, SpawnSystem>();
-            srv.UseLocalScoped<IEntityProvider, EntityProvider>();
+            srv.UseLocalScoped<IEntityFactory, EntityFactory>();
             srv.UseLocalScoped<ITilemap, Tilemap>();
             srv.UseLocalScoped<ITileFactory, TileFactory>();
             srv.UseLocalScoped<IMap, GeneratedMap>();

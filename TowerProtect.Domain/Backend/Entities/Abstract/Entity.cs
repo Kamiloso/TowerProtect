@@ -25,13 +25,13 @@ internal abstract class Entity(Vec2 position, double rotation, byte health)
 
     public event Action? OnDeathEvent;
     public event Action<Vec2, EntityType>? OnSummonEvent;
-    public event Action<Vec2, double>? OnShootEvent;
+    public event Action<Vec2, double, EntityType>? OnShootEvent;
 
     protected void Summon(Vec2 position, EntityType entityType)
         => OnSummonEvent?.Invoke(position, entityType);
 
-    protected void Shoot(Vec2 position, double rotation)
-        => OnShootEvent?.Invoke(position, rotation);
+    protected void Shoot(Vec2 position, double rotation, EntityType projectileType)
+        => OnShootEvent?.Invoke(position, rotation, projectileType);
 
     public virtual bool ApplyDamage()
     {

@@ -26,7 +26,7 @@ internal class BackgroundDisplay(int range) : ISpriteRenderingAware
 
             var asset = isBelowTilemap ? Assets.Floor : Assets.Border;
             var rect = new Rect(pos, K * Vec2Int.One);
-            var layer = Layer.Floor + (isPrimaryAlignment ? 0 : 1);
+            var layer = Layer.Background.SubLayer(isPrimaryAlignment ? 0 : 1);
 
             targetSprites.Add(new Sprite($"{asset}|r:{K},{K}", rect, layer));
         });

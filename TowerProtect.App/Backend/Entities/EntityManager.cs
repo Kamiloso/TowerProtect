@@ -1,7 +1,6 @@
 ﻿using AutoInterfaceAttributes;
 using TowerProtect.Domain.Backend.Entities;
 using TowerProtect.Domain.Backend.Gameplay;
-using TowerProtect.Domain.Backend.Tiles;
 using TowerProtect.Domain.Inventions.Interfaces;
 using TowerProtect.Domain.Model.Vectors;
 
@@ -23,9 +22,9 @@ internal class EntityManager(
 
         if (_timeToSpawn <= 0)
         {
-            var difficulty = progressSystem.Difficulty;
+            var settings = progressSystem.DifficultySettings;
 
-            spawnSystem.SpawnEnemyBurst(() => Vec2.Zero, difficulty);
+            spawnSystem.SpawnEnemyBurst(() => Vec2.Zero, settings);
             _timeToSpawn = progressSystem.NextWaitingTime();
         }
     }

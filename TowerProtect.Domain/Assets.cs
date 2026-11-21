@@ -5,6 +5,7 @@ public static class Assets
     // Textures
     public const string Floor = nameof(Floor);
     public const string Border = nameof(Border);
+    public const string Crystal = nameof(Crystal);
     public const string Unknown = nameof(Unknown);
 
     // Fonts

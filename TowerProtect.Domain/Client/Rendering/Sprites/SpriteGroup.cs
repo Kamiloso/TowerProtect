@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using TowerProtect.Domain.Client.Rendering;
 using TowerProtect.Domain.Model.Vectors;
 
 namespace TowerProtect.Domain.Client.Rendering.Sprites;

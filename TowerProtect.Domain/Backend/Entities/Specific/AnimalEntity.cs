@@ -1,13 +1,17 @@
 ﻿using TowerProtect.Domain.Backend.Entities.Abstract.Dynamic.Controllable;
-using TowerProtect.Domain.Backend.Entities.Input;
+using TowerProtect.Domain.Backend.Entities.Control;
 using TowerProtect.Domain.Model.Gameplay.Entities;
 using TowerProtect.Domain.Model.Vectors;
 
 namespace TowerProtect.Domain.Backend.Entities.Specific;
 
 internal sealed class AnimalEntity(Vec2 position, IEntityController controller)
-    : MeleeEntity(position, health: 1, controller)
+    : MeleeEntity(
+        position, health: 1,
+        controller, physicalProperties: new() { Size = ConstType.GetSize() })
 {
-    public override EntityType Type => EntityType.Animal;
-    public override double MovementSpeed => 2.0;
+    public override EntityType Type => ConstType;
+    public override double MovementSpeed => 4.0;
+
+    private const EntityType ConstType = EntityType.Animal;
 }

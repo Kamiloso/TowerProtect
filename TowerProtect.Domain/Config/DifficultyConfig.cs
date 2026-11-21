@@ -1,53 +1,52 @@
-﻿using System.Collections.Generic;
-using TowerProtect.Domain.Model.Gameplay.Difficulties;
+﻿using TowerProtect.Domain.Model.Gameplay.Difficulties;
 using TowerProtect.Domain.Model.Gameplay.Entities;
+using System.Collections.Generic;
 
 namespace TowerProtect.Domain.Config;
 
 public sealed record DifficultyConfig
 {
-    public IReadOnlyDictionary<Difficulty, DifficultySettings> Difficulties { get; init; } =
-        new Dictionary<Difficulty, DifficultySettings>()
+    public DifficultyProvider Difficulties { get; init; } =
+        new(new Dictionary<Difficulty, DifficultySettings>()
     {
         [Difficulty.None] = new()
         {
-            MinScore = int.MinValue,
+            ScoreRange = (int.MinValue, 0),
             WaitingTimeRange = (1.0, 2.0),
-            BurstSize = 0,
+            BurstSizeRange = (0, 1),
             Odds = [],
         },
 
         [Difficulty.AnimalParadise] = new()
         {
-            MinScore = 0,
+            ScoreRange = (0, 10),
             WaitingTimeRange = (1.0, 2.0),
-            BurstSize = 4,
+            BurstSizeRange = (4, 5),
             Odds = [
-                    (1.0, EntityType.Animal),
-                ],
+                (1.0, EntityType.Animal),
+            ],
         },
 
         [Difficulty.MonsterInc] = new()
         {
-            MinScore = 10,
+            ScoreRange = (10, 50),
             WaitingTimeRange = (1.0, 2.0),
-            BurstSize = 4,
+            BurstSizeRange = (4, 5),
             Odds = [
-                    (0.2, EntityType.Animal),
-                    (0.8, EntityType.Monster),
-                ],
+                (0.2, EntityType.Animal),
+                (0.8, EntityType.Monster),
+            ],
         },
 
         [Difficulty.InsectFactory] = new()
         {
-            MinScore = 50,
-            IsLast = true,
+            ScoreRange = (50, int.MaxValue),
             WaitingTimeRange = (1.0, 2.0),
-            BurstSize = 6,
+            BurstSizeRange = (6, 7),
             Odds = [
-                    (0.2, EntityType.Monster),
-                    (0.8, EntityType.Insect),
-                ],
+                (0.2, EntityType.Monster),
+                (0.8, EntityType.Insect),
+            ],
         },
-    };
+    });
 }
